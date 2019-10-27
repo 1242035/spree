@@ -50,8 +50,8 @@ describe 'Delivery', type: :feature, inaccessible: true, js: true do
 
   context 'custom currency markers' do
     before do
-      Spree::Money.default_formatting_rules[:decimal_mark] = ','
-      Spree::Money.default_formatting_rules[:thousands_separator] = '.'
+      Viauco::Money.default_formatting_rules[:decimal_mark] = ','
+      Viauco::Money.default_formatting_rules[:thousands_separator] = '.'
 
       add_mug_and_navigate_to_delivery_page
 
@@ -59,8 +59,8 @@ describe 'Delivery', type: :feature, inaccessible: true, js: true do
     end
 
     after do
-      Spree::Money.default_formatting_rules.delete(:decimal_mark)
-      Spree::Money.default_formatting_rules.delete(:thousands_separator)
+      Viauco::Money.default_formatting_rules.delete(:decimal_mark)
+      Viauco::Money.default_formatting_rules.delete(:thousands_separator)
     end
 
     it 'calculates shipping total correctly with different currency marker' do

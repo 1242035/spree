@@ -1,8 +1,8 @@
-Spree::Sample.load_sample('taxonomies')
-Spree::Sample.load_sample('products')
+Viauco::Sample.load_sample('taxonomies')
+Viauco::Sample.load_sample('products')
 
-categories = Spree::Taxonomy.find_by!(name: I18n.t('spree.taxonomy_categories_name'))
-brands = Spree::Taxonomy.find_by!(name: I18n.t('spree.taxonomy_brands_name'))
+categories = Viauco::Taxonomy.find_by!(name: I18n.t('viauco.taxonomy_categories_name'))
+brands = Viauco::Taxonomy.find_by!(name: I18n.t('viauco.taxonomy_brands_name'))
 
 products = {
   ror_tote: 'Ruby on Rails Tote',
@@ -12,55 +12,55 @@ products = {
   ror_baseball_jersey: 'Ruby on Rails Baseball Jersey',
   ror_jr_spaghetti: 'Ruby on Rails Jr. Spaghetti',
   ror_ringer: 'Ruby on Rails Ringer T-Shirt',
-  spree_stein: 'Spree Stein',
-  spree_mug: 'Spree Mug',
-  spree_ringer: 'Spree Ringer T-Shirt',
-  spree_baseball_jersey: 'Spree Baseball Jersey',
-  spree_tote: 'Spree Tote',
-  spree_bag: 'Spree Bag',
-  spree_jr_spaghetti: 'Spree Jr. Spaghetti',
+  viauco_stein: 'Viauco Stein',
+  viauco_mug: 'Viauco Mug',
+  viauco_ringer: 'Viauco Ringer T-Shirt',
+  viauco_baseball_jersey: 'Viauco Baseball Jersey',
+  viauco_tote: 'Viauco Tote',
+  viauco_bag: 'Viauco Bag',
+  viauco_jr_spaghetti: 'Viauco Jr. Spaghetti',
   apache_baseball_jersey: 'Apache Baseball Jersey',
   ruby_baseball_jersey: 'Ruby Baseball Jersey'
 }
 
 products.each do |key, name|
-  products[key] = Spree::Product.find_by!(name: name)
+  products[key] = Viauco::Product.find_by!(name: name)
 end
 
 taxons = [
   {
-    name: I18n.t('spree.taxonomy_categories_name'),
+    name: I18n.t('viauco.taxonomy_categories_name'),
     taxonomy: categories,
     position: 0
   },
   {
     name: 'Bags',
     taxonomy: categories,
-    parent: I18n.t('spree.taxonomy_categories_name'),
+    parent: I18n.t('viauco.taxonomy_categories_name'),
     position: 1,
     products: [
       products[:ror_tote],
       products[:ror_bag],
-      products[:spree_tote],
-      products[:spree_bag]
+      products[:viauco_tote],
+      products[:viauco_bag]
     ]
   },
   {
     name: 'Mugs',
     taxonomy: categories,
-    parent: I18n.t('spree.taxonomy_categories_name'),
+    parent: I18n.t('viauco.taxonomy_categories_name'),
     position: 2,
     products: [
       products[:ror_mug],
       products[:ror_stein],
-      products[:spree_stein],
-      products[:spree_mug]
+      products[:viauco_stein],
+      products[:viauco_mug]
     ]
   },
   {
     name: 'Clothing',
     taxonomy: categories,
-    parent: I18n.t('spree.taxonomy_categories_name')
+    parent: I18n.t('viauco.taxonomy_categories_name')
   },
   {
     name: 'Shirts',
@@ -69,7 +69,7 @@ taxons = [
     position: 0,
     products: [
       products[:ror_jr_spaghetti],
-      products[:spree_jr_spaghetti]
+      products[:viauco_jr_spaghetti]
     ]
   },
   {
@@ -81,19 +81,19 @@ taxons = [
       products[:ror_ringer],
       products[:apache_baseball_jersey],
       products[:ruby_baseball_jersey],
-      products[:spree_baseball_jersey],
-      products[:spree_ringer]
+      products[:viauco_baseball_jersey],
+      products[:viauco_ringer]
     ],
     position: 0
   },
   {
-    name: I18n.t('spree.taxonomy_brands_name'),
+    name: I18n.t('viauco.taxonomy_brands_name'),
     taxonomy: brands
   },
   {
     name: 'Ruby',
     taxonomy: brands,
-    parent: I18n.t('spree.taxonomy_brands_name'),
+    parent: I18n.t('viauco.taxonomy_brands_name'),
     products: [
       products[:ruby_baseball_jersey]
     ]
@@ -101,29 +101,29 @@ taxons = [
   {
     name: 'Apache',
     taxonomy: brands,
-    parent: I18n.t('spree.taxonomy_brands_name'),
+    parent: I18n.t('viauco.taxonomy_brands_name'),
     products: [
       products[:apache_baseball_jersey]
     ]
   },
   {
-    name: 'Spree',
+    name: 'Viauco',
     taxonomy: brands,
-    parent: I18n.t('spree.taxonomy_brands_name'),
+    parent: I18n.t('viauco.taxonomy_brands_name'),
     products: [
-      products[:spree_stein],
-      products[:spree_mug],
-      products[:spree_ringer],
-      products[:spree_baseball_jersey],
-      products[:spree_tote],
-      products[:spree_bag],
-      products[:spree_jr_spaghetti]
+      products[:viauco_stein],
+      products[:viauco_mug],
+      products[:viauco_ringer],
+      products[:viauco_baseball_jersey],
+      products[:viauco_tote],
+      products[:viauco_bag],
+      products[:viauco_jr_spaghetti]
     ]
   },
   {
     name: 'Rails',
     taxonomy: brands,
-    parent: I18n.t('spree.taxonomy_brands_name'),
+    parent: I18n.t('viauco.taxonomy_brands_name'),
     products: [
       products[:ror_tote],
       products[:ror_bag],
@@ -137,10 +137,10 @@ taxons = [
 ]
 
 taxons.each do |taxon_attrs|
-  parent = Spree::Taxon.where(name: taxon_attrs[:parent]).first
+  parent = Viauco::Taxon.where(name: taxon_attrs[:parent]).first
   taxonomy = taxon_attrs[:taxonomy]
 
-  taxon = Spree::Taxon.where(name: taxon_attrs[:name]).first_or_create!
+  taxon = Viauco::Taxon.where(name: taxon_attrs[:name]).first_or_create!
   taxon.parent = parent
   taxon.taxonomy = taxonomy
   taxon.save

@@ -5,7 +5,7 @@ section: core
 
 ## Address
 
-The `Address` model in the `spree` gem is used to track address information, mainly for orders. Address information can also be tied to the `Spree::User` objects which come from the `spree_auth_devise` extension.
+The `Address` model in the `viauco` gem is used to track address information, mainly for orders. Address information can also be tied to the `Viauco::User` objects which come from the `viauco_auth_devise` extension.
 
 Addresses have the following attributes:
 
@@ -20,7 +20,7 @@ Addresses have the following attributes:
 * `alternative_phone`: The alternative phone number.
 * `company`: A company name.
 
-Addresses can also link to countries and states. An address must always link to a `Spree::Country` object. It can optionally link to a `Spree::State` object, but only in the cases where the related country has no states listed. In that case, the state information is still required, and is kept within the `state_name` field on the address record. An easy way to get the state information for the address is to call `state_text` on that object.
+Addresses can also link to countries and states. An address must always link to a `Viauco::Country` object. It can optionally link to a `Viauco::State` object, but only in the cases where the related country has no states listed. In that case, the state information is still required, and is kept within the `state_name` field on the address record. An easy way to get the state information for the address is to call `state_text` on that object.
 
 ## Zones
 
@@ -34,8 +34,8 @@ In addition to tax zones, orders also have shipping methods. These are provided 
 
 ## Countries
 
-Countries within Spree are used as a container for states. Countries can be zone members, and also link to an address. The difference between one country and another on an address record can determine which tax rates and shipping methods are used for the order.
+Countries within Viauco are used as a container for states. Countries can be zone members, and also link to an address. The difference between one country and another on an address record can determine which tax rates and shipping methods are used for the order.
 
 ## States
 
-States within Spree are used to scope address data slightly more than country. States are useful for tax purposes, as different states in a country may impose different tax rates on different products. In addition to this, different states may cause different tax rates and shipping methods to be used for an order, similar to how countries affect it also.
+States within Viauco are used to scope address data slightly more than country. States are useful for tax purposes, as different states in a country may impose different tax rates on different products. In addition to this, different states may cause different tax rates and shipping methods to be used for an order, similar to how countries affect it also.

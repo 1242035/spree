@@ -1,0 +1,8 @@
+<script>
+  ViaucoPaths = <%==
+  {
+    mounted_at: Rails.application.routes.url_helpers.viauco_path(trailing_slash: true),
+    admin: Viauco.admin_path.gsub(/\A(\/)?(.*[^\/])(\/)?\z/, '\\2/')
+  }.to_json
+  %>
+</script>

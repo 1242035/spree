@@ -1,0 +1,11 @@
+require 'rails/all'
+require 'sprockets/rails'
+
+require 'bootstrap'
+require 'glyphicons'
+require 'popper_js'
+require 'canonical-rails'
+require 'jquery-rails'
+require 'viauco/core'
+require 'viauco/frontend/middleware/seo_assist'
+require 'viauco/frontend/engine'

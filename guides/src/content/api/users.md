@@ -1,6 +1,6 @@
 ---
 title: Users
-description: Use the Spree Commerce storefront API to access User data.
+description: Use the Viauco Commerce storefront API to access User data.
 ---
 
 List users visible to the authenticated user. If the user is not an admin,
@@ -73,10 +73,10 @@ POST /api/v1/users
 ```
 
 For instance, a request to create a new user with the email
-\"spree@example.com\" and password \"password\" would look like this:
+\"viauco@example.com\" and password \"password\" would look like this:
 
 ```text
-POST /api/v1/users?user[email]=spree@example.com&user[password]=password
+POST /api/v1/users?user[email]=viauco@example.com&user[password]=password
 ```
 
 ### Successful response

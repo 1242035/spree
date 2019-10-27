@@ -6,11 +6,11 @@ describe 'Stock Transfers', type: :feature, js: true do
   it 'shows variants with options text' do
     create(:stock_location_with_items, name: 'NY')
 
-    product = Spree::Product.first
+    product = Viauco::Product.first
     variant = create(:variant, product: product)
     variant.set_option_value('Color', 'Green')
 
-    visit spree.admin_stock_transfers_path
+    visit viauco.admin_stock_transfers_path
     click_on 'New Stock Transfer'
 
     select2_search variant.sku, from: 'Variant'
@@ -23,9 +23,9 @@ describe 'Stock Transfers', type: :feature, js: true do
     create(:stock_location_with_items, name: 'NY') # source_location
     create(:stock_location, name: 'SF') # destination_location
 
-    variant = Spree::Variant.last
+    variant = Viauco::Variant.last
 
-    visit spree.admin_stock_transfers_path
+    visit viauco.admin_stock_transfers_path
     click_on 'New Stock Transfer'
     fill_in 'reference', with: 'PO 666'
 
@@ -39,7 +39,7 @@ describe 'Stock Transfers', type: :feature, js: true do
     expect(page).to have_content('SF')
     expect(page).to have_content(variant.name)
 
-    transfer = Spree::StockTransfer.last
+    transfer = Viauco::StockTransfer.last
     expect(transfer.stock_movements.size).to eq 2
   end
 
@@ -49,7 +49,7 @@ describe 'Stock Transfers', type: :feature, js: true do
       expect(page).not_to have_selector('#stock-location-source')
       expect(page).to have_selector('#stock-location-destination')
 
-      transfer = Spree::StockTransfer.last
+      transfer = Viauco::StockTransfer.last
       expect(transfer.stock_movements.size).to eq 1
       expect(transfer.source_location).to be_nil
     end
@@ -58,9 +58,9 @@ describe 'Stock Transfers', type: :feature, js: true do
       create(:stock_location_with_items, name: 'NY') # source_location
       create(:stock_location, name: 'SF') # destination_location
 
-      variant = Spree::Variant.last
+      variant = Viauco::Variant.last
 
-      visit spree.new_admin_stock_transfer_path
+      visit viauco.new_admin_stock_transfer_path
 
       fill_in 'reference', with: 'PO 666'
       check 'transfer_receive_stock'
@@ -75,9 +75,9 @@ describe 'Stock Transfers', type: :feature, js: true do
 
     it 'forced to only receive there is only one location' do
       create(:stock_location_with_items, name: 'NY') # source_location
-      variant = Spree::Variant.last
+      variant = Viauco::Variant.last
 
-      visit spree.new_admin_stock_transfer_path
+      visit viauco.new_admin_stock_transfer_path
 
       fill_in 'reference', with: 'PO 666'
 

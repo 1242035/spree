@@ -1,0 +1,23 @@
+<ul data-hook="admin_configurations_sidebar_menu" class="border-top bg-white collapse nav nav-pills nav-stacked" id="sidebar-configuration">
+  <%= configurations_sidebar_menu_item(Viauco.t(:general_settings), viauco.edit_admin_general_settings_path) if can? :manage, Viauco::Config %>
+  <%= configurations_sidebar_menu_item(Viauco.t(:stores), viauco.admin_stores_path) if can? :manage, Viauco::Store %>
+  <%= configurations_sidebar_menu_item(Viauco.t(:tax_categories), viauco.admin_tax_categories_path) if can? :manage, Viauco::TaxCategory %>
+  <%= configurations_sidebar_menu_item(Viauco.t(:tax_rates), viauco.admin_tax_rates_path) if can? :manage, Viauco::TaxRate %>
+  <%= configurations_sidebar_menu_item(Viauco.t(:zones), viauco.admin_zones_path) if can? :manage, Viauco::Zone %>
+  <%= configurations_sidebar_menu_item(Viauco.t(:countries), viauco.admin_countries_path) if can? :manage, Viauco::Country %>
+
+  <% if country = Viauco::Country.find_by(id: Viauco::Config[:default_country_id]) || Viauco::Country.first %>
+    <%= configurations_sidebar_menu_item(Viauco.t(:states), viauco.admin_country_states_path(country)) if can? :manage, Viauco::Country %>
+  <% end %>
+
+  <%= configurations_sidebar_menu_item(Viauco.t(:payment_methods), viauco.admin_payment_methods_path) if can? :manage, Viauco::PaymentMethod %>
+  <%= configurations_sidebar_menu_item(Viauco.t(:shipping_methods), viauco.admin_shipping_methods_path) if can? :manage, Viauco::ShippingMethod %>
+  <%= configurations_sidebar_menu_item(Viauco.t(:shipping_categories), viauco.admin_shipping_categories_path) if can? :manage, Viauco::ShippingCategory %>
+  <%= configurations_sidebar_menu_item(Viauco.t(:stock_transfers), viauco.admin_stock_transfers_path) if can? :manage, Viauco::StockTransfer %>
+  <%= configurations_sidebar_menu_item(Viauco.t(:stock_locations), viauco.admin_stock_locations_path) if can? :manage, Viauco::StockLocation %>
+  <%= configurations_sidebar_menu_item(Viauco.t(:store_credit_categories), viauco.admin_store_credit_categories_path) if can? :manage, Viauco::StoreCreditCategory %>
+  <%= configurations_sidebar_menu_item(Viauco.t(:refund_reasons), viauco.admin_refund_reasons_path) if can? :manage, Viauco::RefundReason %>
+  <%= configurations_sidebar_menu_item(Viauco.t(:reimbursement_types), viauco.admin_reimbursement_types_path) if can? :manage, Viauco::ReimbursementType %>
+  <%= configurations_sidebar_menu_item(Viauco.t(:return_authorization_reasons), viauco.admin_return_authorization_reasons_path) if can? :manage, Viauco::ReturnAuthorizationReason %>
+  <%= configurations_sidebar_menu_item(Viauco.t(:roles), viauco.admin_roles_path) if can? :manage, Viauco::Role %>
+</ul>

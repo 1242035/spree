@@ -1,6 +1,6 @@
 ---
 title: Line Items
-description: Use the Spree Commerce storefront API to access LineItem data.
+description: Use the Viauco Commerce storefront API to access LineItem data.
 ---
 
 ## Create

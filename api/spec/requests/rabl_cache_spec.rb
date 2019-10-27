@@ -5,12 +5,12 @@ describe 'Rabl Cache', type: :request, caching: true do
 
   before do
     create(:variant)
-    user.generate_spree_api_key!
-    expect(Spree::Product.count).to eq(1)
+    user.generate_viauco_api_key!
+    expect(Viauco::Product.count).to eq(1)
   end
 
   it "doesn't create a cache key collision for models with different rabl templates" do
-    get '/api/v1/variants', params: { token: user.spree_api_key }
+    get '/api/v1/variants', params: { token: user.viauco_api_key }
     expect(response.status).to eq(200)
 
     # Make sure we get a non master variant
@@ -21,7 +21,7 @@ describe 'Rabl Cache', type: :request, caching: true do
     expect(variant_a['is_master']).to be false
     expect(variant_a['stock_items']).not_to be_nil
 
-    get "/api/v1/products/#{Spree::Product.first.id}", params: { token: user.spree_api_key }
+    get "/api/v1/products/#{Viauco::Product.first.id}", params: { token: user.viauco_api_key }
     expect(response.status).to eq(200)
     variant_b = JSON.parse(response.body)['variants'].last
     expect(variant_b['is_master']).to be false

@@ -3,9 +3,9 @@ import ADDRESS_STATE from './address_state'
 
 export default {
   id: 1,
-  firstname: 'Spree',
+  firstname: 'Viauco',
   lastname: 'Commerce',
-  full_name: 'Spree Commerce',
+  full_name: 'Viauco Commerce',
   address1: '1 Someplace Lane',
   address2: 'Suite 1',
   city: 'Bethesda',

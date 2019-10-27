@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Spree::BaseHelper, type: :helper do
-  include Spree::BaseHelper
+describe Viauco::BaseHelper, type: :helper do
+  include Viauco::BaseHelper
 
   let(:current_store) { create :store }
 
@@ -14,11 +14,11 @@ describe Spree::BaseHelper, type: :helper do
 
     context 'with no checkout zone defined' do
       before do
-        Spree::Config[:checkout_zone] = nil
+        Viauco::Config[:checkout_zone] = nil
       end
 
       it 'return complete list of countries' do
-        expect(available_countries.count).to eq(Spree::Country.count)
+        expect(available_countries.count).to eq(Viauco::Country.count)
       end
     end
 
@@ -27,7 +27,7 @@ describe Spree::BaseHelper, type: :helper do
         before do
           @country_zone = create(:zone, name: 'CountryZone')
           @country_zone.members.create(zoneable: country)
-          Spree::Config[:checkout_zone] = @country_zone.name
+          Viauco::Config[:checkout_zone] = @country_zone.name
         end
 
         it 'return only the countries defined by the checkout zone' do
@@ -40,11 +40,11 @@ describe Spree::BaseHelper, type: :helper do
           state_zone = create(:zone, name: 'StateZone')
           state = create(:state, country: country)
           state_zone.members.create(zoneable: state)
-          Spree::Config[:checkout_zone] = state_zone.name
+          Viauco::Config[:checkout_zone] = state_zone.name
         end
 
         it 'return complete list of countries' do
-          expect(available_countries.count).to eq(Spree::Country.count)
+          expect(available_countries.count).to eq(Viauco::Country.count)
         end
       end
     end
@@ -52,10 +52,10 @@ describe Spree::BaseHelper, type: :helper do
 
   # Regression test for #1436
   context 'defining custom image helpers' do
-    let(:product) { mock_model(Spree::Product, images: [], variant_images: []) }
+    let(:product) { mock_model(Viauco::Product, images: [], variant_images: []) }
 
     before do
-      Spree::Image.class_eval do
+      Viauco::Image.class_eval do
         styles[:very_strange] = '1x1'
         styles.merge!(foobar: '2x2')
       end
@@ -114,7 +114,7 @@ describe Spree::BaseHelper, type: :helper do
       # controller_name is used by this method to infer what it is supposed
       # to be generating meta_data_tags for
       text = FFaker::Lorem.paragraphs(2).join(' ')
-      @test = Spree::Product.new(description: text)
+      @test = Viauco::Product.new(description: text)
       tags = Nokogiri::HTML.parse(meta_data_tags)
       content = tags.css('meta[name=description]').first['content']
       assert content.length <= 160, 'content length is not truncated to 160 characters'
@@ -159,7 +159,7 @@ describe Spree::BaseHelper, type: :helper do
 
     context 'with an order that has a tax zone' do
       let(:current_tax_zone) { create(:zone_with_country) }
-      let(:current_order) { Spree::Order.new }
+      let(:current_order) { Viauco::Order.new }
       let(:default_zone) { create(:zone_with_country, default_tax: true) }
 
       let!(:default_vat) do

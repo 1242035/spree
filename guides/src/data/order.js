@@ -17,7 +17,7 @@ export default {
   payment_state: null,
   email: null,
   special_instructions: null,
-  channel: 'spree',
+  channel: 'viauco',
   included_tax_total: '0.0',
   additional_tax_total: '0.0',
   display_included_tax_total: '$0.0',

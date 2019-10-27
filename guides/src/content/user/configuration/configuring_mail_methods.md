@@ -2,19 +2,19 @@
 title: Mail Methods
 ---
 
-<alert kind="warning">"Spree mail settings has been extracted out into a gem in favor of generic action mailer settings."</alert>
+<alert kind="warning">"Viauco mail settings has been extracted out into a gem in favor of generic action mailer settings."</alert>
 
 ## Introduction
 
-As this has been extracted, please be sure to add [spree_mail_settings](https://github.com/spree-contrib/spree_mail_settings) to your Gemfile before proceeding if you desire this behavior.
+As this has been extracted, please be sure to add [viauco_mail_settings](https://github.com/viauco-contrib/viauco_mail_settings) to your Gemfile before proceeding if you desire this behavior.
 
-The configurable components of your Spree site are managed in the Mail Method Settings panel. You can reach this by going first to the Admin Interface, clicking "Configuration" and then "Mail Method Settings".
+The configurable components of your Viauco site are managed in the Mail Method Settings panel. You can reach this by going first to the Admin Interface, clicking "Configuration" and then "Mail Method Settings".
 
 ![Mail Method Settings](../../../images/user/config/mail_method_settings.jpg)
 
 ### Enable Mail Delivery
 
-Checking the "Enable Mail Delivery" option will cause all of the confirmation and notification emails the Spree shopping cart system generates to be sent. You may want to disable this option if you want to test other functionality of the store without sending bogus emails.
+Checking the "Enable Mail Delivery" option will cause all of the confirmation and notification emails the Viauco shopping cart system generates to be sent. You may want to disable this option if you want to test other functionality of the store without sending bogus emails.
 
 ### Send Mails As
 
@@ -30,4 +30,4 @@ Setting this option causes any notification emails to be re-routed to the email 
 
 ### SMTP Settings
 
-The SMTP Mail Method settings allow you to fully configure your Spree store's server to send out email messages via [SMTP - Simple Mail Transfer Protocol](http://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol). A full explanation of how SMTP works is beyond the scope of this user guide, but any changes you or your site's developer need to make can be done through this area of your Admin Interface.
+The SMTP Mail Method settings allow you to fully configure your Viauco store's server to send out email messages via [SMTP - Simple Mail Transfer Protocol](http://en.wikipedia.org/wiki/Simple_Mail_Transfer_Protocol). A full explanation of how SMTP works is beyond the scope of this user guide, but any changes you or your site's developer need to make can be done through this area of your Admin Interface.

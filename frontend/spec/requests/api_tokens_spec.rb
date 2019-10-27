@@ -1,8 +1,8 @@
 require 'spec_helper'
-require 'spree/api/testing_support/helpers'
+require 'viauco/api/testing_support/helpers'
 
 describe 'API Tokens Spec', type: :request do
-  include Spree::Api::TestingSupport::Helpers
+  include Viauco::Api::TestingSupport::Helpers
 
   shared_examples 'returns valid response' do
     it 'with 200 HTTP status' do
@@ -20,7 +20,7 @@ describe 'API Tokens Spec', type: :request do
       let(:order) { create(:order, user: nil, email: 'dummy@example.com') }
 
       before do
-        allow_any_instance_of(Spree::StoreController).to receive_messages(current_order: order)
+        allow_any_instance_of(Viauco::StoreController).to receive_messages(current_order: order)
         get '/api_tokens'
       end
 
@@ -52,14 +52,14 @@ describe 'API Tokens Spec', type: :request do
     let(:user) { create(:user) }
 
     before do
-      allow_any_instance_of(Spree::StoreController).to receive_messages(try_spree_current_user: user)
+      allow_any_instance_of(Viauco::StoreController).to receive_messages(try_viauco_current_user: user)
     end
 
     context 'with already created order' do
       let(:order) { create(:order, user: user) }
 
       before do
-        allow_any_instance_of(Spree::StoreController).to receive_messages(current_order: order)
+        allow_any_instance_of(Viauco::StoreController).to receive_messages(current_order: order)
         get '/api_tokens'
       end
 

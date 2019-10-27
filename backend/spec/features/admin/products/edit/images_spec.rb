@@ -9,7 +9,7 @@ describe 'Product Images', type: :feature, js: true do
     # Ensure attachment style keys are symbolized before running all tests
     # Otherwise this would result in this error:
     # undefined method `processors' for \"48x48>\
-    Spree::Image.styles.symbolize_keys!
+    Viauco::Image.styles.symbolize_keys!
     allow(ENV).to receive(:[]).and_call_original
   end
 
@@ -17,7 +17,7 @@ describe 'Product Images', type: :feature, js: true do
     it 'allows an admin to upload and edit an image for a product' do
       create(:product)
 
-      visit spree.admin_products_path
+      visit viauco.admin_products_path
       click_icon(:edit)
       click_link 'Images'
       click_link 'new_image_link'
@@ -44,7 +44,7 @@ describe 'Product Images', type: :feature, js: true do
   it 'sees variant images', js: false do
     variant = create(:variant)
     create_image(variant, File.open(file_path))
-    visit spree.admin_product_images_path(variant.product)
+    visit viauco.admin_product_images_path(variant.product)
 
     expect(page).not_to have_content('No Images Found.')
     within('table.table') do
@@ -68,7 +68,7 @@ describe 'Product Images', type: :feature, js: true do
   it 'does not see variant column when product has no variants', js: false do
     product = create(:product)
     create_image(product, File.open(file_path))
-    visit spree.admin_product_images_path(product)
+    visit viauco.admin_product_images_path(product)
 
     expect(page).not_to have_content('No Images Found.')
     within('table.table') do

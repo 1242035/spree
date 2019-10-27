@@ -1,0 +1,11 @@
+<% content_for :page_title do %>
+  <%= link_to Viauco.t(:zones), viauco.admin_zones_url %> /
+  <%= Viauco.t(:new_zone) %>
+<% end %>
+
+<%= render partial: 'viauco/admin/shared/error_messages', locals: { target: @zone } %>
+
+<%= form_for [:admin, @zone] do |zone_form| %>
+  <%= render partial: 'form', locals: { zone_form: zone_form } %>  
+  <%= render partial: 'viauco/admin/shared/new_resource_links' %>
+<% end %>

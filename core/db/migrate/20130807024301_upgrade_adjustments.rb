@@ -1,14 +1,14 @@
 class UpgradeAdjustments < ActiveRecord::Migration[4.2]
   def up
     # Add Temporary index
-    add_index :spree_adjustments, :originator_type unless index_exists?(:spree_adjustments, :originator_type)
+    add_index :viauco_adjustments, :originator_type unless index_exists?(:viauco_adjustments, :originator_type)
 
     # Temporarily make originator association available
-    Spree::Adjustment.class_eval do
+    Viauco::Adjustment.class_eval do
       belongs_to :originator, polymorphic: true
     end
     # Shipping adjustments are now tracked as fields on the object
-    Spree::Adjustment.where(source_type: "Spree::Shipment").find_each do |adjustment|
+    Viauco::Adjustment.where(source_type: "Viauco::Shipment").find_each do |adjustment|
       # Account for possible invalid data
       next if adjustment.source.nil?
       adjustment.source.update_column(:cost, adjustment.amount)
@@ -16,22 +16,22 @@ class UpgradeAdjustments < ActiveRecord::Migration[4.2]
     end
 
     # Tax adjustments have their sources altered
-    Spree::Adjustment.where(originator_type: "Spree::TaxRate").find_each do |adjustment|
+    Viauco::Adjustment.where(originator_type: "Viauco::TaxRate").find_each do |adjustment|
       adjustment.source_id = adjustment.originator_id
-      adjustment.source_type = "Spree::TaxRate"
+      adjustment.source_type = "Viauco::TaxRate"
       adjustment.save!
     end
 
     # Promotion adjustments have their source altered also
-    Spree::Adjustment.where(originator_type: "Spree::PromotionAction").find_each do |adjustment|
+    Viauco::Adjustment.where(originator_type: "Viauco::PromotionAction").find_each do |adjustment|
       next if adjustment.originator.nil?
       adjustment.source = adjustment.originator
       begin
-        if adjustment.source.calculator_type == "Spree::Calculator::FreeShipping"
-          # Previously this was a Spree::Promotion::Actions::CreateAdjustment
+        if adjustment.source.calculator_type == "Viauco::Calculator::FreeShipping"
+          # Previously this was a Viauco::Promotion::Actions::CreateAdjustment
           # And it had a calculator to work out FreeShipping
-          # In Spree 2.2, the "calculator" is now the action itself.
-          adjustment.source.becomes(Spree::Promotion::Actions::FreeShipping)
+          # In Viauco 2.2, the "calculator" is now the action itself.
+          adjustment.source.becomes(Viauco::Promotion::Actions::FreeShipping)
         end
       rescue
         # Fail silently. This is primarily in instances where the calculator no longer exists
@@ -41,6 +41,6 @@ class UpgradeAdjustments < ActiveRecord::Migration[4.2]
     end
 
     # Remove Temporary index
-    remove_index :spree_adjustments, :originator_type if index_exists?(:spree_adjustments, :originator_type)
+    remove_index :viauco_adjustments, :originator_type if index_exists?(:viauco_adjustments, :originator_type)
   end
 end

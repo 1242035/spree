@@ -1,0 +1,13 @@
+<%= render partial: 'viauco/admin/shared/error_messages', locals: { target: @prototype } %>
+
+<% content_for :page_title do %>
+  <%= link_to Viauco.t(:prototypes), viauco.admin_prototypes_url %> /
+  <%= Viauco.t(:new_prototype) %>
+<% end %>
+
+<%= form_for [:admin, @prototype] do |f| %>
+  <fieldset data-hook="new_prototype">
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'viauco/admin/shared/new_resource_links' %>
+  </fieldset>
+<% end %>

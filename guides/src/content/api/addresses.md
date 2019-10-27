@@ -1,6 +1,6 @@
 ---
 title: Address
-description: Use the Spree Commerce storefront API to access Address data.
+description: Use the Viauco Commerce storefront API to access Address data.
 ---
 
 ## Show
@@ -21,7 +21,7 @@ Users may pass in the order's token in order to be authorized to view an order a
 GET /api/v1/orders/1/addresses/1?order_token=abcdef123456
 ```
 
-The `order_token` parameter will work for authorizing any action for an order address within Spree's API.
+The `order_token` parameter will work for authorizing any action for an order address within Viauco's API.
 
 ### Response
 

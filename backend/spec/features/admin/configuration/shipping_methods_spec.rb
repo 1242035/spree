@@ -7,10 +7,10 @@ describe 'Shipping Methods', type: :feature do
 
   before do
     # HACK: To work around no email prompting on check out
-    allow_any_instance_of(Spree::Order).to receive_messages(require_email: false)
+    allow_any_instance_of(Viauco::Order).to receive_messages(require_email: false)
     create(:check_payment_method)
 
-    visit spree.admin_shipping_methods_path
+    visit viauco.admin_shipping_methods_path
   end
 
   context 'show' do
@@ -35,7 +35,7 @@ describe 'Shipping Methods', type: :feature do
       end
 
       click_on 'Create'
-      expect(page).to have_current_path(spree.edit_admin_shipping_method_path(Spree::ShippingMethod.last))
+      expect(page).to have_current_path(viauco.edit_admin_shipping_method_path(Viauco::ShippingMethod.last))
     end
   end
 

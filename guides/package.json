@@ -1,6 +1,6 @@
 {
-  "name": "spree-guides",
-  "description": "Spree Guides",
+  "name": "viauco-guides",
+  "description": "Viauco Guides",
   "version": "2.0.0",
   "author": "Spark Solutions <we@sparksolutions.co>",
   "dependencies": {
@@ -49,7 +49,7 @@
     "tachyons": "^4.11.1"
   },
   "keywords": [
-    "spree",
+    "viauco",
     "guides",
     "documentation"
   ],
@@ -80,6 +80,6 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/spree/spree"
+    "url": "https://github.com/viauco/viauco"
   }
 }

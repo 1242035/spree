@@ -3,16 +3,16 @@ require 'spec_helper'
 describe 'setting locale', type: :feature do
   def with_locale(locale)
     I18n.locale = locale
-    Spree::Frontend::Config[:locale] = locale
+    Viauco::Frontend::Config[:locale] = locale
     yield
     I18n.locale = 'en'
-    Spree::Frontend::Config[:locale] = 'en'
+    Viauco::Frontend::Config[:locale] = 'en'
   end
 
   context 'shopping cart link and page' do
     before do
       I18n.backend.store_translations(:fr,
-                                      spree: {
+                                      viauco: {
                                         cart: 'Panier',
                                         shopping_cart: 'Panier'
                                       })
@@ -20,7 +20,7 @@ describe 'setting locale', type: :feature do
 
     it 'is in french' do
       with_locale('fr') do
-        visit spree.root_path
+        visit viauco.root_path
         click_link 'Panier'
         expect(page).to have_content('Panier')
       end

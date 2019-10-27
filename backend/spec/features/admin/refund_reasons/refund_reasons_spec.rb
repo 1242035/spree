@@ -12,7 +12,7 @@ describe 'RefundReason', type: :feature, js: true do
 
   before do
     create(:refund, payment: payment, amount: amount, reason: refund_reason, transaction_id: nil)
-    visit spree.admin_refund_reasons_path
+    visit viauco.admin_refund_reasons_path
   end
 
   describe 'destroy' do
@@ -33,8 +33,8 @@ describe 'RefundReason', type: :feature, js: true do
         end
       end
 
-      it(js: false) { expect(Spree::RefundReason.all).to include(refund_reason) }
-      it(js: false) { expect(Spree::RefundReason.all).to include(refund_reason2) }
+      it(js: false) { expect(Viauco::RefundReason.all).to include(refund_reason) }
+      it(js: false) { expect(Viauco::RefundReason.all).to include(refund_reason2) }
     end
 
     context 'should allow an admin to destroy a non associated option type' do
@@ -47,8 +47,8 @@ describe 'RefundReason', type: :feature, js: true do
         end
       end
 
-      it(js: false) { expect(Spree::RefundReason.all).to include(refund_reason) }
-      it(js: false) { expect(Spree::RefundReason.all).not_to include(refund_reason2) }
+      it(js: false) { expect(Viauco::RefundReason.all).to include(refund_reason) }
+      it(js: false) { expect(Viauco::RefundReason.all).not_to include(refund_reason2) }
     end
 
     def delete_product_property

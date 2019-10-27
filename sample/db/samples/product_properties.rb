@@ -55,27 +55,27 @@ products =
       'Type' => 'Stein',
       'Size' => %{6.75' tall, 3.75' dia. base, 3' dia. rim}
     },
-    'Spree Stein' =>
+    'Viauco Stein' =>
     {
       'Type' => 'Stein',
       'Size' => %{6.75' tall, 3.75' dia. base, 3' dia. rim}
     },
-    'Spree Mug' =>
+    'Viauco Mug' =>
     {
       'Type' => 'Mug',
       'Size' => %{4.5' tall, 3.25' dia.}
     },
-    'Spree Tote' =>
+    'Viauco Tote' =>
     {
       'Type' => 'Tote',
       'Size' => %{15' x 18' x 6'}
     },
-    'Spree Bag' =>
+    'Viauco Bag' =>
     {
       'Type' => 'Messenger',
       'Size' => %{14 1/2' x 12' x 5'}
     },
-    'Spree Baseball Jersey' =>
+    'Viauco Baseball Jersey' =>
     {
       'Manufacturer' => 'Wilson',
       'Brand' => 'Wannabe Sports',
@@ -86,7 +86,7 @@ products =
       'Fit' => 'Loose',
       'Gender' => 'Men\'s'
     },
-    'Spree Jr. Spaghetti' =>
+    'Viauco Jr. Spaghetti' =>
     {
       'Manufacturer' => 'Jerseys',
       'Brand' => 'Resiliance',
@@ -97,7 +97,7 @@ products =
       'Fit' => 'Form',
       'Gender' => 'Women\'s'
     },
-    'Spree Ringer T-Shirt' =>
+    'Viauco Ringer T-Shirt' =>
     {
       'Manufacturer' => 'Jerseys',
       'Brand' => 'Conditioned',
@@ -111,7 +111,7 @@ products =
   }
 
 products.each do |name, properties|
-  product = Spree::Product.find_by(name: name)
+  product = Viauco::Product.find_by(name: name)
   properties.each do |prop_name, prop_value|
     product.set_property(prop_name, prop_value)
   end

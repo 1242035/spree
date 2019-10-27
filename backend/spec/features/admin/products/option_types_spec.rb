@@ -4,7 +4,7 @@ describe 'Option Types', type: :feature, js: true do
   stub_authorization!
 
   before do
-    visit spree.admin_path
+    visit viauco.admin_path
     click_link 'Products'
   end
 

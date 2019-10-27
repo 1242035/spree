@@ -1,0 +1,17 @@
+source 'https://rubygems.org'
+
+git_source(:github) do |repo_name|
+  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?('/')
+  "https://github.com/#{repo_name}.git"
+end
+
+gem 'viauco_core', github: 'viauco/viauco', branch: 'master'
+gem 'viauco_backend', github: 'viauco/viauco', branch: 'master'
+# Provides basic authentication functionality for testing parts of your engine
+gem 'viauco_auth_devise', github: 'viauco/viauco_auth_devise', branch: 'master'
+gem 'rails-controller-testing'
+
+gem 'rubocop', require: false
+gem 'rubocop-rspec', require: false
+
+gemspec

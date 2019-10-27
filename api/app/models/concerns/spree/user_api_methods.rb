@@ -1,7 +1,7 @@
-module Spree
+module Viauco
   module UserApiMethods
     extend ActiveSupport::Concern
 
-    include Spree::UserApiAuthentication
+    include Viauco::UserApiAuthentication
   end
 end

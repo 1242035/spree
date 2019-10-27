@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Spree
+module Viauco
   describe FrontendHelper, type: :helper do
     # Regression test for #2034
     context 'flash_message' do
@@ -35,7 +35,7 @@ module Spree
     # Regression test for #2759
     it 'nested_taxons_path works with a Taxon object' do
       taxon = create(:taxon, name: 'iphone')
-      expect(spree.nested_taxons_path(taxon)).to eq("/t/#{taxon.parent.permalink}/#{taxon.name}")
+      expect(viauco.nested_taxons_path(taxon)).to eq("/t/#{taxon.parent.permalink}/#{taxon.name}")
     end
 
     context '#checkout_progress' do

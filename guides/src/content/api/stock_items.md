@@ -1,6 +1,6 @@
 ---
 title: Stock Items
-description: Use the Spree Commerce storefront API to access StockItem data.
+description: Use the Viauco Commerce storefront API to access StockItem data.
 ---
 
 ## Index
@@ -40,7 +40,7 @@ To search for a particular stock item, make a request like this:
 GET /api/v1/stock_locations/1/stock_items?q[variant_id_eq]=10
 ```
 
-The searching API is provided through the Ransack gem which Spree depends on. The `variant_id_eq` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
+The searching API is provided through the Ransack gem which Viauco depends on. The `variant_id_eq` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
 
 The search results are paginated.
 

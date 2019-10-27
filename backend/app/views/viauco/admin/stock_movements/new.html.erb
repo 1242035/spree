@@ -1,0 +1,14 @@
+<% content_for :page_title do %>
+  <%= link_to Viauco.t(:stock_locations), viauco.admin_stock_locations_url %> /
+  <%= link_to Viauco.t(:stock_movements), viauco.admin_stock_location_stock_movements_path(stock_location) %> /
+  <%= Viauco.t(:new_stock_movement) %>
+<% end %>
+
+<%= render partial: 'viauco/admin/shared/error_messages', locals: { target: @stock_movement } %>
+
+<%= form_for [:admin, stock_location, @stock_movement] do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'viauco/admin/shared/new_resource_links', locals: { collection_url: admin_stock_location_stock_movements_path(stock_location) } %>
+  </fieldset>
+<% end %>

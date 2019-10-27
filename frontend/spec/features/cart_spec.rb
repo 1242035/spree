@@ -13,7 +13,7 @@ describe 'Cart', type: :feature, inaccessible: true, js: true do
   end
 
   it 'shows cart icon on non-cart pages' do
-    visit spree.root_path
+    visit viauco.root_path
     expect(page).to have_selector('li#link-to-cart a', visible: true)
   end
 
@@ -29,7 +29,7 @@ describe 'Cart', type: :feature, inaccessible: true, js: true do
 
   it 'allows you to remove an item from the cart' do
     add_mug_to_cart
-    line_item = Spree::LineItem.first!
+    line_item = Viauco::LineItem.first!
     within('#line_items') do
       click_link "delete_line_item_#{line_item.id}"
     end
@@ -60,25 +60,25 @@ describe 'Cart', type: :feature, inaccessible: true, js: true do
 
     it 'still adds product to cart' do
       add_mug_to_cart
-      visit spree.cart_path
+      visit viauco.cart_path
       expect(page).to have_content(product.name)
     end
   end
 
   it "has a surrounding element with data-hook='cart_container'" do
-    visit spree.cart_path
+    visit viauco.cart_path
     expect(page).to have_selector("div[data-hook='cart_container']")
   end
 
   describe 'add promotion coupon on cart page' do
-    let!(:promotion) { Spree::Promotion.create(name: 'Huhuhu', code: 'huhu') }
-    let!(:calculator) { Spree::Calculator::FlatPercentItemTotal.create(preferred_flat_percent: '10') }
-    let!(:action) { Spree::Promotion::Actions::CreateItemAdjustments.create(calculator: calculator) }
+    let!(:promotion) { Viauco::Promotion.create(name: 'Huhuhu', code: 'huhu') }
+    let!(:calculator) { Viauco::Calculator::FlatPercentItemTotal.create(preferred_flat_percent: '10') }
+    let!(:action) { Viauco::Promotion::Actions::CreateItemAdjustments.create(calculator: calculator) }
 
     before do
       promotion.actions << action
       add_mug_to_cart
-      expect(page).to have_current_path(spree.cart_path(variant_id: variant))
+      expect(page).to have_current_path(viauco.cart_path(variant_id: variant))
     end
 
     def apply_coupon(code)
@@ -100,7 +100,7 @@ describe 'Cart', type: :feature, inaccessible: true, js: true do
 
         it 'reflects an error that coupon already applied' do
           apply_coupon(promotion.code)
-          expect(page).to have_content(Spree.t(:coupon_code_already_applied))
+          expect(page).to have_content(Viauco.t(:coupon_code_already_applied))
           expect(page).to have_content(promotion.name)
         end
       end
@@ -109,14 +109,14 @@ describe 'Cart', type: :feature, inaccessible: true, js: true do
     context 'invalid coupon' do
       it 'doesnt create a payment record' do
         apply_coupon('invalid')
-        expect(page).to have_content(Spree.t(:coupon_code_not_found))
+        expect(page).to have_content(Viauco.t(:coupon_code_not_found))
       end
     end
 
     context "doesn't fill in coupon code input" do
       it 'advances just fine' do
         click_on 'Update'
-        expect(page).to have_current_path(spree.cart_path)
+        expect(page).to have_current_path(viauco.cart_path)
       end
     end
   end

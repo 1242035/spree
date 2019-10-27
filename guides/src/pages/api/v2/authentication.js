@@ -27,7 +27,7 @@ const AuthenticationPage = () => (
   <Layout activeRootSection="api">
     <Breadcrumbs crumbs={crumbs} />
     <RedocStandalone
-      specUrl="https://raw.githubusercontent.com/spree/spree/master/api/docs/oauth/index.yml"
+      specUrl="https://raw.githubusercontent.com/viauco/viauco/master/api/docs/oauth/index.yml"
       options={{
         disableSearch: true,
         scrollYOffset: 80,

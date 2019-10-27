@@ -5,11 +5,11 @@ section: core
 
 ## Overview
 
-Spree has a highly flexible payments model which allows multiple payment methods to be available during checkout. The logic for processing payments is decoupled from orders, making it easy to define custom payment methods with their own processing logic.
+Viauco has a highly flexible payments model which allows multiple payment methods to be available during checkout. The logic for processing payments is decoupled from orders, making it easy to define custom payment methods with their own processing logic.
 
-Payment methods typically represent a payment gateway. Gateways will process card payments, and may also include non-gateway methods of payment such as Check, which is provided in Spree by default.
+Payment methods typically represent a payment gateway. Gateways will process card payments, and may also include non-gateway methods of payment such as Check, which is provided in Viauco by default.
 
-The `Payment` model in Spree tracks payments against [Orders](/developer/core/orders.html). Payments relate to a `source` which indicates how the payment was made, and a `PaymentMethod`, indicating the processor used for this payment.
+The `Payment` model in Viauco tracks payments against [Orders](/developer/core/orders.html). Payments relate to a `source` which indicates how the payment was made, and a `PaymentMethod`, indicating the processor used for this payment.
 
 When a payment is created, it is given a unique, 8-character identifier. This is used when sending the payment details to the payment processor. Without this identifier, some payment gateways mistakenly reported duplicate payments.
 
@@ -26,7 +26,7 @@ An explanation of the different states:
 * `void`: The payment should not be counted against the order
 * `completed`: The payment is completed. Only payments in this state count against the order total
 
-The state transition for these is handled by the processing code within Spree; however, you are able to call the event methods yourself to reach these states. The event methods are:
+The state transition for these is handled by the processing code within Viauco; however, you are able to call the event methods yourself to reach these states. The event methods are:
 
 * `started_processing`
 * `failure`
@@ -36,11 +36,11 @@ The state transition for these is handled by the processing code within Spree; h
 
 ## Payment Methods
 
-Payment methods represent the different options a customer has for making a payment. Most sites will accept credit card payments through a payment gateway, but there are other options. Spree also comes with built-in support for a Check payment, which can be used to represent any offline payment. There are also third-party extensions that provide support for some other interesting options such as [spree_braintree_vzero](https://github.com/spree-contrib/spree_braintree_vzero) for Braintree & PayPal payment methods.
+Payment methods represent the different options a customer has for making a payment. Most sites will accept credit card payments through a payment gateway, but there are other options. Viauco also comes with built-in support for a Check payment, which can be used to represent any offline payment. There are also third-party extensions that provide support for some other interesting options such as [viauco_braintree_vzero](https://github.com/viauco-contrib/viauco_braintree_vzero) for Braintree & PayPal payment methods.
 
 A `PaymentMethod` can have the following attributes:
 
-* `type`: The subclass of `Spree::PaymentMethod` this payment method represents. Uses rails single table inheritance feature.
+* `type`: The subclass of `Viauco::PaymentMethod` this payment method represents. Uses rails single table inheritance feature.
 * `name`: The visible name for this payment method
 * `description`: The description for this payment method
 * `active`: Whether or not this payment method is active. Set it `false` to hide it in frontend.
@@ -63,11 +63,11 @@ If a payment method meets these criteria, then it will be available.
 
 ### Auto-Capturing
 
-By default, a payment method's `auto_capture?` method depends on the `Spree::Config[:auto_capture]` preference. If you have set this preference to `true`, but don't want a payment method to be auto-capturable like other payment methods in your system, you can override the `auto_capture?` method in your
+By default, a payment method's `auto_capture?` method depends on the `Viauco::Config[:auto_capture]` preference. If you have set this preference to `true`, but don't want a payment method to be auto-capturable like other payment methods in your system, you can override the `auto_capture?` method in your
 `PaymentMethod` subclass:
 
 ```ruby
-class FancyPaymentMethod < Spree::PaymentMethod
+class FancyPaymentMethod < Viauco::PaymentMethod
   def auto_capture?
     false
   end
@@ -78,7 +78,7 @@ The result of this method determines if a payment will be automatically captured
 
 ## Payment Processing
 
-Payment processing in Spree supports many different gateways, but also attempts to comply with the API provided by the [active_merchant](https://github.com/shopify/active_merchant) gem where possible.
+Payment processing in Viauco supports many different gateways, but also attempts to comply with the API provided by the [active_merchant](https://github.com/shopify/active_merchant) gem where possible.
 
 ### Gateway Options
 
@@ -107,11 +107,11 @@ The billing address and shipping address data is as follows:
 
 ### Credit Card Data
 
-Spree stores only the type, expiration date, name and last four digits for the card on your server. This data can then be used to present to the user so that they can verify that the correct card is being used. All credit card data sent through forms is sent through immediately to the gateways, and is not stored for any period of time.
+Viauco stores only the type, expiration date, name and last four digits for the card on your server. This data can then be used to present to the user so that they can verify that the correct card is being used. All credit card data sent through forms is sent through immediately to the gateways, and is not stored for any period of time.
 
 ### Processing Walkthrough
 
-When an order is completed in spree, each `Payment` object associated with the order has the `process!` method called on it (unless `payment_required?` for the order returns `false`), in order to attempt to automatically fulfill the payment required for the order. If the payment method requires a source, and the payment has a source associated with it, then Spree will attempt to process the payment. Otherwise, the payment will need to be processed manually.
+When an order is completed in viauco, each `Payment` object associated with the order has the `process!` method called on it (unless `payment_required?` for the order returns `false`), in order to attempt to automatically fulfill the payment required for the order. If the payment method requires a source, and the payment has a source associated with it, then Viauco will attempt to process the payment. Otherwise, the payment will need to be processed manually.
 
 If the `PaymentMethod` object is configured to auto-capture payments, then the `Payment#purchase!` method will be called, which will call `PaymentMethod#purchase` like this:
 
@@ -127,7 +127,7 @@ payment_method.authorize(<amount>, <source>, <gateway options>)
 
 How the payment is actually put through depends on the `PaymentMethod` sub-class' implementation of the `purchase` and `authorize` methods.
 
-The returned object from both the `purchase` and `authorize` methods on the payment method objects must be an `ActiveMerchant::Billing::Response` object. This response object is then stored (in YAML) in the `spree_log_entries` table. Log entries can be retrieved with a call to the `log_entries` association on any `Payment` object.
+The returned object from both the `purchase` and `authorize` methods on the payment method objects must be an `ActiveMerchant::Billing::Response` object. This response object is then stored (in YAML) in the `viauco_log_entries` table. Log entries can be retrieved with a call to the `log_entries` association on any `Payment` object.
 
 If the `purchase!` route is taken and is successful, the payment is marked as `completed`. If it fails, it is marked as `failed`. If the `authorize` method is successful, the payment is transitioned to the `pending` state so that it can be manually captured later by calling the `capture!` method. If it is unsuccessful, it is also transitioned to the `failed` state.
 
@@ -146,13 +146,13 @@ You may want to keep tabs on the number of orders with a `payment_state` of `fai
 
 ### Log Entries
 
-Responses from payment gateways within Spree are typically `ActiveMerchant::Billing::Response` objects. When Spree handles a response from a payment gateway, it will serialize the object as YAML and store it in the database as a log entry for a payment. These responses can be useful for debugging why a payment has failed.
+Responses from payment gateways within Viauco are typically `ActiveMerchant::Billing::Response` objects. When Viauco handles a response from a payment gateway, it will serialize the object as YAML and store it in the database as a log entry for a payment. These responses can be useful for debugging why a payment has failed.
 
-You can get a list of these log entries by calling the `log_entries` on any `Spree::Payment` object. To get the `Active::Merchant::Billing::Response` out of these `Spree::LogEntry` objects, call the `details` method.
+You can get a list of these log entries by calling the `log_entries` on any `Viauco::Payment` object. To get the `Active::Merchant::Billing::Response` out of these `Viauco::LogEntry` objects, call the `details` method.
 
 ## Supported Gateways
 
-Access to a number of payment gateways is handled with the usage of the [spree_gateway](https://github.com/spree/spree_gateway) extension. This extension currently supports the following gateways:
+Access to a number of payment gateways is handled with the usage of the [viauco_gateway](https://github.com/viauco/viauco_gateway) extension. This extension currently supports the following gateways:
 
 * Authorize.Net
 * Balanced
@@ -169,22 +169,22 @@ Access to a number of payment gateways is handled with the usage of the [spree_g
 * USA ePay
 * WorldPay
 
-With the `spree_gateway` gem included in your application's `Gemfile`, these gateways will be selectable in the admin backend for payment methods.
+With the `viauco_gateway` gem included in your application's `Gemfile`, these gateways will be selectable in the admin backend for payment methods.
 
 ***
 These are just some of the gateways which are supported by the Active Merchant gem. You can see a [list of all the Active Merchant gateways on that project's GitHub page](https://github.com/Shopify/active_merchant#supported-direct-payment-gateways).
 
-In order to implement a new gateway in the spree_gateway project, please refer to the other gateways within `app/models/spree/gateway` inside that project.
+In order to implement a new gateway in the viauco_gateway project, please refer to the other gateways within `app/models/viauco/gateway` inside that project.
 ***
 
 ## Adding your custom gateway
 
 In order to make your custom gateway show up on backend list of available payment methods
-you need to add it to spree config list of payment methods first. That can be achieved
-by adding the following code in your spree.rb for example:
+you need to add it to viauco config list of payment methods first. That can be achieved
+by adding the following code in your viauco.rb for example:
 
 ```ruby
-Rails.application.config.spree.payment_methods << YourCustomGateway
+Rails.application.config.viauco.payment_methods << YourCustomGateway
 ```
 
-[spree_braintree_vzero](https://github.com/spree-contrib/spree_braintree_vzero) is a good example of a standalone custom gateways.
+[viauco_braintree_vzero](https://github.com/viauco-contrib/viauco_braintree_vzero) is a good example of a standalone custom gateways.

@@ -1,0 +1,19 @@
+//= require jquery3
+//= require popper
+//= require bootstrap
+//= require jquery.payment
+//= require viauco
+//= require polyfill.min
+//= require fetch.umd
+//= require viauco/api/main
+//= require viauco/frontend/api_tokens
+//= require viauco/frontend/cart
+//= require viauco/frontend/checkout
+//= require viauco/frontend/checkout/address
+//= require viauco/frontend/checkout/address_book
+//= require viauco/frontend/checkout/payment
+//= require viauco/frontend/product
+
+Viauco.routes.api_tokens = Viauco.pathFor('api_tokens')
+Viauco.routes.ensure_cart = Viauco.pathFor('ensure_cart')
+Viauco.routes.api_v2_storefront_cart_apply_coupon_code = Viauco.pathFor('api/v2/storefront/cart/apply_coupon_code')

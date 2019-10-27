@@ -4,7 +4,7 @@ describe 'Store Credit Categories', type: :feature, js: true do
   stub_authorization!
 
   before do
-    visit spree.admin_path
+    visit viauco.admin_path
     click_link 'Configuration'
   end
 

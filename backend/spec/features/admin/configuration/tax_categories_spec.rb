@@ -4,7 +4,7 @@ describe 'Tax Categories', type: :feature do
   stub_authorization!
 
   before do
-    visit spree.admin_path
+    visit viauco.admin_path
     click_link 'Configuration'
   end
 

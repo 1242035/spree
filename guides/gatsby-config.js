@@ -1,11 +1,11 @@
 module.exports = {
   siteMetadata: {
-    title: 'Spree Commerce Documentation',
-    titleTemplate: '%s :: Spree Commerce - Ruby on Rails e-commerce platform',
-    twitter: '@spreecommerce',
+    title: 'Viauco Commerce Documentation',
+    titleTemplate: '%s :: Viauco Commerce - Ruby on Rails e-commerce platform',
+    twitter: '@viaucocommerce',
     image: '/images/logo.png',
-    siteUrl: 'https://guides.spreecommerce.org',
-    description: 'Spree Guides'
+    siteUrl: 'https://guides.viaucocommerce.org',
+    description: 'Viauco Guides'
   },
   plugins: [
     'gatsby-plugin-sitemap',
@@ -14,8 +14,8 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-robots-txt',
       options: {
-        host: 'https://guides.spreecommerce.org',
-        sitemap: 'https://guides.spreecommerce.org/sitemap.xml',
+        host: 'https://guides.viaucocommerce.org',
+        sitemap: 'https://guides.viaucocommerce.org/sitemap.xml',
         policy: [{ userAgent: '*', disallow: ['/'] }]
       }
     },
@@ -127,7 +127,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: 'spree-guides',
+        name: 'viauco-guides',
         short_name: 'guides',
         start_url: '/',
         background_color: '#663399',

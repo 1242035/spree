@@ -5,21 +5,21 @@ section: core
 
 ## Overview
 
-Spree represents taxes for an order by using `tax_categories` and `tax_rates`.
+Viauco represents taxes for an order by using `tax_categories` and `tax_rates`.
 
-Products within Spree can be linked to Tax Categories, which are then used to influence the taxation rate for the products when they are purchased. One Tax Category can be set to being the default for the entire system, which means that if a product doesn't have a related tax category, then this default tax category would be used.
+Products within Viauco can be linked to Tax Categories, which are then used to influence the taxation rate for the products when they are purchased. One Tax Category can be set to being the default for the entire system, which means that if a product doesn't have a related tax category, then this default tax category would be used.
 
 A `tax_category` can have many `tax_rates`, which indicate the rate at which the products belonging to a specific tax category will be taxed at. A tax rate links a tax rate to a particular zone (see [Addresses](/developer/core/addresses.html) for more information about zones). When an order is placed in a specific zone, any of the products for that order which have a tax zone that matches the order's tax zone will be taxed.
 
-The standard sales tax policies commonly found in the USA can be modeled as well as Value Added Tax (VAT) which is commonly used in Europe. These are not the only types of tax rules that you can model in Spree. Once you obtain a sufficient understanding of the basic concepts you should be able to model the tax rules of your country or jurisdiction.
+The standard sales tax policies commonly found in the USA can be modeled as well as Value Added Tax (VAT) which is commonly used in Europe. These are not the only types of tax rules that you can model in Viauco. Once you obtain a sufficient understanding of the basic concepts you should be able to model the tax rules of your country or jurisdiction.
 
 ***
-Taxation within the United States can get exceptionally complex, with different states, counties and even cities having different taxation rates. If you are shipping interstate within the United States, we would strongly advise you to use the [Spree Tax Cloud](https://github.com/spree-contrib/spree_tax_cloud) extension so that you get correct tax rates.
+Taxation within the United States can get exceptionally complex, with different states, counties and even cities having different taxation rates. If you are shipping interstate within the United States, we would strongly advise you to use the [Viauco Tax Cloud](https://github.com/viauco-contrib/viauco_tax_cloud) extension so that you get correct tax rates.
 ***
 
 ## Tax Categories
 
-The Spree default is to treat everything as exempt from tax. In order for a product to be considered taxable, it must belong to a tax category. The tax category is a special concept that is specific to taxation. The tax category is normally never seen by the user so you could call it something generic like "Taxable Goods." If you wish to tax certain products at different rates, however, then you will want to choose something more descriptive (ex. "Clothing.").
+The Viauco default is to treat everything as exempt from tax. In order for a product to be considered taxable, it must belong to a tax category. The tax category is a special concept that is specific to taxation. The tax category is normally never seen by the user so you could call it something generic like "Taxable Goods." If you wish to tax certain products at different rates, however, then you will want to choose something more descriptive (ex. "Clothing.").
 
 ***
 It can be somewhat tedious to set the tax category for every product. We're currently exploring ways to make this simpler. If you are importing inventory from another source you will likely be writing your own custom Ruby program that automates this process.
@@ -33,7 +33,7 @@ A tax rate is essentially a percentage amount charged based on the sales price. 
 * The zone in which the order address must fall within
 * The tax category that a product must belong to in order to be considered taxable.
 
-Spree will calculate tax based on the best matching zone for the order. It's also possible to have more than one applicable tax rate for a single zone. In order for a tax rate to apply to a particular product, that product must have a tax category that matches the tax category of the tax rate.
+Viauco will calculate tax based on the best matching zone for the order. It's also possible to have more than one applicable tax rate for a single zone. In order for a tax rate to apply to a particular product, that product must have a tax category that matches the tax category of the tax rate.
 
 ## Basic Examples
 
@@ -47,7 +47,7 @@ Please see the [Addresses guide](/developer/core/addresses.html) for more inform
 
 ## Default Tax Zone
 
-Spree also has the concept of a default tax zone. When a user is adding items to their cart we do not yet know where the order will be shipped to, and so it's assumed that the cart is within the default tax zone until later. In some cases we may want to estimate the tax for the order by assuming the order falls within a particular tax zone.
+Viauco also has the concept of a default tax zone. When a user is adding items to their cart we do not yet know where the order will be shipped to, and so it's assumed that the cart is within the default tax zone until later. In some cases we may want to estimate the tax for the order by assuming the order falls within a particular tax zone.
 
 Why might we want to do this? The primary use case for this is for countries where there is already tax included in the price. In the EU, for example, most products have a Value Added Tax (VAT) included in the price. There are cases where it may be desirable to show the portion of the product price that includes tax. In order to calculate this tax amount we need to know the zone (and corresponding Tax Rate) that was assumed in the price.
 
@@ -55,9 +55,9 @@ We may also reduce the order total by the tax amount if the order is being shipp
 
 ## Shipping vs. Billing Address
 
-Most tax jurisdictions base the tax on the shipping address of where the order is being shipped to. So in these cases the shipping address is used when determining the tax zone. Spree does, however, allow you to use the billing address to determine the zone.
+Most tax jurisdictions base the tax on the shipping address of where the order is being shipped to. So in these cases the shipping address is used when determining the tax zone. Viauco does, however, allow you to use the billing address to determine the zone.
 
-To determine tax based on billing address instead of shipping address you will need to set the `Spree::Config[:tax_using_ship_address]` preference to `false`.
+To determine tax based on billing address instead of shipping address you will need to set the `Viauco::Config[:tax_using_ship_address]` preference to `false`.
 
 ***
 `Zone.match` is a method used to determine the most applicable zone for taxation. In the case of multiple matches, the closer match will be used, with State zone matches having priority over Country zone matches.
@@ -65,7 +65,7 @@ To determine tax based on billing address instead of shipping address you will n
 
 ## Calculators
 
-In order to charge tax in Spree you also need a `Spree::Calculator`. In most cases you should be able to use Spree's `DefaultTax` calculator. It is suitable for both sales tax and price-inclusive tax scenarios. For more information, please read the [Calculators guide](/developer/core/calculators.html).
+In order to charge tax in Viauco you also need a `Viauco::Calculator`. In most cases you should be able to use Viauco's `DefaultTax` calculator. It is suitable for both sales tax and price-inclusive tax scenarios. For more information, please read the [Calculators guide](/developer/core/calculators.html).
 
 ***
 The `DefaultTax` calculator uses the item total (exclusive of shipping) when computing sales tax.
@@ -79,11 +79,11 @@ There are two basic types of tax that a store owner might need to contend with. 
 Most taxes can be considered one of these two types. For instance, in Australia customers pay a Goods and Services Tax (GST). This is basically equivalent to VAT in Europe.
 ***
 
-In some cases you may need to charge one type of tax for orders falling within one zone and another type of tax for orders falling within a different zone. There are even some rare situations where you may need to charge both types of tax in the same zone. Spree supports all of these scenarios.
+In some cases you may need to charge one type of tax for orders falling within one zone and another type of tax for orders falling within a different zone. There are even some rare situations where you may need to charge both types of tax in the same zone. Viauco supports all of these scenarios.
 
 ### Sales Tax
 
-Sales tax is the default tax type for any tax rate in Spree.
+Sales tax is the default tax type for any tax rate in Viauco.
 
 Let's take an example of a sales tax situation for the United States. Imagine that we have a zone that covers all of North America and that the zone is used for a tax rate which applies a 5% tax on products with the tax category of "Clothing".
 
@@ -99,7 +99,7 @@ If the quantity of the item is changed to 2, then the tax amount doubles: ($17.9
 
 Let's now assume that we have another product that's a coffee mug, which doesn't have the "Clothing" tax category applied to it. Let's also assume this product costs $13.99, and there's no default tax category set up for the system. Under these circumstances, the coffee mug will not be taxed when it's added to the order.
 
-Finally, if the taxable address (either the shipping or billing, depending on the `Spree::Config[:tax_using_ship_address]` setting) is changed for the order to outside this taxable zone, then the tax adjustment on the order will be removed. If the address is changed back, the tax rate will be applied once more.
+Finally, if the taxable address (either the shipping or billing, depending on the `Viauco::Config[:tax_using_ship_address]` setting) is changed for the order to outside this taxable zone, then the tax adjustment on the order will be removed. If the address is changed back, the tax rate will be applied once more.
 
 ### Tax Included
 

@@ -1,6 +1,6 @@
 require 'spec_helper'
 
-module Spree
+module Viauco
   describe ProductsHelper, type: :helper do
     include ProductsHelper
 
@@ -72,7 +72,7 @@ module Spree
 
     context '#variant_price_full' do
       before do
-        Spree::Config[:show_variant_full_price] = true
+        Viauco::Config[:show_variant_full_price] = true
         @variant1 = create(:variant, product: product)
         @variant2 = create(:variant, product: product)
       end
@@ -150,7 +150,7 @@ THIS IS THE BEST PRODUCT EVER!
 
         product.description = initial_description
 
-        Spree::Config[:show_raw_product_description] = true
+        Viauco::Config[:show_raw_product_description] = true
         description = product_description(product)
         expect(description).to eq(initial_description)
       end
@@ -158,7 +158,7 @@ THIS IS THE BEST PRODUCT EVER!
       context 'renders a product description default description incase description is blank' do
         before { product.description = '' }
 
-        it { expect(product_description(product)).to eq(Spree.t(:product_has_no_description)) }
+        it { expect(product_description(product)).to eq(Viauco.t(:product_has_no_description)) }
       end
     end
 
@@ -166,7 +166,7 @@ THIS IS THE BEST PRODUCT EVER!
       context 'variant has a blank description' do
         let(:description) { nil }
 
-        it { is_expected.to eq(Spree.t(:product_has_no_description)) }
+        it { is_expected.to eq(Viauco.t(:product_has_no_description)) }
       end
 
       context 'variant has a description' do
@@ -197,7 +197,7 @@ THIS IS THE BEST PRODUCT EVER!
     context '#cache_key_for_products' do
       subject { helper.cache_key_for_products }
 
-      let(:zone) { Spree::Zone.new }
+      let(:zone) { Viauco::Zone.new }
       let(:price_options) { { tax_zone: zone } }
 
       before do
@@ -214,7 +214,7 @@ THIS IS THE BEST PRODUCT EVER!
           allow(@products).to receive(:maximum).with(:updated_at) { updated_at }
         end
 
-        it { is_expected.to eq('en/USD/spree/zones/new/spree/products/all-10-20111213-5') }
+        it { is_expected.to eq('en/USD/viauco/zones/new/viauco/products/all-10-20111213-5') }
       end
 
       context 'when there is no considered maximum updated date' do
@@ -226,14 +226,14 @@ THIS IS THE BEST PRODUCT EVER!
           allow(Date).to receive(:today) { today }
         end
 
-        it { is_expected.to eq('en/USD/spree/zones/new/spree/products/all-10-20131211-1234567') }
+        it { is_expected.to eq('en/USD/viauco/zones/new/viauco/products/all-10-20131211-1234567') }
       end
     end
 
     context '#cache_key_for_product' do
       subject(:cache_key) { helper.cache_key_for_product(product) }
 
-      let(:product) { Spree::Product.new }
+      let(:product) { Viauco::Product.new }
       let(:price_options) { { tax_zone: zone } }
 
       before do
@@ -241,29 +241,29 @@ THIS IS THE BEST PRODUCT EVER!
       end
 
       context 'when there is a current tax zone' do
-        let(:zone) { Spree::Zone.new }
+        let(:zone) { Viauco::Zone.new }
 
         it 'includes the current_tax_zone' do
-          expect(subject).to eq('en/USD/spree/zones/new/spree/products/new/')
+          expect(subject).to eq('en/USD/viauco/zones/new/viauco/products/new/')
         end
       end
 
       context 'when there is no current tax zone' do
         let(:zone) { nil }
 
-        it { is_expected.to eq('en/USD/spree/products/new/') }
+        it { is_expected.to eq('en/USD/viauco/products/new/') }
       end
 
       context 'when current_price_options includes nil values' do
         let(:price_options) do
           {
             a: nil,
-            b: Spree::Zone.new
+            b: Viauco::Zone.new
           }
         end
 
         it 'does not include nil values' do
-          expect(cache_key).to eq('en/USD/spree/zones/new/spree/products/new/')
+          expect(cache_key).to eq('en/USD/viauco/zones/new/viauco/products/new/')
         end
       end
 
@@ -271,25 +271,25 @@ THIS IS THE BEST PRODUCT EVER!
         let(:price_options) do
           {
             a: true,
-            b: Spree::Zone.new
+            b: Viauco::Zone.new
           }
         end
 
         it 'includes string representations of these values' do
-          expect(cache_key).to eq('en/USD/true/spree/zones/new/spree/products/new/')
+          expect(cache_key).to eq('en/USD/true/viauco/zones/new/viauco/products/new/')
         end
       end
 
       context 'when keys in the options hash are inserted in non-alphabetical order' do
         let(:price_options) do
           {
-            b: Spree::Zone.new,
+            b: Viauco::Zone.new,
             a: true
           }
         end
 
         it 'the values are nevertheless returned in alphabetical order of their keys' do
-          expect(cache_key).to eq('en/USD/true/spree/zones/new/spree/products/new/')
+          expect(cache_key).to eq('en/USD/true/viauco/zones/new/viauco/products/new/')
         end
       end
     end

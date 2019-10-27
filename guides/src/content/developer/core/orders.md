@@ -5,11 +5,11 @@ section: core
 
 ## Overview
 
-The `Order` model is one of the key models in Spree. It provides a central place around which to collect information about a customer order - including line items, adjustments, payments, addresses, return authorizations, and shipments.
+The `Order` model is one of the key models in Viauco. It provides a central place around which to collect information about a customer order - including line items, adjustments, payments, addresses, return authorizations, and shipments.
 
 Orders have the following attributes:
 
-* `number`: The unique identifier for this order. It begins with the letter R and ends in a 9-digit number. This number is shown to the users, and can be used to find the order by calling `Spree::Order.find_by(number: number)`.
+* `number`: The unique identifier for this order. It begins with the letter R and ends in a 9-digit number. This number is shown to the users, and can be used to find the order by calling `Viauco::Order.find_by(number: number)`.
 * `item_total`: The sum of all the line items for this order.
 * `adjustment_total`: The sum of all adjustments on this order.
 * `total`: The result of the sum of the `item_total` and the `adjustment_total`.
@@ -28,8 +28,8 @@ Orders have the following attributes:
 * `created_by_id`: The ID of object that created this order.
 * `shipment_state`: The current shipment state of the order. For possible states, please see the [Shipments guide](/developer/core/shipments.html).
 * `payment_state`: The current payment state of the order. For possible states, please see the [Payments guide](/developer/core/payments.html).
-* `special_instructions`: Any special instructions for the store to do with this order. Will only appear if `Spree::Config[:shipping_instructions]` is set to `true`.
-* `currency`: The currency for this order. Determined by the `Spree::Config[:currency]` value that was set at the time of order.
+* `special_instructions`: Any special instructions for the store to do with this order. Will only appear if `Viauco::Config[:shipping_instructions]` is set to `true`.
+* `currency`: The currency for this order. Determined by the `Viauco::Config[:currency]` value that was set at the time of order.
 * `last_ip_address`: The last IP address used to update this order in the frontend.
 * `channel`: The channel specified when importing orders from other stores. e.g. amazon.
 * `item_count`: The total value of line items' quantity.

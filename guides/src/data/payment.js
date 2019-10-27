@@ -1,6 +1,6 @@
 export default {
   id: 1,
-  source_type: 'Spree::CreditCard',
+  source_type: 'Viauco::CreditCard',
   source_id: 1,
   amount: '10.00',
   display_amount: '$10.00',

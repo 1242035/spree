@@ -1,28 +1,28 @@
 {
-  "name": "Spree Sandbox",
-  "description":"demo store built with Spree",
-  "repository": "https://github.com/spree/spree",
-  "logo": "http://guides.spreecommerce.org/images/logo.png",
+  "name": "Viauco Sandbox",
+  "description":"demo store built with Viauco",
+  "repository": "https://github.com/viauco/viauco",
+  "logo": "http://guides.viaucocommerce.org/images/logo.png",
   "keywords": [
-    "spree"
+    "viauco"
   ],
   "buildpacks": [
-    {"url": "https://github.com/spark-solutions/heroku-buildpack-spree.git"}
+    {"url": "https://github.com/spark-solutions/heroku-buildpack-viauco.git"}
   ],
   "addons": [
     "heroku-postgresql:hobby-dev"
   ],
   "scripts": {
-    "postdeploy": "bundle exec rake db:migrate && bundle exec rake db:seed && SKIP_SAMPLE_IMAGES=true bundle exec rake spree_sample:load"
+    "postdeploy": "bundle exec rake db:migrate && bundle exec rake db:seed && SKIP_SAMPLE_IMAGES=true bundle exec rake viauco_sample:load"
   },
   "env": {
     "ADMIN_EMAIL": {
       "description": "We will create an admin user with this email.",
-      "value": "spree@example.com"
+      "value": "viauco@example.com"
     },
     "ADMIN_PASSWORD": {
       "description": "We will create an admin user with this password.",
-      "value": "spree123"
+      "value": "viauco123"
     }
   }
 }

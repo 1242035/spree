@@ -2,7 +2,7 @@ if ENV['COVERAGE']
   # Run Coverage report
   require 'simplecov'
   SimpleCov.start 'rails' do
-    add_group 'Libraries', 'lib/spree'
+    add_group 'Libraries', 'lib/viauco'
 
     add_filter '/bin/'
     add_filter '/db/'
@@ -35,18 +35,18 @@ require 'database_cleaner'
 require 'ffaker'
 require 'rspec/retry'
 
-require 'spree/testing_support/authorization_helpers'
-require 'spree/testing_support/factories'
-require 'spree/testing_support/preferences'
-require 'spree/testing_support/controller_requests'
-require 'spree/testing_support/flash'
-require 'spree/testing_support/url_helpers'
-require 'spree/testing_support/order_walkthrough'
-require 'spree/testing_support/capybara_ext'
-require 'spree/testing_support/capybara_config'
-require 'spree/testing_support/image_helpers'
+require 'viauco/testing_support/authorization_helpers'
+require 'viauco/testing_support/factories'
+require 'viauco/testing_support/preferences'
+require 'viauco/testing_support/controller_requests'
+require 'viauco/testing_support/flash'
+require 'viauco/testing_support/url_helpers'
+require 'viauco/testing_support/order_walkthrough'
+require 'viauco/testing_support/capybara_ext'
+require 'viauco/testing_support/capybara_config'
+require 'viauco/testing_support/image_helpers'
 
-require 'spree/core/controller_helpers/strong_parameters'
+require 'viauco/core/controller_helpers/strong_parameters'
 require 'webdrivers'
 
 RSpec.configure do |config|
@@ -80,7 +80,7 @@ RSpec.configure do |config|
     ApplicationRecord.connection.increment_open_transactions if ApplicationRecord.connection.open_transactions < 0
 
     DatabaseCleaner.start
-    reset_spree_preferences
+    reset_viauco_preferences
   end
 
   config.after(:each, type: :feature) do |example|
@@ -97,13 +97,13 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
 
-  config.include Spree::TestingSupport::Preferences
-  config.include Spree::TestingSupport::UrlHelpers
-  config.include Spree::TestingSupport::ControllerRequests, type: :controller
-  config.include Spree::TestingSupport::Flash
-  config.include Spree::TestingSupport::ImageHelpers
+  config.include Viauco::TestingSupport::Preferences
+  config.include Viauco::TestingSupport::UrlHelpers
+  config.include Viauco::TestingSupport::ControllerRequests, type: :controller
+  config.include Viauco::TestingSupport::Flash
+  config.include Viauco::TestingSupport::ImageHelpers
 
-  config.include Spree::Core::ControllerHelpers::StrongParameters, type: :controller
+  config.include Viauco::Core::ControllerHelpers::StrongParameters, type: :controller
 
   config.verbose_retry = true
   config.display_try_failure_messages = true
@@ -119,7 +119,7 @@ RSpec.configure do |config|
   config.run_all_when_everything_filtered = true
 end
 
-module Spree
+module Viauco
   module TestingSupport
     module Flash
       def assert_flash_success(flash)

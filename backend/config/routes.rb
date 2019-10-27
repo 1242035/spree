@@ -1,5 +1,5 @@
-Spree::Core::Engine.add_routes do
-  namespace :admin, path: Spree.admin_path do
+Viauco::Core::Engine.add_routes do
+  namespace :admin, path: Viauco.admin_path do
     resources :promotions do
       resources :promotion_rules
       resources :promotion_actions
@@ -182,6 +182,6 @@ Spree::Core::Engine.add_routes do
     end
   end
 
-  spree_path = Rails.application.routes.url_helpers.try(:spree_path, trailing_slash: true) || '/'
-  get Spree.admin_path, to: redirect((spree_path + Spree.admin_path + '/orders').gsub('//', '/')), as: :admin
+  viauco_path = Rails.application.routes.url_helpers.try(:viauco_path, trailing_slash: true) || '/'
+  get Viauco.admin_path, to: redirect((viauco_path + Viauco.admin_path + '/orders').gsub('//', '/')), as: :admin
 end

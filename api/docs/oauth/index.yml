@@ -1,12 +1,12 @@
 openapi: 3.0.0
 servers:
-  - url: 'http://localhost:3000/spree_oauth'
+  - url: 'http://localhost:3000/viauco_oauth'
 info:
   version: 1.0.0
-  title: Spree OAuth 2.0 Authentication
+  title: Viauco OAuth 2.0 Authentication
   description: >-
-    Spree uses the [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) gem
-    for handling OAuth. This integration is built into `spree_api` gem.
+    Viauco uses the [Doorkeeper](https://github.com/doorkeeper-gem/doorkeeper) gem
+    for handling OAuth. This integration is built into `viauco_api` gem.
 paths:
   '/token':
     post:
@@ -61,11 +61,11 @@ components:
         username:
           type: string
           description: User email address
-          example: 'spree@example.com'
+          example: 'viauco@example.com'
         password:
           type: string
           description: User password
-          example: 'spree123'
+          example: 'viauco123'
     RefreshTokenBody:
       properties:
         grant_type:

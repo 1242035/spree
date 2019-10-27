@@ -1,0 +1,26 @@
+<% content_for :page_actions do %>
+  <% if @return_authorization.can_cancel? %>
+    <%= button_link_to Viauco.t('actions.cancel'), fire_admin_order_return_authorization_url(@order, @return_authorization, e: 'cancel'), method: :put, data: { confirm: Viauco.t(:are_you_sure) }, icon: "delete" %>
+  <% end %>
+<% end %>
+
+<%= render partial: 'viauco/admin/shared/order_tabs', locals: { current: :return_authorizations } %>
+
+<% content_for :page_title do %>
+  / <%= link_to Viauco.t(:return_authorizations), viauco.admin_order_return_authorizations_url %>
+  / <%= @return_authorization.number %> (<%= Viauco.t(@return_authorization.state.downcase) %>)
+<% end %>
+
+<%= render partial: 'viauco/admin/shared/error_messages', locals: { target: @return_authorization } %>
+
+<%= form_for [:admin, @order, @return_authorization] do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+
+    <div class="form-actions" data-hook="buttons">
+      <%= button Viauco.t('actions.update'), 'repeat' %>
+      <span class="or"><%= Viauco.t(:or) %></span>
+      <%= button_link_to Viauco.t('actions.cancel'), viauco.admin_order_return_authorizations_url(@order), icon: 'delete' %>
+    </div>
+  </fieldset>
+<% end %>

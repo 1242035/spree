@@ -38,22 +38,22 @@ fi
 
 cd ./sandbox
 
-if [ "$SPREE_AUTH_DEVISE_PATH" != "" ]; then
-  SPREE_AUTH_DEVISE_GEM="gem 'spree_auth_devise', path: '$SPREE_AUTH_DEVISE_PATH'"
+if [ "$VIAUCO_AUTH_DEVISE_PATH" != "" ]; then
+  VIAUCO_AUTH_DEVISE_GEM="gem 'viauco_auth_devise', path: '$VIAUCO_AUTH_DEVISE_PATH'"
 else
-  SPREE_AUTH_DEVISE_GEM="gem 'spree_auth_devise', github: 'spree/spree_auth_devise', branch: 'master'"
+  VIAUCO_AUTH_DEVISE_GEM="gem 'viauco_auth_devise', github: 'viauco/viauco_auth_devise', branch: 'master'"
 fi
 
-if [ "$SPREE_GATEWAY_PATH" != "" ]; then
-  SPREE_GATEWAY_GEM="gem 'spree_gateway', path: '$SPREE_GATEWAY_PATH'"
+if [ "$VIAUCO_GATEWAY_PATH" != "" ]; then
+  VIAUCO_GATEWAY_GEM="gem 'viauco_gateway', path: '$VIAUCO_GATEWAY_PATH'"
 else
-  SPREE_GATEWAY_GEM="gem 'spree_gateway', github: 'spree/spree_gateway', branch: 'master'"
+  VIAUCO_GATEWAY_GEM="gem 'viauco_gateway', github: 'viauco/viauco_gateway', branch: 'master'"
 fi
 
 cat <<RUBY >> Gemfile
-gem 'spree', path: '..'
-$SPREE_AUTH_DEVISE_GEM
-$SPREE_GATEWAY_GEM
+gem 'viauco', path: '..'
+$VIAUCO_AUTH_DEVISE_GEM
+$VIAUCO_GATEWAY_GEM
 
 group :test, :development do
   gem 'bullet'
@@ -66,6 +66,6 @@ RUBY
 bundle install --gemfile Gemfile
 bundle exec rails db:drop || true
 bundle exec rails db:create
-bundle exec rails g spree:install --auto-accept --user_class=Spree::User --enforce_available_locales=true --copy_views=false
-bundle exec rails g spree:auth:install
-bundle exec rails g spree_gateway:install
+bundle exec rails g viauco:install --auto-accept --user_class=Viauco::User --enforce_available_locales=true --copy_views=false
+bundle exec rails g viauco:auth:install
+bundle exec rails g viauco_gateway:install

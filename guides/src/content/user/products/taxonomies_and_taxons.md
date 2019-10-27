@@ -4,7 +4,7 @@ title: Taxonomies and Taxons
 
 ## Introduction
 
-Taxonomies are the Spree system's approach to category trees. The heading of a tree is called a _Taxonomy_. Any child branches are called _Taxons_. Taxons themselves can have their own branches. So you could have something like the following categories structure:
+Taxonomies are the Viauco system's approach to category trees. The heading of a tree is called a _Taxonomy_. Any child branches are called _Taxons_. Taxons themselves can have their own branches. So you could have something like the following categories structure:
 
 ![Taxonomy Tree](../../../images/user/config/taxonomy_tree.jpg)
 

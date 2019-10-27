@@ -63,7 +63,7 @@ export default class Header extends React.PureComponent {
       >
         <div className="z-3 relative ph4 flex items-center mw9 center h-100">
           <a
-            href="https://spreecommerce.org"
+            href="https://viaucocommerce.org"
             className={cx(
               { db: !this.state.searchIsOpen },
               { dn: this.state.searchIsOpen },
@@ -96,24 +96,24 @@ export default class Header extends React.PureComponent {
               isActive={this.isActive('release_notes')}
               url="/release_notes/"
             />
-            <NavItem url="https://heroku.com/deploy?template=https://github.com/spree/spree/tree/3-7-stable">
+            <NavItem url="https://heroku.com/deploy?template=https://github.com/viauco/viauco/tree/3-7-stable">
               Demo
             </NavItem>
 
-            <NavItem url="https://spreecommerce.org/contact/">
+            <NavItem url="https://viaucocommerce.org/contact/">
               Contact Us
             </NavItem>
 
-            <NavItem url="http://slack.spreecommerce.org/">
+            <NavItem url="http://slack.viaucocommerce.org/">
               <IconSlack />
             </NavItem>
-            <NavItem url="https://github.com/spree/spree">
+            <NavItem url="https://github.com/viauco/viauco">
               <IconGithub />
             </NavItem>
           </nav>
 
           <nav className="dn-l justify-end w-100 flex">
-            <NavItem url="https://spreecommerce.org/contact/">
+            <NavItem url="https://viaucocommerce.org/contact/">
               <IconContact />
             </NavItem>
             {this.state.searchIsOpen ? (
@@ -128,10 +128,10 @@ export default class Header extends React.PureComponent {
               />
             )}
 
-            <NavItem url="http://slack.spreecommerce.org/">
+            <NavItem url="http://slack.viaucocommerce.org/">
               <IconSlack />
             </NavItem>
-            <NavItem url="https://github.com/spree/spree">
+            <NavItem url="https://github.com/viauco/viauco">
               <IconGithub />
             </NavItem>
             {this.state.menuIsOpen ? (

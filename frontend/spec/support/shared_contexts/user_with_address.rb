@@ -1,5 +1,5 @@
 shared_context 'user with address' do
-  let(:state) { Spree::State.all.first || create(:state) }
+  let(:state) { Viauco::State.all.first || create(:state) }
 
   let(:address) do
     create(:address, address1: FFaker::Address.street_address, state: state)
@@ -18,7 +18,7 @@ shared_context 'user with address' do
   end
 
   before do
-    allow_any_instance_of(Spree::CheckoutController).to receive_messages(try_spree_current_user: user)
-    allow_any_instance_of(Spree::AddressesController).to receive_messages(try_spree_current_user: user)
+    allow_any_instance_of(Viauco::CheckoutController).to receive_messages(try_viauco_current_user: user)
+    allow_any_instance_of(Viauco::AddressesController).to receive_messages(try_viauco_current_user: user)
   end
 end

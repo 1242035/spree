@@ -6,11 +6,11 @@ describe 'States', type: :feature do
   let!(:country) { create(:country) }
 
   before do
-    @hungary = Spree::Country.create!(name: 'Hungary', iso_name: 'Hungary', iso: 'HU', iso3: 'HUN')
+    @hungary = Viauco::Country.create!(name: 'Hungary', iso_name: 'Hungary', iso: 'HU', iso3: 'HUN')
   end
 
   def go_to_states_page
-    visit spree.admin_country_states_path(country)
+    visit viauco.admin_country_states_path(country)
     expect(page).to have_selector('#new_state_link')
     page.execute_script('$.fx.off = true')
   end
@@ -19,7 +19,7 @@ describe 'States', type: :feature do
     let!(:state) { create(:state, country: country) }
 
     it 'correctly displays the states' do
-      visit spree.admin_country_states_path(country)
+      visit viauco.admin_country_states_path(country)
       expect(page).to have_content(state.name)
     end
   end

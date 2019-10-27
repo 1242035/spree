@@ -5,7 +5,7 @@ order: 0
 
 ## Introduction
 
-Taxation, as you undoubtedly already know, is a very complicated topic. It can be challenging to manage taxation settings in an e-commerce store - particularly when you sell a variety of types of goods - but the Spree shopping cart system gives you simple, yet effective tools to manage it with ease.
+Taxation, as you undoubtedly already know, is a very complicated topic. It can be challenging to manage taxation settings in an e-commerce store - particularly when you sell a variety of types of goods - but the Viauco shopping cart system gives you simple, yet effective tools to manage it with ease.
 
 There are a few concepts you need to understand in order to configure your site adequately:
 
@@ -16,7 +16,7 @@ There are a few concepts you need to understand in order to configure your site 
 
 ## Tax Categories
 
-Tax Categories is Spree's way of grouping products into those which are taxed in the same way. This is behind-the-scenes functionality; the customer never sees the category a product is in. They only see the amount they will be charged based on their order's delivery address.
+Tax Categories is Viauco's way of grouping products into those which are taxed in the same way. This is behind-the-scenes functionality; the customer never sees the category a product is in. They only see the amount they will be charged based on their order's delivery address.
 
 To access your store's existing Tax Categories, go to your Admin Interface, click "Configuration" then "Tax Categories".
 
@@ -60,7 +60,7 @@ Here, you can see all of your existing tax rates and how they are configured. To
 * **Tax Category** - The [tax category](#tax-categories) that relates to this tax rate.
 * **Included in Price** - Check this box if you have already added the cost of tax into the price of the items.
 * **Show Rate in Label** - When this box is checked, order summaries will include the tax rate, not just the tax amount.
-* **Calculator** - By default, Spree uses the Default Tax calculator (a simple tax rate times item price adjusted for any promotions) calculation to determine tax. If you need something more specific or customized than this, it can be done - you'll just need to work with your development team to make it happen.
+* **Calculator** - By default, Viauco uses the Default Tax calculator (a simple tax rate times item price adjusted for any promotions) calculation to determine tax. If you need something more specific or customized than this, it can be done - you'll just need to work with your development team to make it happen.
 
 ## Tax Settings
 
@@ -68,4 +68,4 @@ Finally, European stores will benefit from the Tax Settings page.
 
 ![Tax Settings](../../../images/user/config/tax_settings.jpg)
 
-When this option is checked, your Spree site will take it as a default [tax category](#tax-categories), find the corresponding [tax rate](#tax-rates), and multiply it times the shipping rate for each available [shipping method](/user/shipments/shipping_methods.html) offered to a customer during checkout.
+When this option is checked, your Viauco site will take it as a default [tax category](#tax-categories), find the corresponding [tax rate](#tax-rates), and multiply it times the shipping rate for each available [shipping method](/user/shipments/shipping_methods.html) offered to a customer during checkout.

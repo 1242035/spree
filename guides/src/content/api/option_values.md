@@ -1,6 +1,6 @@
 ---
 title: Option Values
-description: Use the Spree Commerce storefront API to access OptionValue data.
+description: Use the Viauco Commerce storefront API to access OptionValue data.
 ---
 
 ## Index
@@ -36,7 +36,7 @@ To search for a specific option value, make a request like this:
 GET /api/v1/option_values?q[name_cont]=red
 ```
 
-The searching API is provided through the Ransack gem which Spree depends on. The `name_cont` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
+The searching API is provided through the Ransack gem which Viauco depends on. The `name_cont` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
 
 ### Response
 

@@ -27,7 +27,7 @@ const IndexPage = () => (
   <Layout activeRootSection="api">
     <Breadcrumbs crumbs={crumbs} />
     <RedocStandalone
-      specUrl="https://raw.githubusercontent.com/spree/spree/master/api/docs/v2/storefront/index.yaml"
+      specUrl="https://raw.githubusercontent.com/viauco/viauco/master/api/docs/v2/storefront/index.yaml"
       options={{
         disableSearch: true,
         scrollYOffset: 80,

@@ -4,7 +4,7 @@ title: Payment Methods
 
 ## Introduction
 
-Payment methods represent the different payment options available to customers during the checkout process on an e-commerce store. Spree supports many types of payment methods, including both online and offline options. This guide describes how to add payment methods to your Spree store.
+Payment methods represent the different payment options available to customers during the checkout process on an e-commerce store. Viauco supports many types of payment methods, including both online and offline options. This guide describes how to add payment methods to your Viauco store.
 
 ## Terminology
 
@@ -26,7 +26,7 @@ When researching payment gateway options, you may find that they offer an all-in
 
 ## Add a Payment Method
 
-Spree enables you to utilize the payment method of choice for your e-commerce store. We have two [preferred payment gateway partners](http://spreecommerce.com/products/payment_processing) and a long [list](https://github.com/Shopify/active_merchant#supported-direct-payment-gateways) of payment gateways that are supported by default in Spree. We also enable you to add a custom payment gateway, as well as offer offline payment options such as checks and purchase orders.
+Viauco enables you to utilize the payment method of choice for your e-commerce store. We have two [preferred payment gateway partners](http://viaucocommerce.com/products/payment_processing) and a long [list](https://github.com/Shopify/active_merchant#supported-direct-payment-gateways) of payment gateways that are supported by default in Viauco. We also enable you to add a custom payment gateway, as well as offer offline payment options such as checks and purchase orders.
 
 ### Add a Supported Gateway
 
@@ -34,11 +34,11 @@ Read through the following explanatory text to add one of the supported payment 
 
 #### Select Provider
 
-To configure one of the supported payment gateways, you must first install the [Spree_Gateway](https://github.com/spree/spree_gateway) extension on your store. More than likely, you will want to ask someone from your technical team to do this. Once this extension has been installed, you can configure one of the supported gateways in the Admin Interface by clicking the "Configuration" tab and then clicking the "New Payment Method" button.
+To configure one of the supported payment gateways, you must first install the [Viauco_Gateway](https://github.com/viauco/viauco_gateway) extension on your store. More than likely, you will want to ask someone from your technical team to do this. Once this extension has been installed, you can configure one of the supported gateways in the Admin Interface by clicking the "Configuration" tab and then clicking the "New Payment Method" button.
 
 ![New Payment Method Form](../../../images/user/payments/new_payment_method.jpg)
 
-If you installed the [Spree_Gateway](https://github.com/spree/spree_gateway) extension, you will see a long list of gateways in the "Provider" drop down menu. Select the one that you would like to add.
+If you installed the [Viauco_Gateway](https://github.com/viauco/viauco_gateway) extension, you will see a long list of gateways in the "Provider" drop down menu. Select the one that you would like to add.
 
 ![Select Payment Gateway Provider](../../../images/user/payments/add_payment_provider.jpg)
 

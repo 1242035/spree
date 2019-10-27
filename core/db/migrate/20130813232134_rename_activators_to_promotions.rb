@@ -1,5 +1,5 @@
 class RenameActivatorsToPromotions < ActiveRecord::Migration[4.2]
   def change
-    rename_table :spree_activators, :spree_promotions
+    rename_table :viauco_activators, :viauco_promotions
   end
 end

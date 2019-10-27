@@ -1,5 +1,5 @@
 ---
-title: Upgrading Spree from 1.0.x to 1.1.x
+title: Upgrading Viauco from 1.0.x to 1.1.x
 section: upgrades
 hidden: false
 order: 14
@@ -7,18 +7,18 @@ order: 14
 
 ## Overview
 
-This guide covers upgrading a 1.0.x Spree store, to a 1.1.x store. This
-guide has been written from the perspective of a blank Spree 1.0.x store with
+This guide covers upgrading a 1.0.x Viauco store, to a 1.1.x store. This
+guide has been written from the perspective of a blank Viauco 1.0.x store with
 no extensions.
 
 If you have extensions that your store depends on, you will need to manually
 verify that each of those extensions work within your 1.1.x store once this
 upgrade is complete. Typically, extensions that are compatible with this
-version of Spree will have a 1-1-stable branch.
+version of Viauco will have a 1-1-stable branch.
 
 ## Upgrade Rails
 
-Spree 1.1 depends on any Rails 3.2 release afer Rails 3.2.9. Ensure that you have that dependency specified in your Gemfile:
+Viauco 1.1 depends on any Rails 3.2 release afer Rails 3.2.9. Ensure that you have that dependency specified in your Gemfile:
 
 ````ruby
 gem 'rails', '~> 3.2.9'```
@@ -37,26 +37,26 @@ gem 'jquery-rails', '2.1.4'
 
 For more information, please refer to the [Upgrading Ruby on Rails guide](http://guides.rubyonrails.org/upgrading_ruby_on_rails.html#upgrading-from-rails-3-1-to-rails-3-2).
 
-## Upgrade Spree
+## Upgrade Viauco
 
 For best results, use the 1-1-stable branch from GitHub:
 
 ````ruby
-gem 'spree', github: 'spree/spree', branch: '1-1-stable'```
+gem 'viauco', github: 'viauco/viauco', branch: '1-1-stable'```
 
-Run `bundle update spree`.
+Run `bundle update viauco`.
 
 ## Copy and run migrations
 
-Copy over the migrations from Spree (and any other engine) and run them using
+Copy over the migrations from Viauco (and any other engine) and run them using
 these commands:
 
     rake railties:install:migrations
     rake db:migrate
 
-## Remove references to spree_api assets
+## Remove references to viauco_api assets
 
-Spree API no longer provides any asset files, so references to these must be removed from:
+Viauco API no longer provides any asset files, so references to these must be removed from:
 
 * app/assets/stylesheets/store/all.css
 * app/assets/stylesheets/admin/all.css
@@ -65,7 +65,7 @@ Spree API no longer provides any asset files, so references to these must be rem
 
 ## Read the release notes
 
-For information about what has changed in this release, please read the [1.1.0 Release Notes](http://guides.spreecommerce.org/release_notes/spree_1_1_0.html).
+For information about what has changed in this release, please read the [1.1.0 Release Notes](http://guides.viaucocommerce.org/release_notes/viauco_1_1_0.html).
 
 ## Verify that everything is OK
 

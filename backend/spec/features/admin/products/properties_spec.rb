@@ -4,14 +4,14 @@ describe 'Properties', type: :feature, js: true do
   stub_authorization!
 
   before do
-    visit spree.admin_products_path
+    visit viauco.admin_products_path
   end
 
   context 'Property index' do
     before do
       create(:property, name: 'shirt size', presentation: 'size')
       create(:property, name: 'shirt fit', presentation: 'fit')
-      visit spree.admin_properties_path
+      visit viauco.admin_properties_path
     end
 
     context 'listing product properties' do
@@ -58,7 +58,7 @@ describe 'Properties', type: :feature, js: true do
 
   context 'creating a property' do
     it 'allows an admin to create a new product property' do
-      visit spree.admin_properties_path
+      visit viauco.admin_properties_path
       click_link 'new_property_link'
       within('.content-header') { expect(page).to have_content('New Property') }
 
@@ -72,7 +72,7 @@ describe 'Properties', type: :feature, js: true do
   context 'editing a property' do
     before do
       create(:property)
-      visit spree.admin_properties_path
+      visit viauco.admin_properties_path
       within_row(1) { click_icon :edit }
     end
 
@@ -93,7 +93,7 @@ describe 'Properties', type: :feature, js: true do
   context 'linking a property to a product' do
     before do
       create(:product)
-      visit spree.admin_products_path
+      visit viauco.admin_products_path
       click_icon :edit
       within('#sidebar') do
         click_link 'Properties'

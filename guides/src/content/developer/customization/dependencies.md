@@ -6,17 +6,17 @@ order: 3
 
 ## Overview
 
-Dependendencies is a a new way to customize Spree. With Dependencies you can easily replace parts of Spree internals with your custom classes. You can replace [Services](https://github.com/spree/spree/tree/master/core/app/services/spree), Abilities and [Serializers](https://github.com/spree/spree/tree/master/api/app/serializers/spree/v2). More will come in the future.
+Dependendencies is a a new way to customize Viauco. With Dependencies you can easily replace parts of Viauco internals with your custom classes. You can replace [Services](https://github.com/viauco/viauco/tree/master/core/app/services/viauco), Abilities and [Serializers](https://github.com/viauco/viauco/tree/master/api/app/serializers/viauco/v2). More will come in the future.
 
 <alert kind="warning">
-  Dependencies are available in [Spree 3.7](/release_notes/3_7_0.html) and later.
+  Dependencies are available in [Viauco 3.7](/release_notes/3_7_0.html) and later.
 </alert>
 
 ## Controller level customization
 
 To replace [serializers](https://github.com/Netflix/fast_jsonapi) or Services in a specific API endpoint you can create a simple decorator:
 
-Create a `app/controllers/spree/api/v2/storefront/cart_controller_decorator.rb`
+Create a `app/controllers/viauco/api/v2/storefront/cart_controller_decorator.rb`
 ```ruby
   module MyCartControllerDecorator
     def resource_serializer
@@ -27,22 +27,22 @@ Create a `app/controllers/spree/api/v2/storefront/cart_controller_decorator.rb`
       MyNewAwesomeAddItemToCart
     end
   end
-  Spree::Api::V2::Storefront::CartController.prepend MyCartControllerDecorator
+  Viauco::Api::V2::Storefront::CartController.prepend MyCartControllerDecorator
 ```
 
 This will change the serializer in this API endpoint to `MyNewAwesomeCartSerializer` and also it will swap the default `add_item_service` to `MyNewAwesomeAddItemToCart`.
 
-Different API endpoints can have different dependency injection points. You can review their [source code](https://github.com/spree/spree/tree/master/api/app/controllers/spree/api/v2) to see what you can configure.
+Different API endpoints can have different dependency injection points. You can review their [source code](https://github.com/viauco/viauco/tree/master/api/app/controllers/viauco/api/v2) to see what you can configure.
 
 ## API level customization
 
 Storefront and Platform APIs have separate Dependencies injection points so you can easily customize one without touching the other.
 
-In your Spree initializer (`config/initializers/spree.rb`) please add:
+In your Viauco initializer (`config/initializers/viauco.rb`) please add:
 
 ```ruby
-Spree::Api::Dependencies[:storefront_cart_serializer] = 'MyNewAwesomeCartSerializer'
-Spree::Api::Dependencies[:storefront_cart_add_item_service] = 'MyNewAwesomeAddItemToCart'
+Viauco::Api::Dependencies[:storefront_cart_serializer] = 'MyNewAwesomeCartSerializer'
+Viauco::Api::Dependencies[:storefront_cart_add_item_service] = 'MyNewAwesomeAddItemToCart'
 ```
 
 This will swap the default Cart serializer and Add Item to Cart service for your custom ones within all Storefront API endpoints that uses those classes.
@@ -53,16 +53,16 @@ This will swap the default Cart serializer and Add Item to Cart service for your
 
 ## Application (global) customization
 
-You can also inject classes globally to the entire Spree stack. Be careful about this though as this touches every aspect of the application (both APIs, Admin Panel and default Rails frontend if you're using it).
+You can also inject classes globally to the entire Viauco stack. Be careful about this though as this touches every aspect of the application (both APIs, Admin Panel and default Rails frontend if you're using it).
 
 ```ruby
-Spree::Dependencies[:cart_add_item_service] = 'MyNewAwesomeAddItemToCart'
+Viauco::Dependencies[:cart_add_item_service] = 'MyNewAwesomeAddItemToCart'
 ```
 
 or
 
 ```ruby
-Spree.dependencies do |dependencies|
+Viauco.dependencies do |dependencies|
   dependencies.cart_add_item_service = 'MyNewAwesomeAddItemToCart'
 end
 ```
@@ -70,8 +70,8 @@ end
 You can mix and match both global and API level customizations:
 
 ```ruby
-Spree::Dependencies[:cart_add_item_service] = 'MyNewAwesomeAddItemToCart'
-Spree::Api::Dependencies[:storefront_cart_add_item_service] = 'AnotherAddItemToCart'
+Viauco::Dependencies[:cart_add_item_service] = 'MyNewAwesomeAddItemToCart'
+Viauco::Api::Dependencies[:storefront_cart_add_item_service] = 'AnotherAddItemToCart'
 ```
 
 The second line will have precedence over the first one, and the Storefront API will use `AnotherAddItemToCart` and the rest of the application will use `MyNewAwesomeAddItemToCart`
@@ -84,5 +84,5 @@ The second line will have precedence over the first one, and the Storefront API 
 
 Default values can be easily checked looking at the source code of Dependencies classes:
 
-- [Application (global) dependencies](https://github.com/spree/spree/blob/master/core/app/models/spree/app_dependencies.rb)
-- [API level dependencies](https://github.com/spree/spree/blob/master/api/app/models/spree/api_dependencies.rb)
+- [Application (global) dependencies](https://github.com/viauco/viauco/blob/master/core/app/models/viauco/app_dependencies.rb)
+- [API level dependencies](https://github.com/viauco/viauco/blob/master/api/app/models/viauco/api_dependencies.rb)

@@ -5,7 +5,7 @@ describe 'Product Variants', type: :feature, js: true do
 
   before do
     create(:product)
-    visit spree.admin_products_path
+    visit viauco.admin_products_path
   end
 
   context 'editing variant option types' do
@@ -32,7 +32,7 @@ describe 'Product Variants', type: :feature, js: true do
       click_button 'Update'
       expect(page).to have_content('successfully updated!')
 
-      visit spree.admin_products_path
+      visit viauco.admin_products_path
       within_row(1) { click_icon :edit }
 
       select2_search 'shirt', from: 'Option Types'

@@ -6,49 +6,49 @@ order: 1
 
 ## Overview
 
-This guide covers how Spree manages its JavaScript, stylesheet and image
+This guide covers how Viauco manages its JavaScript, stylesheet and image
 assets and how you can extend and customize them including:
 
--   Understanding Spree's use of the Rails asset pipeline
+-   Understanding Viauco's use of the Rails asset pipeline
 -   Managing application specific assets
 -   Managing extension specific assets
--   Overriding Spree's core assets
+-   Overriding Viauco's core assets
 
-## Spree's Asset Pipeline
+## Viauco's Asset Pipeline
 
 Using asset customization
 techniques outlined below you be able to adapt all the JavaScript,
-stylesheets and images contained in Spree to easily provide a fully
+stylesheets and images contained in Viauco to easily provide a fully
 custom experience.
 
-All Spree generated (or upgraded) applications include an `app/assets`
+All Viauco generated (or upgraded) applications include an `app/assets`
 directory. We've taken this one
 step further by subdividing each top level asset directory (images,
 JavaScript files, stylesheets) into `frontend` and `backend` directories. This is
 designed to keep assets from the frontend and backend from conflicting with each other.
 
-A typical assets directory for a Spree application will look like:
+A typical assets directory for a Viauco application will look like:
 
     app
     |-- assets
         |-- images
-        |   |-- spree
+        |   |-- viauco
         |       |-- frontend
         |       |-- backend
         |-- javascripts
-        |   |-- spree
+        |   |-- viauco
         |       |-- frontend
         |       |   |-- all.js
         |       |-- backend
         |           |-- all.js
         |-- stylesheets
-        |   |-- spree
+        |   |-- viauco
         |       |-- frontend
         |       |   |-- all.css
         |       |-- backend
         |           |-- all.css
 
-Spree also generates four top level manifests (all.css & all.js, see
+Viauco also generates four top level manifests (all.css & all.js, see
 above) that require all the core extension's and site specific
 stylesheets / JavaScript files.
 
@@ -58,32 +58,32 @@ All core engines have been updated to provide four asset manifests that
 are responsible for bundling up all the JavaScript files and stylesheets
 required for that engine.
 
-For example, Spree provides the following manifests:
+For example, Viauco provides the following manifests:
 
     vendor
     |-- assets
         |-- javascripts
-        |   |-- spree
+        |   |-- viauco
         |       |-- frontend
         |       |   |-- all.js
         |       |-- backend
         |           |-- all.js
         |-- stylesheets
-        |   |-- spree
+        |   |-- viauco
         |       |-- frontend
         |       |   |-- all.css
         |       |-- backend
         |           |-- all.css
 
 These manifests are included by default by the
-relevant all.css or all.js in the host Spree application. For example,
-`vendor/assets/javascripts/spree/backend/all.js` includes:
+relevant all.css or all.js in the host Viauco application. For example,
+`vendor/assets/javascripts/viauco/backend/all.js` includes:
 
 ```js
 //= require jquery
 //= require jquery_ujs
 
-//= require spree/backend
+//= require viauco/backend
 
 //= require_tree .
 ```
@@ -93,15 +93,15 @@ relocated into vendor/assets.
 
 ## Managing your application's assets
 
-Assets that customize your Spree store should go inside the appropriate
-directories inside `vendor/assets/images/spree`, `vendor/assets/javascripts/spree`,
-or `vendor/assets/stylesheets/spree`. This is done so that these assets do
+Assets that customize your Viauco store should go inside the appropriate
+directories inside `vendor/assets/images/viauco`, `vendor/assets/javascripts/viauco`,
+or `vendor/assets/stylesheets/viauco`. This is done so that these assets do
 not interfere with other parts of your application.
 
 ## Managing your extension's assets
 
 We're suggesting that all third party extensions should adopt the same
-approach as Spree and provide the same four (or less depending on
+approach as Viauco and provide the same four (or less depending on
 what the extension requires) manifest files, using the same directory
 structure as outlined above.
 
@@ -112,11 +112,11 @@ a Rails generator to do so.
 
 For an example of an extension using a generator to install assets and
 migrations take a look at the
-[install generator for Braintree Vzero](https://github.com/spree-contrib/spree_braintree_vzero/blob/master/lib/generators/spree_braintree_vzero/install/install_generator.rb).
+[install generator for Braintree Vzero](https://github.com/viauco-contrib/viauco_braintree_vzero/blob/master/lib/generators/viauco_braintree_vzero/install/install_generator.rb).
 
-## Overriding Spree's core assets
+## Overriding Viauco's core assets
 
-Overriding or replacing any of Spree's internal assets is even easier
+Overriding or replacing any of Viauco's internal assets is even easier
 than before. It's recommended to attempt to replace as little as
 possible in a given JavaScript or stylesheet file to help ease future
 upgrade work required.
@@ -131,7 +131,7 @@ include asset files from your extensions / themes).
 Say for example you want to replace the following CSS snippet:
 
 ```css
-/* spree/app/assets/stylesheets/spree/frontend/screen.css */
+/* viauco/app/assets/stylesheets/viauco/frontend/screen.css */
 
 div#footer {
  clear: both;
@@ -139,10 +139,10 @@ div#footer {
 ```
 
 You can now just create a new stylesheet inside
-`your_app/vendor/assets/stylesheets/spree/frontend/` and include the following CSS:
+`your_app/vendor/assets/stylesheets/viauco/frontend/` and include the following CSS:
 
 ```css
-/* vendor/assets/stylesheets/spree/frontend/foo.css */
+/* vendor/assets/stylesheets/viauco/frontend/foo.css */
 
 div#footer {
  clear: none;
@@ -156,13 +156,13 @@ included last, hence it will be the rule applied.
 
 ### Overriding entire CSS files
 
-To replace an entire stylesheet as provided by Spree you simply need to
+To replace an entire stylesheet as provided by Viauco you simply need to
 create a file with the same name and save it to the corresponding path
 within your application's or extension's `vendor/assets/stylesheets`
 directory.
 
-For example, to replace `spree/frontend/all.css` you would save the replacement
-to `your_app/vendor/assets/stylesheets/spree/frontend/all.css`.
+For example, to replace `viauco/frontend/all.css` you would save the replacement
+to `your_app/vendor/assets/stylesheets/viauco/frontend/all.css`.
 
 <alert kind="note">
 This same method can also be used to override stylesheets provided by
@@ -175,7 +175,7 @@ A similar approach can be used for JavaScript functions. For example, if
 you wanted to override the `show_variant_images` method:
 
 ```javascript
- // spree/app/assets/javascripts/spree/frontend/product.js
+ // viauco/app/assets/javascripts/viauco/frontend/product.js
 
 var show_variant_images = function(variant_id) {
   $('li.vtmb').hide();
@@ -201,11 +201,11 @@ var show_variant_images = function(variant_id) {
 ```
 
 Again, just create a new JavaScript file inside
-`your_app/vendor/assets/javascripts/spree/frontend` and include the new method
+`your_app/vendor/assets/javascripts/viauco/frontend` and include the new method
 definition:
 
 ```javascript
- // your_app/vendor/assets/javascripts/spree/frontend/foo.js
+ // your_app/vendor/assets/javascripts/viauco/frontend/foo.js
 
 var show_variant_images = function(variant_id) {
  alert('hello world');
@@ -217,13 +217,13 @@ being the one executed on request.
 
 ### Overriding entire JavaScript files
 
-To replace an entire JavaScript file as provided by Spree you simply
+To replace an entire JavaScript file as provided by Viauco you simply
 need to create a file with the same name and save it to the
 corresponding path within your application's or extension's
 `app/assets/javascripts` directory.
 
-For example, to replace `spree/frontend/all.js` you would save the replacement to
-`your_app/vendor/assets/javascripts/spree/frontend/all.js`.
+For example, to replace `viauco/frontend/all.js` you would save the replacement to
+`your_app/vendor/assets/javascripts/viauco/frontend/all.js`.
 
 <alert kind="note">
 This same method can be used to override JavaScript files provided

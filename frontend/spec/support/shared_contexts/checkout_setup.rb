@@ -13,7 +13,7 @@ shared_context 'proceed to payment step' do
   before do
     add_to_cart('RoR Mug')
     click_button 'Checkout'
-    fill_in 'order_email', with: 'spree@example.com'
+    fill_in 'order_email', with: 'viauco@example.com'
     fill_in 'First Name', with: 'John'
     fill_in 'Last Name', with: 'Smith'
     fill_in 'Address', with: '1 John Street'

@@ -5,7 +5,7 @@ order: 1
 
 ## Introduction
 
-The Spree store gives you a great deal of leverage in managing your business' inventory. You can set up multiple [stock locations](#stock-locations), each of which represents a physical location at which you store your products for delivery to customers. As you add new products and make sales, [stock movements](#stock-movements) are recorded. You can receive stock from a supplier, and even move products from one stock location to another by recording [stock transfers](#stock-transfers). All of this helps to keep your inventorying manageable and current.
+The Viauco store gives you a great deal of leverage in managing your business' inventory. You can set up multiple [stock locations](#stock-locations), each of which represents a physical location at which you store your products for delivery to customers. As you add new products and make sales, [stock movements](#stock-movements) are recorded. You can receive stock from a supplier, and even move products from one stock location to another by recording [stock transfers](#stock-transfers). All of this helps to keep your inventorying manageable and current.
 
 ### Stock Locations
 
@@ -53,7 +53,7 @@ Stock movements are actions that happen automatically through the normal managem
 
 ### Stock Transfers
 
-If you have more than one stock location, your Spree store offers you a way to record the movement on inventory from one location to another: the stock transfer.
+If you have more than one stock location, your Viauco store offers you a way to record the movement on inventory from one location to another: the stock transfer.
 
 To create a new stock transfer, go to your Admin Interface, click "Configuration", then "Stock Transfers", then click the "New Stock Transfer" button.
 
@@ -68,7 +68,7 @@ Select a product variant from the "Variant" drop-down list and enter the quantit
 ![Stock Transfer Readied](../../../images/user/config/stock_transfer.jpg)
 
 ***
-If you try to transfer an item that you do not have in stock at your Source location, the Spree system will record a stock transfer with a quantity of 0.
+If you try to transfer an item that you do not have in stock at your Source location, the Viauco system will record a stock transfer with a quantity of 0.
 ***
 
 The new stock transfer is readied. Once you have added all of the items you want to transfer, click the "Transfer Stock" button.

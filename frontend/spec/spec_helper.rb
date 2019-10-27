@@ -2,7 +2,7 @@ if ENV['COVERAGE']
   # Run Coverage report
   require 'simplecov'
   SimpleCov.start 'rails' do
-    add_group 'Libraries', 'lib/spree'
+    add_group 'Libraries', 'lib/viauco'
 
     add_filter '/bin/'
     add_filter '/db/'
@@ -34,19 +34,19 @@ Dir["#{File.dirname(__FILE__)}/support/**/*.rb"].each { |f| require f }
 require 'database_cleaner'
 require 'rspec/retry'
 
-require 'spree/testing_support/i18n' if ENV['CHECK_TRANSLATIONS']
+require 'viauco/testing_support/i18n' if ENV['CHECK_TRANSLATIONS']
 
-require 'spree/testing_support/authorization_helpers'
-require 'spree/testing_support/capybara_ext'
-require 'spree/testing_support/factories'
-require 'spree/testing_support/preferences'
-require 'spree/testing_support/controller_requests'
-require 'spree/testing_support/flash'
-require 'spree/testing_support/url_helpers'
-require 'spree/testing_support/order_walkthrough'
-require 'spree/testing_support/caching'
-require 'spree/testing_support/capybara_config'
-require 'spree/testing_support/image_helpers'
+require 'viauco/testing_support/authorization_helpers'
+require 'viauco/testing_support/capybara_ext'
+require 'viauco/testing_support/factories'
+require 'viauco/testing_support/preferences'
+require 'viauco/testing_support/controller_requests'
+require 'viauco/testing_support/flash'
+require 'viauco/testing_support/url_helpers'
+require 'viauco/testing_support/order_walkthrough'
+require 'viauco/testing_support/caching'
+require 'viauco/testing_support/capybara_config'
+require 'viauco/testing_support/image_helpers'
 require 'webdrivers'
 
 RSpec.configure do |config|
@@ -87,7 +87,7 @@ RSpec.configure do |config|
     # See issue #3428
     ApplicationRecord.connection.increment_open_transactions if ApplicationRecord.connection.open_transactions < 0
     DatabaseCleaner.start
-    reset_spree_preferences
+    reset_viauco_preferences
   end
 
   config.after(:each, type: :feature) do |example|
@@ -104,11 +104,11 @@ RSpec.configure do |config|
 
   config.include FactoryBot::Syntax::Methods
 
-  config.include Spree::TestingSupport::Preferences
-  config.include Spree::TestingSupport::UrlHelpers
-  config.include Spree::TestingSupport::ControllerRequests, type: :controller
-  config.include Spree::TestingSupport::Flash
-  config.include Spree::TestingSupport::ImageHelpers
+  config.include Viauco::TestingSupport::Preferences
+  config.include Viauco::TestingSupport::UrlHelpers
+  config.include Viauco::TestingSupport::ControllerRequests, type: :controller
+  config.include Viauco::TestingSupport::Flash
+  config.include Viauco::TestingSupport::ImageHelpers
 
   config.order = :random
   Kernel.srand config.seed

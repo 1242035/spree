@@ -1,6 +1,6 @@
 ---
 title: Payments
-description: Use the Spree Commerce storefront API to access Payment data.
+description: Use the Viauco Commerce storefront API to access Payment data.
 ---
 
 ## Index
@@ -36,7 +36,7 @@ To search for a particular payment, make a request like this:
 
     GET /api/v1/orders/R1234567/payments?q[response_code_cont]=123
 
-The searching API is provided through the Ransack gem which Spree depends on. The `response_code_cont` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
+The searching API is provided through the Ransack gem which Viauco depends on. The `response_code_cont` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
 
 The search results are paginated.
 
@@ -65,7 +65,7 @@ In order to create a new payment, you will need to know about the available paym
   "attributes": ["id", "source_type", "source_id", "amount",
    "display_amount", "payment_method_id", "state", "avs_response",
    "created_at", "updated_at", "number"],
-  "payment_methods": [Spree::Resources::PAYMENT_METHOD]
+  "payment_methods": [Viauco::Resources::PAYMENT_METHOD]
 }
 ```
 

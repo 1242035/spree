@@ -5,7 +5,7 @@ describe 'Stock Locations', type: :feature do
   let!(:stock_location) { create(:stock_location) }
 
   before do
-    visit spree.admin_stock_locations_path
+    visit viauco.admin_stock_locations_path
   end
 
   it 'can create a new stock location' do

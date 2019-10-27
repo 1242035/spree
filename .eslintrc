@@ -2,15 +2,15 @@
 extends: standard
 
 globals:
-  Spree: true
+  Viauco: true
   analytics: true
   ga: true
   _: true
   Select2: true
   Handlebars: true
   Raphael: true
-  SpreeAPI: true
-  SpreePaths: true
+  ViaucoAPI: true
+  ViaucoPaths: true
 
 env:
   browser: true

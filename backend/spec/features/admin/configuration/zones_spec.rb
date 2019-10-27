@@ -4,8 +4,8 @@ describe 'Zones', type: :feature do
   stub_authorization!
 
   before do
-    Spree::Zone.delete_all
-    visit spree.admin_path
+    Viauco::Zone.delete_all
+    visit viauco.admin_path
     click_link 'Configuration'
   end
 

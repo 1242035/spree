@@ -10,9 +10,9 @@ When you click the **Orders** tab on the Admin Interface, you are instantly pres
 The list shows you the following information about each order:
 
 * **Completed At** - The date on which the user finalized their order.
-* **Number** - The Spree-generated order number.
+* **Number** - The Viauco-generated order number.
 * **State** - The current state of the order. You can learn more about [order states in another guide](/user/orders/order_states.html).
-* **Payment State** - Spree tracks the state of an order's payment separately from the state of the order itself. As payment is received, the state of the order progresses.
+* **Payment State** - Viauco tracks the state of an order's payment separately from the state of the order itself. As payment is received, the state of the order progresses.
 * **Shipment State** - Having the Shipment State pictured separately lets you quickly see which orders are paid and need to be packed and shipped, improving your store's workflow.
 * **Customer Email**
 * **Total** - This amount includes item totals, tax, shipping, and any promotions or adjustments made to the order.
@@ -21,7 +21,7 @@ Next to each row is an "Edit" icon. Clicking this icon allows you to [make chang
 
 # Filtering Results
 
-You may not always want to see all of the most recent orders - the Spree default. You may want to view only those orders that you need to pack and ship, or only those from a particular customer. Spree gives you the flexibility to quickly find only those orders you need.
+You may not always want to see all of the most recent orders - the Viauco default. You may want to view only those orders that you need to pack and ship, or only those from a particular customer. Viauco gives you the flexibility to quickly find only those orders you need.
 
 ![Order Filter Options](../../../images/user/orders/filter_options.jpg)
 
@@ -52,7 +52,7 @@ You can restrict orders to only those with a particular status. Available status
 
 ## Order Number
 
-Spree generates a unique order number for each order when the first item is added to a shopping cart. Order numbers begin with the letter R, followed by 9 random numbers. If you are searching for a particular order, you can just input the entire order number and that order is all that will be returned.
+Viauco generates a unique order number for each order when the first item is added to a shopping cart. Order numbers begin with the letter R, followed by 9 random numbers. If you are searching for a particular order, you can just input the entire order number and that order is all that will be returned.
 
 ## Email
 

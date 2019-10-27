@@ -1,0 +1,38 @@
+<% content_for :page_title do %>
+  <%= link_to Viauco.t(:users), viauco.admin_users_path %> /
+<% end %>
+
+<% content_for :sidebar do %>
+  <ul class="nav flex-column nav-pills" data-hook="admin_user_tab_options">
+    <li>
+      <%= link_to_with_icon 'user',
+        Viauco.t(:"admin.user.account"),
+        viauco.edit_admin_user_path(@user),
+        class: "nav-link #{'active' if current == :account}" %>
+    </li>
+    <li>
+      <%= link_to_with_icon 'user',
+        Viauco.t(:"admin.user.addresses"),
+        viauco.addresses_admin_user_path(@user),
+        class: "nav-link #{'active' if current == :address}" %>
+    </li>
+    <li>
+      <%= link_to_with_icon 'shopping-cart',
+        Viauco.t(:"admin.user.orders"),
+        viauco.orders_admin_user_path(@user),
+        class: "nav-link #{'active' if current == :orders}" %>
+    </li>
+    <li>
+      <%= link_to_with_icon 'edit',
+        Viauco.t(:"admin.user.items"),
+        viauco.items_admin_user_path(@user),
+        class: "nav-link #{'active' if current == :items}" %>
+    </li>
+    <li>
+      <%= link_to_with_icon 'money',
+        Viauco.t(:"admin.user.store_credits"),
+        viauco.admin_user_store_credits_path(@user),
+        class: "nav-link #{'active' if current == :store_credits}" %>
+    </li>
+  </ul>
+<% end %>

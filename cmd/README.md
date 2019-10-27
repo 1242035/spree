@@ -1,11 +1,11 @@
-Spree CMD
+Viauco CMD
 ===============
 
-Command line utility to create new Spree extensions
+Command line utility to create new Viauco extensions
 
-To build a new Spree Extension, you can run
+To build a new Viauco Extension, you can run
 ```ruby
-spree extension my_extension
+viauco extension my_extension
 ```
 
 This wll create a brand new project with all the developer tools and gems needed to developer your extension.

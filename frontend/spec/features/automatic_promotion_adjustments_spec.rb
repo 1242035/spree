@@ -10,18 +10,18 @@ describe 'Automatic promotions', type: :feature, js: true do
     create(:shipping_method)
     create(:check_payment_method)
 
-    promotion = Spree::Promotion.create!(name: '$10 off when you spend more than $100')
+    promotion = Viauco::Promotion.create!(name: '$10 off when you spend more than $100')
 
-    calculator = Spree::Calculator::FlatRate.new
+    calculator = Viauco::Calculator::FlatRate.new
     calculator.preferred_amount = 10
 
-    rule = Spree::Promotion::Rules::ItemTotal.create
+    rule = Viauco::Promotion::Rules::ItemTotal.create
     rule.preferred_amount_min = 100
     rule.save
 
     promotion.rules << rule
 
-    action = Spree::Promotion::Actions::CreateAdjustment.create
+    action = Viauco::Promotion::Actions::CreateAdjustment.create
     action.calculator = calculator
     action.save
 

@@ -1,0 +1,43 @@
+<nav>
+  <% if can? :admin, Viauco::Order %>
+    <ul class="nav nav-sidebar border-bottom">
+      <%= tab *Viauco::BackendConfiguration::ORDER_TABS, icon: 'shopping-cart' %>
+    </ul>
+  <% end %>
+
+  <% if can?(:admin, Viauco::ReturnAuthorization) || can?(:admin, Viauco::CustomerReturn) %>
+    <ul class="nav nav-sidebar border-bottom">
+      <%= main_menu_tree Viauco.t(:returns), icon: "transfer", sub_menu: "returns", url: "#sidebar-returns" %>
+    </ul>
+  <% end %>
+
+  <% if can? :admin, Viauco::Product %>
+    <ul class="nav nav-sidebar border-bottom">
+      <%= main_menu_tree Viauco.t(:products), icon: "th-large", sub_menu: "product", url: "#sidebar-product" %>
+    </ul>
+  <% end %>
+
+  <% if can? :admin, Viauco::Admin::ReportsController %>
+    <ul class="nav nav-sidebar border-bottom">
+      <%= tab *Viauco::BackendConfiguration::REPORT_TABS, icon: 'file'  %>
+    </ul>
+  <% end %>
+
+  <% if can? :admin, Viauco::Promotion %>
+    <ul class="nav nav-sidebar border-bottom">
+      <%= main_menu_tree Viauco.t(:promotions), icon: "gift", sub_menu: "promotion", url: "#sidebar-promotions" %>
+    </ul>
+  <% end %>
+
+  <% if Viauco.user_class && can?(:admin, Viauco.user_class) %>
+    <ul class="nav nav-sidebar border-bottom">
+      <%= tab *Viauco::BackendConfiguration::USER_TABS, url: viauco.admin_users_path, icon: 'user' %>
+    </ul>
+  <% end %>
+
+  <% if can? :admin, current_store %>
+    <ul class="nav nav-sidebar border-bottom">
+      <%= main_menu_tree Viauco.t(:configurations), icon: "wrench", sub_menu: "configuration", url: "#sidebar-configuration" %>
+    </ul>
+  <% end %>
+</nav>

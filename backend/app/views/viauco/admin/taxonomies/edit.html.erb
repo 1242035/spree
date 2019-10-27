@@ -1,0 +1,37 @@
+<%= render partial: 'js_head' %>
+
+<% content_for :page_title do %>
+  <%= link_to Viauco.t(:taxonomies), viauco.admin_taxonomies_url %> /
+  <%= @taxonomy.name %>
+<% end %>
+
+<div id="ajax_error" class="errorExplanation" style="display:none;"></div>
+
+<%= form_for [:admin, @taxonomy] do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <div class="form-group">
+      <%= label_tag nil, Viauco.t(:tree) %>
+      <script>
+        Viauco.routes.taxonomy_taxons_path = "<%= viauco.api_v1_taxonomy_taxons_path(@taxonomy) %>";
+        Viauco.routes.admin_taxonomy_taxons_path = "<%= viauco.admin_taxonomy_taxons_path(@taxonomy) %>";
+        Viauco.routes.jstree_theme_path = "<%= stylesheet_path("jquery.jstree/themes/viauco/style.css") %>";
+      </script>
+      <div id="taxonomy_tree" class="tree">
+        <div class="alert alert-warning">
+          <%= Viauco.t(:loading_tree) %>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert alert-info">
+      <%= Viauco.t(:taxonomy_tree_instruction) %>
+    </div>
+
+    <div class="form-actions">
+      <%= button Viauco.t('actions.update'), 'ok', 'submit', { class: 'btn-success' } %>
+      <span class="or"><%= Viauco.t(:or) %></span>
+      <%= button_link_to Viauco.t('actions.cancel'), admin_taxonomies_path, icon: 'delete' %>
+    </div>
+  </fieldset>
+<% end %>

@@ -10,16 +10,16 @@ This guide explains how to change Product Images dimensions and different storag
 
 ## ActiveStorage
 
-ActiveStorage is the default attachment storage system since [Spree 3.6](https://guides.spreecommerce.org/release_notes/spree_3_6_0.html) and [Rails 5.2](https://guides.rubyonrails.org/5_2_release_notes.html).
+ActiveStorage is the default attachment storage system since [Viauco 3.6](https://guides.viaucocommerce.org/release_notes/viauco_3_6_0.html) and [Rails 5.2](https://guides.rubyonrails.org/5_2_release_notes.html).
 To read more about ActiveStorage head to the [official documentation](https://edgeguides.rubyonrails.org/active_storage_overview.html).
 
 ### Image dimensions
 
-To change the default image dimensions or add new ones you need to create a decorator file `app/models/spree/image_decorator.rb`:
+To change the default image dimensions or add new ones you need to create a decorator file `app/models/viauco/image_decorator.rb`:
 
 ```ruby
 module YourApplication
-  module Spree
+  module Viauco
     module ImageDecorator
       module ClassMethods
         def styles
@@ -40,7 +40,7 @@ module YourApplication
   end
 end
 
-Spree::Image.prepend ::YourApplication::Spree::ImageDecorator
+Viauco::Image.prepend ::YourApplication::Viauco::ImageDecorator
 ```
 
 You can also create image variations on the fly in your templates, eg.
@@ -58,18 +58,18 @@ or [Google Cloud Storage](https://guides.rubyonrails.org/active_storage_overview
 
 ## Paperclip
 
-**Paperclip** support will be removed in Spree 4.0. To migrate to **ActiveStorage** please read [the official migration guide](https://github.com/thoughtbot/paperclip/blob/master/MIGRATING.md).
+**Paperclip** support will be removed in Viauco 4.0. To migrate to **ActiveStorage** please read [the official migration guide](https://github.com/thoughtbot/paperclip/blob/master/MIGRATING.md).
 
 ### Image dimensions
 
-Until Spree 3.6 we've used Thoughtbot's
+Until Viauco 3.6 we've used Thoughtbot's
 [paperclip](https://github.com/thoughtbot/paperclip) gem to manage
 images for products. All the normal paperclip options are available on
-the `Image` class. If you want to modify the default Spree product and
-thumbnail image sizes, simply create an `app/models/spree/image_decorator.rb` file and override the attachment sizes:
+the `Image` class. If you want to modify the default Viauco product and
+thumbnail image sizes, simply create an `app/models/viauco/image_decorator.rb` file and override the attachment sizes:
 
 ```ruby
-Spree::Image.class_eval do
+Viauco::Image.class_eval do
   attachment_definitions[:attachment][:styles] = {
     mini: '48x48>', # thumbs under image
     small: '100x100>', # images on category view
@@ -98,7 +98,7 @@ used options are:
 
 Start with adding AWS-SDK to your `Gemfile` with: `gem 'aws-sdk-s3'`, then install the gem by running `bundle install`.
 
-When that's done you need to configure Spree to use Amazon S3. You can add an initializer or just use the spree.rb initializer located at `config/intializers/spree.rb`.
+When that's done you need to configure Viauco to use Amazon S3. You can add an initializer or just use the viauco.rb initializer located at `config/intializers/viauco.rb`.
 
 ```ruby
 attachment_config = {
@@ -120,7 +120,7 @@ attachment_config = {
 }
 
 attachment_config.each do |key, value|
-  Spree::Image.attachment_definitions[:attachment][key.to_sym] = value
+  Viauco::Image.attachment_definitions[:attachment][key.to_sym] = value
 end
 
 ```

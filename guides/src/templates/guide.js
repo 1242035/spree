@@ -50,7 +50,7 @@ const renderAst = new RehypeReact({
 
 export default function Template({ data }) {
   const { guide } = data
-  const disqusShortname = 'spree-guides'
+  const disqusShortname = 'viauco-guides'
   const disqusConfig = {
     identifier: data.id,
     title: guide.frontmatter.title

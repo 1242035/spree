@@ -20,18 +20,18 @@ describe 'Prototypes', type: :feature, js: true do
       create(:property, name: 'shirt_type', presentation: 'Type')
       p = create(:prototype, name: 'Shirt')
       %w(brand gender manufacturer model shirt_fabric shirt_fit shirt_sleeve_length shirt_type).each do |prop|
-        p.properties << Spree::Property.find_by(name: prop)
+        p.properties << Viauco::Property.find_by(name: prop)
       end
       p = create(:prototype, name: 'Mug')
       %w(mug_size mug_type).each do |prop|
-        p.properties << Spree::Property.find_by(name: prop)
+        p.properties << Viauco::Property.find_by(name: prop)
       end
       p = create(:prototype, name: 'Bag')
       %w(bag_type bag_material).each do |prop|
-        p.properties << Spree::Property.find_by(name: prop)
+        p.properties << Viauco::Property.find_by(name: prop)
       end
 
-      visit spree.admin_path
+      visit viauco.admin_path
       click_link 'Products'
       click_link 'Prototypes'
 
@@ -43,7 +43,7 @@ describe 'Prototypes', type: :feature, js: true do
 
   context 'creating a prototype' do
     it 'allows an admin to create a new product prototype' do
-      visit spree.admin_path
+      visit viauco.admin_path
       click_link 'Products'
       click_link 'Prototypes'
 
@@ -55,7 +55,7 @@ describe 'Prototypes', type: :feature, js: true do
       click_button 'Create'
       expect(page).to have_content('successfully created!')
 
-      visit spree.admin_prototypes_path
+      visit viauco.admin_prototypes_path
       within_row(1) { click_icon :edit }
       fill_in 'prototype_name', with: 'Shirt 99'
       click_button 'Update'
@@ -71,10 +71,10 @@ describe 'Prototypes', type: :feature, js: true do
 
       shirt_prototype = create(:prototype, name: 'Shirt', properties: [])
       %w(brand model).each do |prop|
-        shirt_prototype.properties << Spree::Property.find_by(name: prop)
+        shirt_prototype.properties << Viauco::Property.find_by(name: prop)
       end
 
-      visit spree.admin_path
+      visit viauco.admin_path
       click_link 'Products'
       click_link 'Prototypes'
 
@@ -99,12 +99,12 @@ describe 'Prototypes', type: :feature, js: true do
     shirt_prototype = create(:prototype, name: 'Shirt', properties: [])
     shirt_prototype.taxons << create(:taxon)
 
-    visit spree.admin_path
+    visit viauco.admin_path
     click_link 'Products'
     click_link 'Prototypes'
 
     accept_confirm do
-      within("#spree_prototype_#{shirt_prototype.id}") do
+      within("#viauco_prototype_#{shirt_prototype.id}") do
         page.find('.delete-resource').click
       end
     end

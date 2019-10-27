@@ -13,11 +13,11 @@ describe 'Free shipping promotions', type: :feature, js: true do
     create(:check_payment_method)
     create(:product, name: 'RoR Mug', price: 20)
 
-    promotion = Spree::Promotion.create!(name: 'Free Shipping',
+    promotion = Viauco::Promotion.create!(name: 'Free Shipping',
                                          starts_at: 1.day.ago,
                                          expires_at: 1.day.from_now)
 
-    action = Spree::Promotion::Actions::FreeShipping.new
+    action = Viauco::Promotion::Actions::FreeShipping.new
     action.promotion = promotion
     action.save
 

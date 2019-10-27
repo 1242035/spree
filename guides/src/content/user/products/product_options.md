@@ -22,7 +22,7 @@ NOTE: Sometimes the term "Display" is used instead of "Presentation" to indicate
 
 For our first Option Type - Size - enter "Size" for the Name and "Size of the Tumbler" as the Presentation. Click "Update".
 
-When the screen refreshes, you see that Spree has helpfully provided you with a blank row in which you can enter your first Option Value for the new Option Type.
+When the screen refreshes, you see that Viauco has helpfully provided you with a blank row in which you can enter your first Option Value for the new Option Type.
 
 ![New Option Value](../../../images/user/products/new_option_value.jpg)
 
@@ -32,11 +32,11 @@ We're going to need two Option Values (Large and Small) for the Size Option Valu
 
 ![Completed Option Values](../../../images/user/products/large_small_option_values.jpg)
 
-When you click "Update", Spree saves the two new Option Values, associates them with the Size Option Type, and takes you to the list of all Option Types.
+When you click "Update", Viauco saves the two new Option Values, associates them with the Size Option Type, and takes you to the list of all Option Types.
 
 ### Associating Option Values with a Product
 
-Our Spree application now knows that we have an Option Type with corresponding Option Values,but it doesn't know which of our products should have those Option Types. We have to explicitly tell it about those associations. We can do so either when we create a new Product (if the options have already been created), or when we edit an existing product.
+Our Viauco application now knows that we have an Option Type with corresponding Option Values,but it doesn't know which of our products should have those Option Types. We have to explicitly tell it about those associations. We can do so either when we create a new Product (if the options have already been created), or when we edit an existing product.
 
 At the bottom of the Product edit form is a text box labeled "Option Types". When you click in this box, a drop-down appears with all of the Option Types you have defined for your store. All you have to do is click one or more of them to associate them with your Product.
 

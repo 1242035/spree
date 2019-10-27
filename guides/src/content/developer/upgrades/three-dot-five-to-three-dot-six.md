@@ -1,17 +1,17 @@
 ---
-title: Upgrading Spree from 3.5.x to 3.6.x
+title: Upgrading Viauco from 3.5.x to 3.6.x
 section: upgrades
 order: 1
 ---
 
-This guide covers upgrading a 3.5 Spree application, to a 3.6 application.
+This guide covers upgrading a 3.5 Viauco application, to a 3.6 application.
 
 ### Update Gemfile
 
 ```ruby
-gem 'spree', '~> 3.6.1'
-gem 'spree_auth_devise', '~> 3.3'
-gem 'spree_gateway', '~> 3.3'
+gem 'viauco', '~> 3.6.1'
+gem 'viauco_auth_devise', '~> 3.3'
+gem 'viauco_gateway', '~> 3.3'
 ```
 
 ### Update your Rails version to 5.2
@@ -27,14 +27,14 @@ to upgrade your store.
 Please follow the [official paperclip guide](https://github.com/thoughtbot/paperclip/blob/master/MIGRATING.md) if you
 want to use ActiveStorage instead of paperclip.
 
-You cann still use paperclip for attachment management by setting `SPREE_USE_PAPERCLIP` environment variable to `true`, but keep in mind that paperclip is DEPRECATED and we will remove paperclip support in Spree 4.0.
+You cann still use paperclip for attachment management by setting `VIAUCO_USE_PAPERCLIP` environment variable to `true`, but keep in mind that paperclip is DEPRECATED and we will remove paperclip support in Viauco 4.0.
 
 ### Install missing migrations
 
 ```bash
-rails spree:install:migrations
-rails spree_auth:install:migrations
-rails spree_gateway:install:migrations
+rails viauco:install:migrations
+rails viauco_auth:install:migrations
+rails viauco_gateway:install:migrations
 ```
 
 ### Run migrations
@@ -47,7 +47,7 @@ You're good to go!
 
 ## Read the release notes
 
-For information about changes contained within this release, please read the [3.6.0 Release Notes](http://guides.spreecommerce.org/release_notes/spree_3_6_0.html).
+For information about changes contained within this release, please read the [3.6.0 Release Notes](http://guides.viaucocommerce.org/release_notes/viauco_3_6_0.html).
 
 ## Verify that everything is OK
 

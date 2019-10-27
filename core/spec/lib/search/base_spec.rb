@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe Spree::Core::Search::Base do
+describe Viauco::Core::Search::Base do
   before do
-    include Spree::Core::ProductFilters
+    include Viauco::Core::ProductFilters
     @taxon = create(:taxon, name: 'Ruby on Rails')
 
     @product1 = create(:product, name: 'RoR Mug', price: 9.00)

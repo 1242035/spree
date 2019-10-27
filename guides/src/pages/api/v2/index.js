@@ -39,7 +39,7 @@ const IndexPage = () => (
       Simplified <Link to="/api/v2/storefront#section/Authentication">authentication</Link>
       &nbsp;to support both signed in users and guest checkouts.
     </P>
-    <ExternalLink url="https://github.com/spree/spree-storefront-api-v2-js-sdk">
+    <ExternalLink url="https://github.com/viauco/viauco-storefront-api-v2-js-sdk">
       Download JavaScript/TypeScript SDK
     </ExternalLink>
     <H3>
@@ -48,7 +48,7 @@ const IndexPage = () => (
     <P>
       API endpoints for any admin level privileges actions. Designed to connect 3rd party systems like WMS, retail Points of Sale, etc.
       <br />
-      We plan on including Platform API in one of the Spree 4.x releases.
+      We plan on including Platform API in one of the Viauco 4.x releases.
     </P>
 
     <H2>JSON API features supported</H2>

@@ -23,7 +23,7 @@ There is only one input box that tells what kind of category you will create. Si
 ## Editing and Deleting Store Credit Categories
 
 Previously created Category is visible on Store Credit Categories settings. Now, you can create more of them or make additional changes to existing ones.
-Simple as that, in every other section in Spree you can see **Edit** and **Delete** buttons next to the name of category.
+Simple as that, in every other section in Viauco you can see **Edit** and **Delete** buttons next to the name of category.
 
 ![Category Edit](../../../images/user/config/category_edit_icon.jpg)
 

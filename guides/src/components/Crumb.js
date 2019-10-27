@@ -10,8 +10,8 @@ import { cx } from 'emotion'
 const Crumb = ({ name, isActive }) => (
   <span
     className={cx(
-      { 'spree-green': isActive },
-      { 'spree-blue': !isActive },
+      { 'viauco-green': isActive },
+      { 'viauco-blue': !isActive },
       'f4 fw5 dib mr2'
     )}
   >

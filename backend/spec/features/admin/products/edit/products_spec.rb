@@ -8,7 +8,7 @@ describe 'Product Details', type: :feature, js: true do
       create(:product, name: 'Bún thịt nướng', sku: 'A100',
                        description: 'lorem ipsum', available_on: '2013-08-14 01:02:03')
 
-      visit spree.admin_products_path
+      visit viauco.admin_products_path
       within_row(1) { click_icon :edit }
     end
 
@@ -32,11 +32,11 @@ describe 'Product Details', type: :feature, js: true do
     end
 
     it 'has a link to preview a product' do
-      allow(Spree::Core::Engine).to receive(:frontend_available?).and_return(true)
-      allow_any_instance_of(Spree::BaseHelper).to receive(:product_url).and_return('http://example.com/products/product-slug')
+      allow(Viauco::Core::Engine).to receive(:frontend_available?).and_return(true)
+      allow_any_instance_of(Viauco::BaseHelper).to receive(:product_url).and_return('http://example.com/products/product-slug')
       click_link 'Details'
       expect(page).to have_css('#admin_preview_product')
-      expect(page).to have_link Spree.t(:preview_product), href: 'http://example.com/products/product-slug'
+      expect(page).to have_link Viauco.t(:preview_product), href: 'http://example.com/products/product-slug'
     end
   end
 end

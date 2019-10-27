@@ -3,13 +3,13 @@ if ENV['COVERAGE']
   require 'simplecov'
   SimpleCov.start 'rails' do
     add_group 'Serializers', 'app/serializers'
-    add_group 'Libraries', 'lib/spree'
+    add_group 'Libraries', 'lib/viauco'
 
     add_filter '/bin/'
     add_filter '/db/'
     add_filter '/script/'
     add_filter '/spec/'
-    add_filter '/lib/spree/api/testing_support/'
+    add_filter '/lib/viauco/api/testing_support/'
 
     coverage_dir "#{ENV['COVERAGE_DIR']}/api" if ENV['COVERAGE_DIR']
   end
@@ -32,15 +32,15 @@ require 'ffaker'
 # in spec/support/ and its subdirectories.
 Dir[File.dirname(__FILE__) + '/support/**/*.rb'].each { |f| require f }
 
-require 'spree/testing_support/factories'
-require 'spree/testing_support/preferences'
-require 'spree/testing_support/image_helpers'
+require 'viauco/testing_support/factories'
+require 'viauco/testing_support/preferences'
+require 'viauco/testing_support/image_helpers'
 
-require 'spree/api/testing_support/caching'
-require 'spree/api/testing_support/helpers'
-require 'spree/api/testing_support/setup'
-require 'spree/api/testing_support/v2/base'
-require 'spree/api/testing_support/v2/current_order'
+require 'viauco/api/testing_support/caching'
+require 'viauco/api/testing_support/helpers'
+require 'viauco/api/testing_support/setup'
+require 'viauco/api/testing_support/v2/base'
+require 'viauco/api/testing_support/v2/current_order'
 
 RSpec.configure do |config|
   config.backtrace_exclusion_patterns = [/gems\/activesupport/, /gems\/actionpack/, /gems\/rspec/]
@@ -53,14 +53,14 @@ RSpec.configure do |config|
 
   config.include JSONAPI::RSpec
   config.include FactoryBot::Syntax::Methods
-  config.include Spree::Api::TestingSupport::Helpers, type: :controller
-  config.include Spree::Api::TestingSupport::Helpers, type: :request
-  config.extend Spree::Api::TestingSupport::Setup, type: :controller
-  config.include Spree::TestingSupport::Preferences, type: :controller
-  config.include Spree::TestingSupport::ImageHelpers
+  config.include Viauco::Api::TestingSupport::Helpers, type: :controller
+  config.include Viauco::Api::TestingSupport::Helpers, type: :request
+  config.extend Viauco::Api::TestingSupport::Setup, type: :controller
+  config.include Viauco::TestingSupport::Preferences, type: :controller
+  config.include Viauco::TestingSupport::ImageHelpers
 
   config.before do
-    Spree::Api::Config[:requires_authentication] = true
+    Viauco::Api::Config[:requires_authentication] = true
   end
 
   config.order = :random

@@ -1,6 +1,6 @@
 class UniqueShippingMethodCategories < ActiveRecord::Migration[4.2]
   def change
-    klass   = Spree::ShippingMethodCategory
+    klass   = Viauco::ShippingMethodCategory
     columns = %w[shipping_category_id shipping_method_id]
 
     say "Find duplicate #{klass} records"
@@ -16,9 +16,9 @@ class UniqueShippingMethodCategories < ActiveRecord::Migration[4.2]
     end
 
     say "Add unique index to #{klass.table_name} for #{columns.inspect}"
-    add_index klass.table_name, columns, unique: true, name: 'unique_spree_shipping_method_categories'
+    add_index klass.table_name, columns, unique: true, name: 'unique_viauco_shipping_method_categories'
 
     say "Remove redundant simple index on #{klass.table_name}"
-    remove_index klass.table_name, name: 'index_spree_shipping_method_categories_on_shipping_category_id'
+    remove_index klass.table_name, name: 'index_viauco_shipping_method_categories_on_shipping_category_id'
   end
 end

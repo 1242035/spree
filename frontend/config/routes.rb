@@ -1,4 +1,4 @@
-Spree::Core::Engine.add_routes do
+Viauco::Core::Engine.add_routes do
   root to: 'home#index'
 
   resources :products, only: [:index, :show]

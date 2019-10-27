@@ -1,16 +1,16 @@
 class RenameHasAndBelongsToAssociationsToModelNames < ActiveRecord::Migration[4.2]
   def change
     {
-      'spree_option_types_prototypes' => 'spree_option_type_prototypes',
-      'spree_option_values_variants' => 'spree_option_value_variants',
-      'spree_orders_promotions' => 'spree_order_promotions',
-      'spree_products_promotion_rules' => 'spree_product_promotion_rules',
-      'spree_taxons_promotion_rules' => 'spree_promotion_rule_taxons',
-      'spree_promotion_rules_users' => 'spree_promotion_rule_users',
-      'spree_properties_prototypes' => 'spree_property_prototypes',
-      'spree_taxons_prototypes' => 'spree_prototype_taxons',
-      'spree_roles_users' => 'spree_role_users',
-      'spree_shipping_methods_zones' => 'spree_shipping_method_zones'
+      'viauco_option_types_prototypes' => 'viauco_option_type_prototypes',
+      'viauco_option_values_variants' => 'viauco_option_value_variants',
+      'viauco_orders_promotions' => 'viauco_order_promotions',
+      'viauco_products_promotion_rules' => 'viauco_product_promotion_rules',
+      'viauco_taxons_promotion_rules' => 'viauco_promotion_rule_taxons',
+      'viauco_promotion_rules_users' => 'viauco_promotion_rule_users',
+      'viauco_properties_prototypes' => 'viauco_property_prototypes',
+      'viauco_taxons_prototypes' => 'viauco_prototype_taxons',
+      'viauco_roles_users' => 'viauco_role_users',
+      'viauco_shipping_methods_zones' => 'viauco_shipping_method_zones'
     }.each do |old_name, new_name|
       rename_table old_name, new_name
     end

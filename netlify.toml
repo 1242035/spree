@@ -20,7 +20,7 @@ ID = "49ded9cc-27d3-4e02-b186-4fd7fd334ed8"
 
 # release notes redirects
 [[redirects]]
-  from = "/release_notes/spree_*"
+  from = "/release_notes/viauco_*"
   to = "/release_notes/:splat"
 
 # User - Users section redirects

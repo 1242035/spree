@@ -2,10 +2,10 @@ namespace :exchanges do
   desc %q{Takes unreturned exchanged items and creates a new order to charge
   the customer for not returning them}
   task charge_unreturned_items: :environment do
-    unreturned_return_items_scope = Spree::ReturnItem.awaiting_return.exchange_processed
+    unreturned_return_items_scope = Viauco::ReturnItem.awaiting_return.exchange_processed
     unreturned_return_items = unreturned_return_items_scope.joins(:exchange_inventory_units).where([
-                                                                                                     'spree_inventory_units.created_at < :days_ago AND spree_inventory_units.state = :iu_state',
-                                                                                                     days_ago: Spree::Config[:expedited_exchanges_days_window].days.ago, iu_state: 'shipped'
+                                                                                                     'viauco_inventory_units.created_at < :days_ago AND viauco_inventory_units.state = :iu_state',
+                                                                                                     days_ago: Viauco::Config[:expedited_exchanges_days_window].days.ago, iu_state: 'shipped'
                                                                                                    ]).distinct.to_a
 
     # Determine that a return item has already been deemed unreturned and therefore charged
@@ -22,13 +22,13 @@ namespace :exchanges do
         email: original_order.email
       }
       order_attributes[:store_id] = original_order.store_id
-      order = Spree::Order.create!(order_attributes)
+      order = Viauco::Order.create!(order_attributes)
 
       order.associate_user!(original_order.user) if original_order.user
 
       return_items.group_by(&:exchange_variant).map do |variant, variant_return_items|
         variant_inventory_units = variant_return_items.map(&:exchange_inventory_units).flatten
-        line_item = Spree::LineItem.create!(variant: variant, quantity: variant_return_items.count, order: order)
+        line_item = Viauco::LineItem.create!(variant: variant, quantity: variant_return_items.count, order: order)
         variant_inventory_units.each { |i| i.update!(line_item_id: line_item.id, order_id: order.id) }
       end
 
@@ -38,7 +38,7 @@ namespace :exchanges do
       unless order.payments.present?
         card_to_reuse = original_order.valid_credit_cards.first
         card_to_reuse = original_order.user.credit_cards.default.first if !card_to_reuse && original_order.user
-        Spree::Payment.create!(order: order,
+        Viauco::Payment.create!(order: order,
                                payment_method_id: card_to_reuse.try(:payment_method_id),
                                source: card_to_reuse,
                                amount: order.total)

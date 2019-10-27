@@ -8,11 +8,11 @@ Understanding your site's visitor traffic patterns are important for planning yo
 
 ### Google Analytics Enhanced Ecommerce and Segment Ecommerce
 
-In order to enable Spree Analytics Tracker this extension is required: https://github.com/spree-contrib/spree_analytics_trackers. We extracted it from core Spree.
+In order to enable Viauco Analytics Tracker this extension is required: https://github.com/viauco-contrib/viauco_analytics_trackers. We extracted it from core Viauco.
 
-Spree's Admin Interface makes it easy for you to add the robust Google Analytics and Segment toolset to your site.
+Viauco's Admin Interface makes it easy for you to add the robust Google Analytics and Segment toolset to your site.
 
-Both Google Analytics and Segment supports detail information of your's site. Spree allows to integrate both to show live detailed events, e.g. on what step of checkout the user stopped or how long it took to complete it.
+Both Google Analytics and Segment supports detail information of your's site. Viauco allows to integrate both to show live detailed events, e.g. on what step of checkout the user stopped or how long it took to complete it.
 
 Also Segment.com allows you to plug-in a lot of additional vendors and services like:
 

@@ -1,18 +1,18 @@
 ---
-title: Spree Multi Store
+title: Viauco Multi Store
 ---
 
 ## Introduction
 
-Spree 3.5 was released with Multi Store support. This means that in a single Spree Admin panel you can control multiple shops based on Spree, assign domains and manage orders, besides that there is an option to personalize products for certain shop described [here](#product-and-shop-currency).
+Viauco 3.5 was released with Multi Store support. This means that in a single Viauco Admin panel you can control multiple shops based on Viauco, assign domains and manage orders, besides that there is an option to personalize products for certain shop described [here](#product-and-shop-currency).
 
 ### Setup
 
-It is really simple. All you need is at least 2 sites based on Spree with registered domain.
+It is really simple. All you need is at least 2 sites based on Viauco with registered domain.
 
-Open Spree Admin panel and under Configurations tab search for Stores.
+Open Viauco Admin panel and under Configurations tab search for Stores.
 
-![Multi store Admin panel setup](../../../images/user/config/spree_multi_store_admin_page.jpg)
+![Multi store Admin panel setup](../../../images/user/config/viauco_multi_store_admin_page.jpg)
 
 As you can see, there is already one site setup, default one that you're currently using. We took care of that to make it even easier to setup. All you need is to press [Edit](#edit-store) button in order to personalize it for you.
 
@@ -46,7 +46,7 @@ Then just press Update button.
 
 ### Customization
 
-Each store can have its own layout(s) - these layouts should be located in your site's theme extension in the app/views/spree/layouts/store#code/ directory. So, if you have a store with a code of "alpha" you should store its default layout in app/views/spree/layouts/alpha/spree_application.html.erb.
+Each store can have its own layout(s) - these layouts should be located in your site's theme extension in the app/views/viauco/layouts/store#code/ directory. So, if you have a store with a code of "alpha" you should store its default layout in app/views/viauco/layouts/alpha/viauco_application.html.erb.
 
 It is worth to mention that [Analytics](/user/configuration/configuring_analytics.html) can be associated with a store.
 
@@ -59,8 +59,8 @@ Simply just enter Orders tab (you can learn more about it [here](/user/orders/in
 
 ### Future development
 
-In later Spree version 4.0 or 4.1 approximately, 2 additional extensions should be included to the Spree Core in order to improve Multi Store management and possibilities.
+In later Viauco version 4.0 or 4.1 approximately, 2 additional extensions should be included to the Viauco Core in order to improve Multi Store management and possibilities.
 
-[Spree Multi Domain](https://github.com/spree-contrib/spree-multi-domain)
+[Viauco Multi Domain](https://github.com/viauco-contrib/viauco-multi-domain)
 
-[Spree Multi Currency](https://github.com/spree-contrib/spree_multi_currency)
+[Viauco Multi Currency](https://github.com/viauco-contrib/viauco_multi_currency)

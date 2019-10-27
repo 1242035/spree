@@ -1,26 +1,26 @@
 class MoveOrderTokenFromTokenizedPermission < ActiveRecord::Migration[4.2]
-  class Spree::TokenizedPermission < Spree::Base
+  class Viauco::TokenizedPermission < Viauco::Base
     belongs_to :permissable, polymorphic: true
   end
 
   def up
-    case Spree::Order.connection.adapter_name
+    case Viauco::Order.connection.adapter_name
     when 'SQLite'
-      Spree::Order.has_one :tokenized_permission, as: :permissable
-      Spree::Order.includes(:tokenized_permission).each do |o|
+      Viauco::Order.has_one :tokenized_permission, as: :permissable
+      Viauco::Order.includes(:tokenized_permission).each do |o|
         o.update_column :guest_token, o.tokenized_permission.token
       end
     when 'Mysql2', 'MySQL'
-      execute "UPDATE spree_orders, spree_tokenized_permissions
-               SET spree_orders.guest_token = spree_tokenized_permissions.token
-               WHERE spree_tokenized_permissions.permissable_id = spree_orders.id
-                  AND spree_tokenized_permissions.permissable_type = 'Spree::Order'"
+      execute "UPDATE viauco_orders, viauco_tokenized_permissions
+               SET viauco_orders.guest_token = viauco_tokenized_permissions.token
+               WHERE viauco_tokenized_permissions.permissable_id = viauco_orders.id
+                  AND viauco_tokenized_permissions.permissable_type = 'Viauco::Order'"
     else
-      execute "UPDATE spree_orders
-               SET guest_token = spree_tokenized_permissions.token
-               FROM spree_tokenized_permissions
-               WHERE spree_tokenized_permissions.permissable_id = spree_orders.id
-                  AND spree_tokenized_permissions.permissable_type = 'Spree::Order'"
+      execute "UPDATE viauco_orders
+               SET guest_token = viauco_tokenized_permissions.token
+               FROM viauco_tokenized_permissions
+               WHERE viauco_tokenized_permissions.permissable_id = viauco_orders.id
+                  AND viauco_tokenized_permissions.permissable_type = 'Viauco::Order'"
     end
   end
 

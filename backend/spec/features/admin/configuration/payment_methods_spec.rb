@@ -4,7 +4,7 @@ describe 'Payment Methods', type: :feature do
   stub_authorization!
 
   before do
-    visit spree.admin_payment_methods_path
+    visit viauco.admin_payment_methods_path
   end
 
   context 'admin visiting payment methods listing page' do
@@ -20,7 +20,7 @@ describe 'Payment Methods', type: :feature do
       end
 
       within('table#listing_payment_methods') do
-        expect(page).to have_content('Spree::PaymentMethod::Check')
+        expect(page).to have_content('Viauco::PaymentMethod::Check')
       end
     end
   end

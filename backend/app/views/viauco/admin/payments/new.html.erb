@@ -1,0 +1,25 @@
+<%= render partial: 'viauco/admin/shared/order_tabs', locals: { current: :payments } %>
+
+<% content_for :page_title do %>
+  / <%= Viauco.t(:new_payment) %>
+<% end %>
+
+<% if @payment_methods.any? %>
+  <%= render partial: 'viauco/admin/shared/error_messages', locals: { target: @payment } %>
+
+  <%= form_for @payment, url: admin_order_payments_path(@order) do |f| %>
+    <fieldset>
+      <%= render partial: 'form', locals: { f: f } %>
+
+      <div class="form-actions" data-hook="buttons">
+        <%= button @order.cart? ? Viauco.t('actions.continue') : Viauco.t('actions.update'), @order.cart? ? 'arrow-right' : 'save' %>
+      </div>
+    </fieldset>
+  <% end %>
+
+<% else %>
+  <div class="alert alert-info">
+    <%= Viauco.t(:cannot_create_payment_without_payment_methods) %>
+    <%= link_to Viauco.t(:please_define_payment_methods), viauco.admin_payment_methods_url %>
+  </div>
+<% end %>

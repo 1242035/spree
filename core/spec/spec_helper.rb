@@ -8,13 +8,13 @@ if ENV['COVERAGE']
     add_group 'Services', 'app/services'
     add_group 'Sorters', 'app/sorters'
     add_group 'Validators', 'app/validators'
-    add_group 'Libraries', 'lib/spree'
+    add_group 'Libraries', 'lib/viauco'
 
     add_filter '/bin/'
     add_filter '/db/'
     add_filter '/script/'
     add_filter '/spec/'
-    add_filter '/lib/spree/testing_support/'
+    add_filter '/lib/viauco/testing_support/'
     add_filter '/lib/generators/'
 
     coverage_dir "#{ENV['COVERAGE_DIR']}/core" if ENV['COVERAGE_DIR']
@@ -37,12 +37,12 @@ require 'ffaker'
 
 Dir['./spec/support/**/*.rb'].sort.each { |f| require f }
 
-require 'spree/testing_support/i18n' if ENV['CHECK_TRANSLATIONS']
+require 'viauco/testing_support/i18n' if ENV['CHECK_TRANSLATIONS']
 
-require 'spree/testing_support/factories'
-require 'spree/testing_support/preferences'
-require 'spree/testing_support/url_helpers'
-require 'spree/testing_support/kernel'
+require 'viauco/testing_support/factories'
+require 'viauco/testing_support/preferences'
+require 'viauco/testing_support/url_helpers'
+require 'viauco/testing_support/kernel'
 
 RSpec.configure do |config|
   config.color = true
@@ -61,14 +61,14 @@ RSpec.configure do |config|
   config.before do
     begin
       Rails.cache.clear
-      reset_spree_preferences
+      reset_viauco_preferences
     rescue Errno::ENOTEMPTY
     end
   end
 
   config.include FactoryBot::Syntax::Methods
-  config.include Spree::TestingSupport::Preferences
-  config.include Spree::TestingSupport::Kernel
+  config.include Viauco::TestingSupport::Preferences
+  config.include Viauco::TestingSupport::Kernel
 
   # Clean out the database state before the tests run
   config.before(:suite) do

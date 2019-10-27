@@ -1,7 +1,7 @@
 require 'spec_helper'
 
-describe Spree::CalculatedAdjustments do
+describe Viauco::CalculatedAdjustments do
   it 'adds has_one :calculator relationship' do
-    assert Spree::ShippingMethod.reflect_on_all_associations(:has_one).map(&:name).include?(:calculator)
+    assert Viauco::ShippingMethod.reflect_on_all_associations(:has_one).map(&:name).include?(:calculator)
   end
 end

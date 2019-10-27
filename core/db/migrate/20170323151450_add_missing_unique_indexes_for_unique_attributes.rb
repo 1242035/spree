@@ -10,7 +10,7 @@ class AddMissingUniqueIndexesForUniqueAttributes < ActiveRecord::Migration[5.0]
     }
 
     tables.each do |table, columns|
-      table_class = "Spree::#{table.to_s.classify}".constantize
+      table_class = "Viauco::#{table.to_s.classify}".constantize
       table_name = table_class.table_name
 
       columns.each do |column|

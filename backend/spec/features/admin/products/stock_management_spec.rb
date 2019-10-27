@@ -10,7 +10,7 @@ describe 'Stock Management', type: :feature, js: true do
 
     before do
       stock_location.stock_item(variant).update_column(:count_on_hand, 10)
-      visit spree.stock_admin_product_path(product)
+      visit viauco.stock_admin_product_path(product)
     end
 
     context "toggle backorderable for a variant's stock item" do
@@ -83,7 +83,7 @@ describe 'Stock Management', type: :feature, js: true do
     end
 
     context 'with multiple variants' do
-      let!(:variant) { create(:variant, product: product, sku: 'SPREEC') }
+      let!(:variant) { create(:variant, product: product, sku: 'VIAUCOC') }
 
       before do
         variant.stock_items.first.update_column(:count_on_hand, 30)
@@ -92,12 +92,12 @@ describe 'Stock Management', type: :feature, js: true do
 
       it 'can create a new stock movement for the specified variant' do
         fill_in 'stock_movement_quantity', with: 10
-        select2 'SPREEC', from: 'Variant'
+        select2 'VIAUCOC', from: 'Variant'
         click_button 'Add Stock'
 
         expect(page).to have_content('successfully created')
 
-        within('#listing_product_stock tr', text: 'SPREEC') do
+        within('#listing_product_stock tr', text: 'VIAUCOC') do
           within('table') do
             expect(column_text(2)).to eq '40'
           end
@@ -111,13 +111,13 @@ describe 'Stock Management', type: :feature, js: true do
       let(:variant) { create(:variant, product: product, sku: 'FOOBAR') }
 
       before do
-        Spree::StockLocation.delete_all
+        Viauco::StockLocation.delete_all
 
-        visit spree.stock_admin_product_path(product)
+        visit viauco.stock_admin_product_path(product)
       end
 
       it 'redirects to stock locations page', js: false do
-        expect(page).to have_content(Spree.t(:stock_management_requires_a_stock_location))
+        expect(page).to have_content(Viauco.t(:stock_management_requires_a_stock_location))
         expect(page).to have_current_path(%r{admin/stock_locations})
       end
     end

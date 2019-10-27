@@ -1,2 +1,2 @@
-class Spree::Gateway::Test < Spree::Gateway
+class Viauco::Gateway::Test < Viauco::Gateway
 end

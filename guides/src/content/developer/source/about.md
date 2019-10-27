@@ -3,11 +3,11 @@ title: About the Code
 section: source-code
 ---
 
-## What is Spree?
+## What is Viauco?
 
-Spree is a full featured e-commerce platform written for the Ruby on Rails framework. It is designed to make programming commerce applications easier by making several assumptions about what most developers needs to get started. Spree is a production ready store that can be used "out of the box", but more importantly, it is also a developer tool that can be used as a solid foundation for a more sophisticated application than what is generally possible with traditional open source offerings.
+Viauco is a full featured e-commerce platform written for the Ruby on Rails framework. It is designed to make programming commerce applications easier by making several assumptions about what most developers needs to get started. Viauco is a production ready store that can be used "out of the box", but more importantly, it is also a developer tool that can be used as a solid foundation for a more sophisticated application than what is generally possible with traditional open source offerings.
 
-Spree is 100% [open source](http://en.wikipedia.org/wiki/Open_source).  It is licensed under the very permissive [New BSD License](https://github.com/spree/spree/blob/master/license.md).  You are free to use the software as you see fit, at no charge.  Perhaps more important than the cost, Spree is a true open source community. Spree has hundreds of contributors who have used and improved it while building their own e-commerce solutions.
+Viauco is 100% [open source](http://en.wikipedia.org/wiki/Open_source).  It is licensed under the very permissive [New BSD License](https://github.com/viauco/viauco/blob/master/license.md).  You are free to use the software as you see fit, at no charge.  Perhaps more important than the cost, Viauco is a true open source community. Viauco has hundreds of contributors who have used and improved it while building their own e-commerce solutions.
 
 ## Motivation
 
@@ -16,11 +16,11 @@ solution for Ruby on Rails. At the start of this project, the Rails
 commerce space was immature and lacking serious solutions for developers
 with complex business needs. In the past, Rails has suffered from "small
 project mentality." Most open source projects in Rails are maintained by
-a single individual and tend to be limited in scope. Spree seeks to
+a single individual and tend to be limited in scope. Viauco seeks to
 create a large and healthy open source community that developers of
 other languages have come to expect.
 
-The founder of Spree was motivated to start the project after failing to
+The founder of Viauco was motivated to start the project after failing to
 find an existing community in the Rails space dedicated to this vision.
 In addition, he was motivated by unsuccessful efforts to use other open
 source solutions in other programming languages, including (but not
@@ -31,7 +31,7 @@ practical cases of use.
 ### Opinionated Commerce
 
 David Heinemeier Hansson (the creator of Rails) is well known for saying
-that Rails is "opinionated software." Spree continues this fine
+that Rails is "opinionated software." Viauco continues this fine
 tradition of adopting a few strong (possibly controversial) opinions
 which drive its development.
 
@@ -40,8 +40,8 @@ which drive its development.
 No solution can possibly solve everyone's needs perfectly. There are
 simply too many ways in which people do business for us to tailor to
 each individual need. Rather than come up short (like so many projects
-before it did), Spree's approach is to simply accept this and not even
-try. Instead Spree tries to focus on solving 90% of the bulk that most
+before it did), Viauco's approach is to simply accept this and not even
+try. Instead Viauco tries to focus on solving 90% of the bulk that most
 commerce projects face. The remaining 10% will need to be addressed by
 the end developer familiar with the client's exact business
 requirements.
@@ -52,7 +52,7 @@ Rails developers are the target audience for this application - not
 business owners. No serious company would ever try to run an online
 store by just paying some fool on Craig's List to install OSCommerce for
 them. Serious businesses have complicated needs that require paying one
-or more software professionals to solve them. Spree seeks to be the
+or more software professionals to solve them. Viauco seeks to be the
 platform that developers use as the foundation for their project rather
 than having to start from scratch or settle for less with other
 software.
@@ -62,7 +62,7 @@ software.
 Most business owners will not be satisfied with the generic templates
 offered by other platforms. Why should they? They want their website to
 look just like the other professional sites they see on the web. Most
-businesses have very specific shipping and taxation rules as well. Spree
+businesses have very specific shipping and taxation rules as well. Viauco
 needs to be flexible enough to accommodate most situations. Sensible
 defaults should be provided with an eye towards allowing further
 customization.
@@ -71,18 +71,18 @@ customization.
 
 This is perhaps the most important principle behind the design
 philosophy. We need to stay focused on core functionality (the 90% that
-everybody needs.) For this reason it is not appropriate for Spree to
+everybody needs.) For this reason it is not appropriate for Viauco to
 attempt to become a Content Management System (CMS). There are already
 some pretty good Rails based CMS projects out there such as
 [Radiant](http://radiantcms.org). CMS is definitely important but it is
-a big enough task to warrant its own project. Spree will definitely be
+a big enough task to warrant its own project. Viauco will definitely be
 looking at ways to integrate with existing CMS platforms, we just won't
 be attempting to reinvent the CMS concept.
 
 ## Requirements
 
 This guide is designed for beginners who want to get started with a
-Spree application from scratch. It assumes a basic working knowledge of
+Viauco application from scratch. It assumes a basic working knowledge of
 Ruby on Rails. To get the most out of this guide, you need to have some
 prerequisites installed:
 
@@ -103,8 +103,8 @@ database specific bugs.
 ***
 
 It is highly recommended that you **familiarize yourself with Ruby on
-Rails before diving into Spree**. You will find it much easier to follow
-what's going on with a Spree application if you understand basic Ruby
+Rails before diving into Viauco**. You will find it much easier to follow
+what's going on with a Viauco application if you understand basic Ruby
 syntax.
 
 There are many excellent online resources for learning Ruby on Rails,
@@ -124,13 +124,13 @@ Ruby, including:
 
 ## Open Source License
 
-Copyright © 2007-2019, Spree Commerce Inc. and other contributors.
+Copyright © 2007-2019, Viauco Commerce Inc. and other contributors.
 All rights reserved.
 
 Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 
 -   Redistributions of source code must retain the above copyright notice, this list of conditions and the following disclaimer.
 -   Redistributions in binary form must reproduce the above copyright notice, this list of conditions and the following disclaimer in the documentation and/or other materials provided with the distribution.
--   Neither the name of Spree Commerce Inc. nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
+-   Neither the name of Viauco Commerce Inc. nor the names of its contributors may be used to endorse or promote products derived from this software without specific prior written permission.
 
 This software is provided by the copyright holders and contributors "as is" and any express or implied warranties, including, but not limited to, the implied warranties of merchantability and fitness for a particular purpose are disclaimed. In no event shall the copyright owner of contributors be liable for any direct, indirect, incidental, special, exemplary, or consequential damages (including, but not limited to, procurement of substitute goods or services; loss of use, data, or profits; or business interruption) however caused and on any theory of liability, whether in contract, strict liability, or tort (including negligence or otherwise) arising in any way out of the use of this software, even if advised of the possibility of such damage.

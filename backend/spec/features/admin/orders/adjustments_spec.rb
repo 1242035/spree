@@ -25,7 +25,7 @@ describe 'Adjustments', type: :feature do
     order.update_totals
     order.persist_totals
 
-    visit spree.admin_orders_path
+    visit viauco.admin_orders_path
     within_row(1) { click_on order.number }
     click_on 'Adjustments'
   end

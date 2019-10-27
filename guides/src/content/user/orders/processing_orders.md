@@ -11,7 +11,7 @@ Once an order comes into your store - whether it is entered by a customer throug
 3. Package and ship the order.
 4. Record the shipment information on the order.
 
-Steps 1 and 3 you would obviously do physically at your stocking location(s). This guide covers how you use your Spree store to manage steps 2 and 4.
+Steps 1 and 3 you would obviously do physically at your stocking location(s). This guide covers how you use your Viauco store to manage steps 2 and 4.
 
 ## Processing Payments
 

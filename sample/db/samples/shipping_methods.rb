@@ -1,13 +1,13 @@
 begin
-  north_america = Spree::Zone.find_by!(name: 'North America')
+  north_america = Viauco::Zone.find_by!(name: 'North America')
 rescue ActiveRecord::RecordNotFound
   puts 'Couldn\'t find \'North America\' zone. Did you run `rake db:seed` first?'
-  puts 'That task will set up the countries, states and zones required for Spree.'
+  puts 'That task will set up the countries, states and zones required for Viauco.'
   exit
 end
 
-europe_vat = Spree::Zone.find_by!(name: 'EU_VAT')
-shipping_category = Spree::ShippingCategory.find_or_create_by!(name: 'Default')
+europe_vat = Viauco::Zone.find_by!(name: 'EU_VAT')
+shipping_category = Viauco::ShippingCategory.find_or_create_by!(name: 'Default')
 
 shipping_methods = [
   {
@@ -43,8 +43,8 @@ shipping_methods = [
 ]
 
 shipping_methods.each do |attributes|
-  Spree::ShippingMethod.where(name: attributes[:name]).first_or_create! do |shipping_method|
-    shipping_method.calculator = Spree::Calculator::Shipping::FlatRate.create!
+  Viauco::ShippingMethod.where(name: attributes[:name]).first_or_create! do |shipping_method|
+    shipping_method.calculator = Viauco::Calculator::Shipping::FlatRate.create!
     shipping_method.zones = attributes[:zones]
     shipping_method.display_on = attributes[:display_on]
     shipping_method.shipping_categories = attributes[:shipping_categories]
@@ -58,7 +58,7 @@ end
   'UPS Two Day (USD)' => [10, 'USD'],
   'UPS Ground (EUR)' => [8, 'EUR']
 }.each do |shipping_method_name, (price, currency)|
-  shipping_method = Spree::ShippingMethod.find_by!(name: shipping_method_name)
+  shipping_method = Viauco::ShippingMethod.find_by!(name: shipping_method_name)
   shipping_method.calculator.preferences = {
     amount: price,
     currency: currency

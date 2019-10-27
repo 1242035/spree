@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Order Details', type: :feature, js: true do
   let!(:stock_location) { create(:stock_location_with_items) }
-  let!(:product) { create(:product, name: 'spree t-shirt', price: 20.00) }
+  let!(:product) { create(:product, name: 'viauco t-shirt', price: 20.00) }
   let!(:store) { create(:store) }
   let(:order) { create(:order, state: 'complete', completed_at: '2011-02-01 12:36:15', number: 'R100', store_id: store.id) }
   let(:state) { create(:state) }
@@ -10,7 +10,7 @@ describe 'Order Details', type: :feature, js: true do
   before do
     create(:shipping_method, name: 'Default')
     order.shipments.create!(stock_location_id: stock_location.id)
-    Spree::Cart::AddItem.call(order: order, variant: product.master, quantity: 2)
+    Viauco::Cart::AddItem.call(order: order, variant: product.master, quantity: 2)
   end
 
   context 'as Admin' do
@@ -21,7 +21,7 @@ describe 'Order Details', type: :feature, js: true do
 
       before do
         product.master.stock_items.first.update_column(:count_on_hand, 100)
-        visit spree.store_admin_order_path(order)
+        visit viauco.store_admin_order_path(order)
       end
 
       it 'displays select with current order store name' do
@@ -39,11 +39,11 @@ describe 'Order Details', type: :feature, js: true do
     context 'cart edit page' do
       before do
         product.master.stock_items.first.update_column(:count_on_hand, 100)
-        visit spree.cart_admin_order_path(order)
+        visit viauco.cart_admin_order_path(order)
       end
 
       it 'allows me to edit order details' do
-        expect(page).to have_content('spree t-shirt')
+        expect(page).to have_content('viauco t-shirt')
         expect(page).to have_content('$40.00')
 
         within_row(1) do
@@ -58,7 +58,7 @@ describe 'Order Details', type: :feature, js: true do
       end
 
       it 'can add an item to a shipment' do
-        select2_search 'spree t-shirt', from: Spree.t(:name_or_sku)
+        select2_search 'viauco t-shirt', from: Viauco.t(:name_or_sku)
 
         within('table.stock-levels') do
           fill_in 'variant_quantity', with: 2
@@ -71,7 +71,7 @@ describe 'Order Details', type: :feature, js: true do
       end
 
       it 'can remove an item from a shipment' do
-        expect(page).to have_content('spree t-shirt')
+        expect(page).to have_content('viauco t-shirt')
 
         within_row(1) do
           accept_confirm do
@@ -80,12 +80,12 @@ describe 'Order Details', type: :feature, js: true do
         end
 
         # Click "ok" on confirmation dialog
-        expect(page).not_to have_content('spree t-shirt')
+        expect(page).not_to have_content('viauco t-shirt')
       end
 
       # Regression test for #3862
       it 'can cancel removing an item from a shipment' do
-        expect(page).to have_content('spree t-shirt')
+        expect(page).to have_content('viauco t-shirt')
 
         within_row(1) do
           # Click "cancel" on confirmation dialog
@@ -94,11 +94,11 @@ describe 'Order Details', type: :feature, js: true do
           end
         end
 
-        expect(page).to have_content('spree t-shirt')
+        expect(page).to have_content('viauco t-shirt')
       end
 
       it 'can add tracking information' do
-        visit spree.edit_admin_order_path(order)
+        visit viauco.edit_admin_order_path(order)
 
         within('.show-tracking') do
           click_icon :edit
@@ -112,7 +112,7 @@ describe 'Order Details', type: :feature, js: true do
 
       it 'can change the shipping method' do
         order = create(:completed_order_with_totals)
-        visit spree.edit_admin_order_path(order)
+        visit viauco.edit_admin_order_path(order)
         within('table.table tr.show-method') do
           click_icon :edit
         end
@@ -127,9 +127,9 @@ describe 'Order Details', type: :feature, js: true do
         create(:shipping_method, name: 'Backdoor', display_on: 'back_end')
         order = create(
           :completed_order_with_totals,
-          shipping_method_filter: Spree::ShippingMethod::DISPLAY_ON_BACK_END
+          shipping_method_filter: Viauco::ShippingMethod::DISPLAY_ON_BACK_END
         )
-        visit spree.edit_admin_order_path(order)
+        visit viauco.edit_admin_order_path(order)
         within('table tr.show-method') do
           click_icon :edit
         end
@@ -142,7 +142,7 @@ describe 'Order Details', type: :feature, js: true do
 
       it 'will show the variant sku', js: false do
         order = create(:completed_order_with_totals)
-        visit spree.edit_admin_order_path(order)
+        visit viauco.edit_admin_order_path(order)
         sku = order.line_items.first.variant.sku
         expect(page).to have_content("SKU: #{sku}")
       end
@@ -153,7 +153,7 @@ describe 'Order Details', type: :feature, js: true do
         end
 
         it 'will show the special_instructions', js: false do
-          visit spree.edit_admin_order_path(order)
+          visit viauco.edit_admin_order_path(order)
           expect(page).to have_content('Very special instructions here')
         end
       end
@@ -169,7 +169,7 @@ describe 'Order Details', type: :feature, js: true do
           end
 
           it 'adds variant to order just fine' do
-            select2_search tote.name, from: Spree.t(:name_or_sku)
+            select2_search tote.name, from: Viauco.t(:name_or_sku)
 
             within('table.stock-levels') do
               fill_in 'variant_quantity', with: 1
@@ -184,16 +184,16 @@ describe 'Order Details', type: :feature, js: true do
 
         context "site doesn't track inventory" do
           before do
-            Spree::Config[:track_inventory_levels] = false
+            Viauco::Config[:track_inventory_levels] = false
             tote.master.update_column(:track_inventory, true)
             # make sure there's no stock level for any item
             tote.master.stock_items.update_all count_on_hand: 0, backorderable: true
           end
 
-          after { Spree::Config[:track_inventory_levels] = true }
+          after { Viauco::Config[:track_inventory_levels] = true }
 
           it 'adds variant to order just fine' do
-            select2_search tote.name, from: Spree.t(:name_or_sku)
+            select2_search tote.name, from: Viauco.t(:name_or_sku)
             within('table.stock-levels') do
               fill_in 'variant_quantity', with: 1
               click_icon :add
@@ -215,10 +215,10 @@ describe 'Order Details', type: :feature, js: true do
         end
 
         it 'does not add a product to the order' do
-          select2_search tote.name, from: Spree.t(:name_or_sku)
+          select2_search tote.name, from: Viauco.t(:name_or_sku)
 
           within('table.stock-levels') do
-            expect(page).to have_content(Spree.t(:out_of_stock))
+            expect(page).to have_content(Viauco.t(:out_of_stock))
           end
         end
       end
@@ -234,7 +234,7 @@ describe 'Order Details', type: :feature, js: true do
       end
 
       context 'splitting to location' do
-        before { visit spree.edit_admin_order_path(order) }
+        before { visit viauco.edit_admin_order_path(order) }
 
         it 'should warn you if you have not selected a location or shipment' do
           within_row(1) { click_icon :split }
@@ -343,9 +343,9 @@ describe 'Order Details', type: :feature, js: true do
               order = create(:order, state: 'payment')
               order.shipments.create!(stock_location_id: stock_location.id, state: 'shipped')
 
-              visit spree.cart_admin_order_path(order)
+              visit viauco.cart_admin_order_path(order)
 
-              expect(page).to have_current_path(spree.edit_admin_order_path(order))
+              expect(page).to have_current_path(viauco.edit_admin_order_path(order))
               expect(page).not_to have_text 'Cart'
             end
           end
@@ -392,7 +392,7 @@ describe 'Order Details', type: :feature, js: true do
 
         context 'multiple items in cart' do
           it 'has no problem splitting if multiple items are in the from shipment' do
-            Spree::Cart::AddItem.call(order: order, variant: create(:variant), quantity: 2)
+            Viauco::Cart::AddItem.call(order: order, variant: create(:variant), quantity: 2)
             expect(order.shipments.count).to eq(1)
             expect(order.shipments.first.manifest.count).to eq(2)
 
@@ -421,7 +421,7 @@ describe 'Order Details', type: :feature, js: true do
             end
 
             it 'adds variant to order just fine' do
-              select2_search tote.name, from: Spree.t(:name_or_sku)
+              select2_search tote.name, from: Viauco.t(:name_or_sku)
               within('table.stock-levels tbody tr', match: :first) do
                 fill_in 'stock_item_quantity', match: :first, with: 1
                 click_icon :add
@@ -437,16 +437,16 @@ describe 'Order Details', type: :feature, js: true do
 
           context "site doesn't track inventory" do
             before do
-              Spree::Config[:track_inventory_levels] = false
+              Viauco::Config[:track_inventory_levels] = false
               tote.master.update_column(:track_inventory, true)
               # make sure there's no stock level for any item
               tote.master.stock_items.update_all count_on_hand: 0, backorderable: true
             end
 
-            after { Spree::Config[:track_inventory_levels] = true }
+            after { Viauco::Config[:track_inventory_levels] = true }
 
             it 'adds variant to order just fine' do
-              select2_search tote.name, from: Spree.t(:name_or_sku)
+              select2_search tote.name, from: Viauco.t(:name_or_sku)
               within('table.stock-levels') do
                 fill_in 'stock_item_quantity', match: :first, with: 1
                 click_icon :add
@@ -466,10 +466,10 @@ describe 'Order Details', type: :feature, js: true do
           end
 
           it 'displays out of stock instead of add button' do
-            select2_search product.name, from: Spree.t(:name_or_sku)
+            select2_search product.name, from: Viauco.t(:name_or_sku)
 
             within('table.stock-levels') do
-              expect(page).to have_content(Spree.t(:out_of_stock))
+              expect(page).to have_content(Viauco.t(:out_of_stock))
             end
           end
         end
@@ -478,7 +478,7 @@ describe 'Order Details', type: :feature, js: true do
       context 'splitting to shipment' do
         before do
           @shipment2 = order.shipments.create(stock_location_id: stock_location2.id)
-          visit spree.edit_admin_order_path(order)
+          visit viauco.edit_admin_order_path(order)
         end
 
         it 'deletes the old shipment if enough are split off' do
@@ -538,7 +538,7 @@ describe 'Order Details', type: :feature, js: true do
 
           it 'splits fine if more than one line_item is in the receiving shipment' do
             variant2 = create(:variant)
-            Spree::Cart::AddItem.call(order: order, variant: variant2, quantity: 2, options: { shipment: @shipment2 })
+            Viauco::Cart::AddItem.call(order: order, variant: variant2, quantity: 2, options: { shipment: @shipment2 })
 
             within_row(1) { click_icon 'split' }
             targetted_select2 @shipment2.number, from: '#s2id_item_stock_location'
@@ -586,13 +586,13 @@ describe 'Order Details', type: :feature, js: true do
 
       context 'display order summary' do
         before do
-          visit spree.cart_admin_order_path(order)
+          visit viauco.cart_admin_order_path(order)
         end
 
         it 'contains elements' do
           within('.additional-info') do
             expect(page).to have_content('complete')
-            expect(page).to have_content('spree')
+            expect(page).to have_content('viauco')
             expect(page).to have_content('backorder')
             expect(page).to have_content('balance due')
           end
@@ -603,15 +603,15 @@ describe 'Order Details', type: :feature, js: true do
 
   context 'with only read permissions' do
     before do
-      allow_any_instance_of(Spree::Admin::BaseController).to receive(:spree_current_user).and_return(nil)
+      allow_any_instance_of(Viauco::Admin::BaseController).to receive(:viauco_current_user).and_return(nil)
     end
 
     custom_authorization! do |_user|
-      can [:admin, :index, :read, :edit], Spree::Order
+      can [:admin, :index, :read, :edit], Viauco::Order
     end
 
     it 'does not display forbidden links' do
-      visit spree.edit_admin_order_path(order)
+      visit viauco.edit_admin_order_path(order)
 
       expect(page).not_to have_button('cancel')
       expect(page).not_to have_button('Resend')
@@ -635,20 +635,20 @@ describe 'Order Details', type: :feature, js: true do
 
   context 'as Fakedispatch' do
     custom_authorization! do |_user|
-      # allow dispatch to :admin, :index, and :edit on Spree::Order
-      can [:admin, :edit, :index, :read], Spree::Order
+      # allow dispatch to :admin, :index, and :edit on Viauco::Order
+      can [:admin, :edit, :index, :read], Viauco::Order
       # allow dispatch to :index, :show, :create and :update shipments on the admin
-      can [:admin, :manage, :read, :ship], Spree::Shipment
+      can [:admin, :manage, :read, :ship], Viauco::Shipment
     end
 
     before do
-      allow(Spree.user_class).to receive(:find_by).
-        with(hash_including(:spree_api_key)).
-        and_return(Spree.user_class.new)
+      allow(Viauco.user_class).to receive(:find_by).
+        with(hash_including(:viauco_api_key)).
+        and_return(Viauco.user_class.new)
     end
 
     it 'does not display order tabs or edit buttons without ability', js: false do
-      visit spree.edit_admin_order_path(order)
+      visit viauco.edit_admin_order_path(order)
 
       # Order Form
       expect(page).not_to have_css('.edit-item')
@@ -661,7 +661,7 @@ describe 'Order Details', type: :feature, js: true do
     end
 
     it 'can add tracking information' do
-      visit spree.edit_admin_order_path(order)
+      visit viauco.edit_admin_order_path(order)
       within('table.stock-contents tr:nth-child(5)', match: :first) do
         click_icon :edit
       end
@@ -674,7 +674,7 @@ describe 'Order Details', type: :feature, js: true do
 
     it 'can change the shipping method' do
       order = create(:completed_order_with_totals)
-      visit spree.edit_admin_order_path(order)
+      visit viauco.edit_admin_order_path(order)
       within('table.table tr.show-method') do
         click_icon :edit
       end
@@ -688,7 +688,7 @@ describe 'Order Details', type: :feature, js: true do
     it 'can ship' do
       order = create(:order_ready_to_ship)
       order.refresh_shipment_rates
-      visit spree.edit_admin_order_path(order)
+      visit viauco.edit_admin_order_path(order)
       click_on 'Ship'
       expect(page).to have_css('.shipment-state', text: 'shipped')
     end

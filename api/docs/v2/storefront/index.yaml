@@ -12,18 +12,18 @@ info:
       intefaces either in JavaScript frameworks or native mobile libraries.
     </p>
     <p>
-      Please read our <a href="https://guides.spreecommerce.org/api/v2/">
+      Please read our <a href="https://guides.viaucocommerce.org/api/v2/">
         introduction to the API v2
       </a>
     </p>
     <p>
       Download our
-      <a href="https://github.com/spree/spree-storefront-api-v2-js-sdk">
+      <a href="https://github.com/viauco/viauco-storefront-api-v2-js-sdk">
         official JavaScript & TypeScript SDK
       </a>
     </p>
     <p>
-      <a href="https://raw.githubusercontent.com/spree/spree/master/api/docs/v2/storefront/index.yaml" target="_blank" rel="noopener">
+      <a href="https://raw.githubusercontent.com/viauco/viauco/master/api/docs/v2/storefront/index.yaml" target="_blank" rel="noopener">
         Import this documentation to Postman
       </a>
     </p>
@@ -212,11 +212,11 @@ paths:
         <br />
         <p>
           Additional parameters passed in <strong>options</strong> hash
-          must be registered in <cite>config/initialiers/spree.rb</cite>, eg.
+          must be registered in <cite>config/initialiers/viauco.rb</cite>, eg.
         </p>
         <br />
         <blockquote>
-          Spree::PermittedAttributes.line_item_attributes << :foo
+          Viauco::PermittedAttributes.line_item_attributes << :foo
         </blockquote>
       tags:
         - Cart
@@ -252,8 +252,8 @@ paths:
                   description: >-
                     Additional custom options.
                     You need to add them via
-                    `Spree::PermittedAttributes.line_item_attributes << :foo`
-                    in `config/initialiers/spree.rb`
+                    `Viauco::PermittedAttributes.line_item_attributes << :foo`
+                    in `config/initialiers/viauco.rb`
               example:
                 variant_id: "1"
                 quantity: 5
@@ -1016,7 +1016,7 @@ components:
       scheme: bearer
       description: >-
         User token to authorize Cart and Checkout requests. You can obtain it
-        from `http://your_store_url.com/spree_oauth` endpoint.
+        from `http://your_store_url.com/viauco_oauth` endpoint.
         It is required to associate Cart with the User.
         See OAuth documentation for more details.
     orderToken:
@@ -1032,7 +1032,7 @@ components:
           You can obtain it from the `/cart` endpoint -
           it's part of the response (value of the `token` field).
         </p>
-      name: X-Spree-Order-Token
+      name: X-Viauco-Order-Token
   schemas:
     Error:
       required:
@@ -1234,7 +1234,7 @@ components:
           example: 'R123456789'
         email:
           type: string
-          example: 'spree@example.com'
+          example: 'viauco@example.com'
         item_total:
           type: string
           example: '19.99'
@@ -1306,7 +1306,7 @@ components:
           type: string
           example: abcdef123456
           description: >-
-            Used for authorizing any action for an order within Spree’s
+            Used for authorizing any action for an order within Viauco’s
             API
     CreditCardList:
       required:
@@ -1432,7 +1432,7 @@ components:
           properties:
             email:
               type: string
-              example: 'spree@example.com'
+              example: 'viauco@example.com'
     LineItem:
       properties:
         id:
@@ -2183,7 +2183,7 @@ components:
           properties:
             type:
               type: string
-              example: 'Spree::Gateway::StripeGateway'
+              example: 'Viauco::Gateway::StripeGateway'
             name:
               type: string
               example: 'Stripe'
@@ -2247,8 +2247,8 @@ components:
           example: 'shipped'
           description: >-
             Status of the Shipment. For list of all available statuses please refer:
-            <a href="https://guides.spreecommerce.org/developer/shipments.html#overview" target="_blank" rel="noopener">
-              Shipment section in Spree Guides
+            <a href="https://guides.viaucocommerce.org/developer/shipments.html#overview" target="_blank" rel="noopener">
+              Shipment section in Viauco Guides
             </a>
         shipped_at:
           type: string
@@ -2340,7 +2340,7 @@ components:
       properties:
         email:
           type: string
-          example: 'spree@example.com'
+          example: 'viauco@example.com'
         store_credits:
           type: number
           example: 150.75

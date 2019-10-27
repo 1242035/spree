@@ -1,0 +1,11 @@
+<% content_for :page_title do %>
+  <%= link_to Viauco.t(:reimbursement_types), viauco.admin_reimbursement_types_url %> /
+  <%= Viauco.t(:new_reimbursement_type) %>
+<% end %>
+
+<%= render partial: 'viauco/admin/shared/error_messages', locals: { target: @reimbursement_type } %>
+
+<%= form_for [:admin, @reimbursement_type] do |reimbursement_form| %>
+  <%= render partial: 'form', locals: { f: reimbursement_form } %>
+  <%= render partial: 'viauco/admin/shared/new_resource_links' %>
+<% end %>

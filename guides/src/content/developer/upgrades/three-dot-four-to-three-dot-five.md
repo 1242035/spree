@@ -1,17 +1,17 @@
 ---
-title: Upgrading Spree from 3.4.x to 3.5.x
+title: Upgrading Viauco from 3.4.x to 3.5.x
 section: upgrades
 order: 2
 ---
 
-This guide covers upgrading a 3.4 Spree store, to a 3.5 store.
+This guide covers upgrading a 3.4 Viauco store, to a 3.5 store.
 
 ### Update Gemfile
 
 ```ruby
-gem 'spree', '~> 3.5.0'
-gem 'spree_auth_devise', '~> 3.3'
-gem 'spree_gateway', '~> 3.3'
+gem 'viauco', '~> 3.5.0'
+gem 'viauco_auth_devise', '~> 3.3'
+gem 'viauco_gateway', '~> 3.3'
 ```
 
 ### Run `bundle update`
@@ -19,9 +19,9 @@ gem 'spree_gateway', '~> 3.3'
 ### Install missing migrations
 
 ```bash
-rails spree:install:migrations
-rails spree_auth:install:migrations
-rails spree_gateway:install:migrations
+rails viauco:install:migrations
+rails viauco_auth:install:migrations
+rails viauco_gateway:install:migrations
 ```
 
 ### Run migrations
@@ -30,15 +30,15 @@ rails spree_gateway:install:migrations
 rails db:migrate
 ```
 
-### Install Spree Analytics Trackers extension
+### Install Viauco Analytics Trackers extension
 
 If you were previously using Analytics Trackers feature you need to install it as an extension
-as it was [extracted from the core](https://github.com/spree/spree/pull/8408).
+as it was [extracted from the core](https://github.com/viauco/viauco/pull/8408).
 
-1. Add [Spree Analytics Trackers](https://github.com/spree-contrib/spree_analytics_trackers) to your `Gemfile`:
+1. Add [Viauco Analytics Trackers](https://github.com/viauco-contrib/viauco_analytics_trackers) to your `Gemfile`:
 
 ```ruby
-gem 'spree_analytics_trackers', github: 'spree-contrib/spree_analytics_trackers'
+gem 'viauco_analytics_trackers', github: 'viauco-contrib/viauco_analytics_trackers'
 ```
 
 2. Install the gem using Bundler:
@@ -50,14 +50,14 @@ bundle install
 3. Copy and run migrations:
 
 ```bash
-bundle exec rails g spree_analytics_trackers:install
+bundle exec rails g viauco_analytics_trackers:install
 ```
 
 You're good to go!
 
 ## Read the release notes
 
-For information about changes contained within this release, please read the [3.5.0 Release Notes](http://guides.spreecommerce.org/release_notes/spree_3_5_0.html).
+For information about changes contained within this release, please read the [3.5.0 Release Notes](http://guides.viaucocommerce.org/release_notes/viauco_3_5_0.html).
 
 ## Verify that everything is OK
 

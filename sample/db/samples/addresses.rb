@@ -1,8 +1,8 @@
-united_states = Spree::Country.find_by!(iso: 'US')
-new_york = Spree::State.find_by!(name: 'New York')
+united_states = Viauco::Country.find_by!(iso: 'US')
+new_york = Viauco::State.find_by!(name: 'New York')
 
 # Billing address
-Spree::Address.create!(
+Viauco::Address.create!(
   firstname: FFaker::Name.first_name,
   lastname: FFaker::Name.last_name,
   address1: FFaker::Address.street_address,
@@ -15,7 +15,7 @@ Spree::Address.create!(
 )
 
 # Shipping address
-Spree::Address.create!(
+Viauco::Address.create!(
   firstname: FFaker::Name.first_name,
   lastname: FFaker::Name.last_name,
   address1: FFaker::Address.street_address,

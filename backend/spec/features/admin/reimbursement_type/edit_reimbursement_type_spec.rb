@@ -5,7 +5,7 @@ describe 'edit reimbursement type', type: :feature do
   let(:r_type) do
     create(:reimbursement_type,
            name: 'Exchange',
-           type: 'Spree::ReimbursementType::Exchange',
+           type: 'Viauco::ReimbursementType::Exchange',
            active: true,
            mutable: true)
   end
@@ -20,7 +20,7 @@ describe 'edit reimbursement type', type: :feature do
       uncheck 'Mutable'
       uncheck 'Active'
 
-      expect { click_button 'Create' }.not_to change(Spree::ReimbursementType, :count)
+      expect { click_button 'Create' }.not_to change(Viauco::ReimbursementType, :count)
 
       r_type.reload
 

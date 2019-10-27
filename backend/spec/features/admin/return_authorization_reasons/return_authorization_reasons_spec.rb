@@ -16,7 +16,7 @@ describe 'ReturnAuthorizationReason', type: :feature, js: true do
       reason: rma_reason
     )
 
-    visit spree.admin_return_authorization_reasons_path
+    visit viauco.admin_return_authorization_reasons_path
   end
 
   describe 'destroy' do
@@ -37,8 +37,8 @@ describe 'ReturnAuthorizationReason', type: :feature, js: true do
         end
       end
 
-      it(js: false) { expect(Spree::ReturnAuthorizationReason.all).to include(rma_reason) }
-      it(js: false) { expect(Spree::ReturnAuthorizationReason.all).to include(rma_reason2) }
+      it(js: false) { expect(Viauco::ReturnAuthorizationReason.all).to include(rma_reason) }
+      it(js: false) { expect(Viauco::ReturnAuthorizationReason.all).to include(rma_reason2) }
     end
 
     context 'should allow an admin to destroy a non associated option type' do
@@ -51,8 +51,8 @@ describe 'ReturnAuthorizationReason', type: :feature, js: true do
         end
       end
 
-      it(js: false) { expect(Spree::ReturnAuthorizationReason.all).to include(rma_reason) }
-      it(js: false) { expect(Spree::ReturnAuthorizationReason.all).not_to include(rma_reason2) }
+      it(js: false) { expect(Viauco::ReturnAuthorizationReason.all).to include(rma_reason) }
+      it(js: false) { expect(Viauco::ReturnAuthorizationReason.all).not_to include(rma_reason2) }
     end
 
     def delete_product_property

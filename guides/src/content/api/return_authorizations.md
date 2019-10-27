@@ -1,6 +1,6 @@
 ---
 title: Return Authorizations
-description: Use the Spree Commerce storefront API to access ReturnAuthorization data.
+description: Use the Viauco Commerce storefront API to access ReturnAuthorization data.
 ---
 
 ## Index
@@ -37,7 +37,7 @@ To search for a particular return authorization, make a request like this:
 
     GET /api/v1/orders/R1234567/return_authorizations?q[memo_cont]=damage
 
-The searching API is provided through the Ransack gem which Spree depends on. The `memo_cont` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
+The searching API is provided through the Ransack gem which Viauco depends on. The `memo_cont` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
 
 The search results are paginated.
 

@@ -1,7 +1,7 @@
-Spree::Sample.load_sample('tax_categories')
-Spree::Sample.load_sample('shipping_categories')
+Viauco::Sample.load_sample('tax_categories')
+Viauco::Sample.load_sample('shipping_categories')
 
-clothing = Spree::TaxCategory.find_by!(name: 'Clothing')
+clothing = Viauco::TaxCategory.find_by!(name: 'Clothing')
 
 products = [
   {
@@ -48,31 +48,31 @@ products = [
     eur_price: 16
   },
   {
-    name: 'Spree Baseball Jersey',
+    name: 'Viauco Baseball Jersey',
     tax_category: clothing,
     price: 19.99,
     eur_price: 16
   },
   {
-    name: 'Spree Jr. Spaghetti',
+    name: 'Viauco Jr. Spaghetti',
     tax_category: clothing,
     price: 19.99,
     eur_price: 16
   },
   {
-    name: 'Spree Ringer T-Shirt',
+    name: 'Viauco Ringer T-Shirt',
     tax_category: clothing,
     price: 19.99,
     eur_price: 16
   },
   {
-    name: 'Spree Tote',
+    name: 'Viauco Tote',
     tax_category: clothing,
     price: 15.99,
     eur_price: 14
   },
   {
-    name: 'Spree Bag',
+    name: 'Viauco Bag',
     tax_category: clothing,
     price: 22.99,
     eur_price: 19
@@ -88,24 +88,24 @@ products = [
     eur_price: 14
   },
   {
-    name: 'Spree Stein',
+    name: 'Viauco Stein',
     price: 16.99,
     eur_price: 14
   },
   {
-    name: 'Spree Mug',
+    name: 'Viauco Mug',
     price: 13.99,
     eur_price: 12
   }
 ]
 
-default_shipping_category = Spree::ShippingCategory.find_by!(name: 'Default')
+default_shipping_category = Viauco::ShippingCategory.find_by!(name: 'Default')
 
 products.each do |product_attrs|
-  Spree::Config[:currency] = 'USD'
+  Viauco::Config[:currency] = 'USD'
   eur_price = product_attrs.delete(:eur_price)
 
-  new_product = Spree::Product.where(name: product_attrs[:name],
+  new_product = Viauco::Product.where(name: product_attrs[:name],
                                      tax_category: product_attrs[:tax_category]).first_or_create! do |product|
     product.price = product_attrs[:price]
     product.description = FFaker::Lorem.paragraph
@@ -115,10 +115,10 @@ products.each do |product_attrs|
 
   next unless new_product
 
-  Spree::Config[:currency] = 'EUR'
+  Viauco::Config[:currency] = 'EUR'
   new_product.reload
   new_product.price = eur_price
   new_product.save
 end
 
-Spree::Config[:currency] = 'USD'
+Viauco::Config[:currency] = 'USD'

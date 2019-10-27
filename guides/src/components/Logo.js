@@ -23,7 +23,7 @@ const Logo = () => (
     render={data => (
       <Img
         critical
-        alt="Spree Commerce - Ruby on Rails e-commerce platform"
+        alt="Viauco Commerce - Ruby on Rails e-commerce platform"
         fadeIn={false}
         fixed={data.placeholderImage.childImageSharp.fixed}
       />

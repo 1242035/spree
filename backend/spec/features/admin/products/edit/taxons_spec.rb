@@ -14,7 +14,7 @@ describe 'Product Taxons', type: :feature, js: true do
       product = create(:product)
       product.taxons << taxon_1
 
-      visit spree.admin_products_path
+      visit viauco.admin_products_path
       within_row(1) { click_icon :edit }
 
       expect(page).to have_css('.select2-search-choice', exact_text: "#{taxon_1.parent.name} -> #{taxon_1.name}")

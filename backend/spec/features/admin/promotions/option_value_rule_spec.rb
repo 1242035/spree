@@ -10,7 +10,7 @@ describe 'Promotion with option value rule', type: :feature do
   let(:promotion) { create :promotion }
 
   before do
-    visit spree.edit_admin_promotion_path(promotion)
+    visit viauco.edit_admin_promotion_path(promotion)
   end
 
   it 'adding an option value rule', js: true do
@@ -36,7 +36,7 @@ describe 'Promotion with option value rule', type: :feature do
     within('#rules_container') { click_button 'Update' }
 
     first_rule = promotion.rules.reload.first
-    expect(first_rule.class).to eq Spree::Promotion::Rules::OptionValue
+    expect(first_rule.class).to eq Viauco::Promotion::Rules::OptionValue
     expect(first_rule.preferred_eligible_values).to eq Hash[product.id => [option_value.id]]
   end
 
@@ -45,7 +45,7 @@ describe 'Promotion with option value rule', type: :feature do
     let(:variant2) { create :variant }
 
     before do
-      rule = Spree::Promotion::Rules::OptionValue.new
+      rule = Viauco::Promotion::Rules::OptionValue.new
       rule.promotion = promotion
       rule.preferred_eligible_values = Hash[
         variant1.product_id => variant1.option_values.pluck(:id),
@@ -53,7 +53,7 @@ describe 'Promotion with option value rule', type: :feature do
       ]
       rule.save!
 
-      visit spree.edit_admin_promotion_path(promotion)
+      visit viauco.edit_admin_promotion_path(promotion)
     end
 
     it 'deleting a product', js: true do

@@ -1,0 +1,30 @@
+<div data-hook="admin_user_lifetime_stats" class="card mb-3">
+  <div class="card-header">
+    <h1 class="card-title mb-0 h5">
+      <%= Viauco.t(:lifetime_stats) %>
+    </h1>
+  </div>
+
+  <table class="table" id="user-lifetime-stats" data-hook>
+    <tr>
+      <td width="30%"><%= Viauco.t(:total_sales) %>:</td>
+      <td><%= @user.display_lifetime_value.to_html %></td>
+    </tr>
+    <tr>
+      <td><%= Viauco.t(:num_orders) %>:</td>
+      <td><%= @user.order_count %></td>
+    </tr>
+    <tr>
+      <td><%= Viauco.t(:average_order_value) %>:</td>
+      <td><%= @user.display_average_order_value.to_html %></td>
+    </tr>
+    <tr>
+      <td><%= Viauco.t('admin.user.store_credits') %>:</td>
+      <td id="store_credit"><%= Viauco::Money.new(@user.total_available_store_credit) %></td>
+    </tr>
+    <tr>
+      <td><%= Viauco.t(:member_since) %>:</td>
+      <td><%= pretty_time(@user.created_at) %></td>
+    </tr>
+  </table>
+</div>

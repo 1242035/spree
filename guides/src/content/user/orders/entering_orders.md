@@ -55,11 +55,11 @@ Click the "Shipping Method" drop-down menu, and make your selection.
 
 ![Edit Shipping Options](../../../images/user/orders/edit_shipping_options.jpg)
 
-Click the "Save" icon to confirm your change. Your Spree site will re-calculate the shipping, any relevant adjustments, and total for your order.
+Click the "Save" icon to confirm your change. Your Viauco site will re-calculate the shipping, any relevant adjustments, and total for your order.
 
 ## Adjustments
 
-The Spree shopping cart will automatically add the cost of the Shipping Method to your order as an adjustment - you can change or remove this.
+The Viauco shopping cart will automatically add the cost of the Shipping Method to your order as an adjustment - you can change or remove this.
 
 ### Editing Adjustments
 

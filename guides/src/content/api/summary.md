@@ -5,7 +5,7 @@ order: 0
 
 ## Overview
 
-Spree currently supports RESTful access to the resources listed in the sidebar
+Viauco currently supports RESTful access to the resources listed in the sidebar
 on the right &raquo;
 
 This API was built using the great [Rabl](https://github.com/nesquena/rabl) gem.
@@ -16,14 +16,14 @@ This API conforms to a set of [rules](#rules).
 
 ### JSON Data
 
-Developers communicate with the Spree API using the [JSON](http://www.json.org) data format. Requests for data are communicated in the standard manner using the HTTP protocol.
+Developers communicate with the Viauco API using the [JSON](http://www.json.org) data format. Requests for data are communicated in the standard manner using the HTTP protocol.
 
 ### Making an API Call
 
-You will need an authentication token to access the API. These keys can be generated on the user edit screen within the admin interface. To make a request to the API, pass a `X-Spree-Token` header along with the request:
+You will need an authentication token to access the API. These keys can be generated on the user edit screen within the admin interface. To make a request to the API, pass a `X-Viauco-Token` header along with the request:
 
 ```bash
-$ curl --header "X-Spree-Token: YOUR_KEY_HERE" http://example.com/api/v1/products.json
+$ curl --header "X-Viauco-Token: YOUR_KEY_HERE" http://example.com/api/v1/products.json
 ```
 
 
@@ -60,11 +60,11 @@ You may encounter the follow error messages when using the API.
 
 ## Rules
 
-The following are some simple rules that all Spree API endpoints comply with.
+The following are some simple rules that all Viauco API endpoints comply with.
 
 1. All successful requests for the API will return a status of 200.
 2. Successful create and update requests will result in a status of 201 and 200 respectively.
-3. Both create and update requests will return Spree\'s representation of the data upon success.
+3. Both create and update requests will return Viauco\'s representation of the data upon success.
 4. If a create or update request fails, a status code of 422 will be returned, with a hash containing an \"error\" key, and an \"errors\" key. The errors value will contain all ActiveRecord validation errors encountered when saving this record.
 5. Delete requests will return status of 200, and no content.
 6. Requests that list collections, such as `/api/v1/products` are paginated and
@@ -90,5 +90,5 @@ eventually finding its way to the API engine.
 You can use this to your advantage and define a view template within your
 application that exists at the same path as a template within the API engine.
 For instance, if you place a template in your application at
-`app/views/spree/api/v1/products/show.v1.rabl`, it will take precedence over the
+`app/views/viauco/api/v1/products/show.v1.rabl`, it will take precedence over the
 template within the API engine.

@@ -5,9 +5,9 @@ section: upgrades
 
 ## Upgrade Guides
 
-We strongly advise upgrading Spree incrementally, rather than in one big go. For example, if you're upgrading a Spree store from 0.60.x to 2.4.x, you would read through all of these guides, one by one.
+We strongly advise upgrading Viauco incrementally, rather than in one big go. For example, if you're upgrading a Viauco store from 0.60.x to 2.4.x, you would read through all of these guides, one by one.
 
-If there are any issues with these guides, please let us know by [filing an issue](https://github.com/spree/spree/issues/new).
+If there are any issues with these guides, please let us know by [filing an issue](https://github.com/viauco/viauco/issues/new).
 
 * [3.5.x to 3.6.x](/developer/three-dot-five-to-three-dot-six)
 * [3.4.x to 3.5.x](/developer/three-dot-four-to-three-dot-five)

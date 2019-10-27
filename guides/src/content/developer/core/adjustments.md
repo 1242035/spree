@@ -5,9 +5,9 @@ section: core
 
 ## Overview
 
-An `Adjustment` object tracks an adjustment to the price of an [Order](/developer/core/orders.html), an order's [Line Item](/developer/core/orders.html#line-items), or an order's [Shipments](/developer/core/shipments.html) within a Spree Commerce storefront.
+An `Adjustment` object tracks an adjustment to the price of an [Order](/developer/core/orders.html), an order's [Line Item](/developer/core/orders.html#line-items), or an order's [Shipments](/developer/core/shipments.html) within a Viauco Commerce storefront.
 
-Adjustments can be either positive or negative. Adjustments with a positive value are sometimes referred to as "charges" while adjustments with a negative value are sometimes referred to as "credits." These are just terms of convenience since there is only one `Spree::Adjustment` model in a storefront which handles this by allowing either positive or negative values.
+Adjustments can be either positive or negative. Adjustments with a positive value are sometimes referred to as "charges" while adjustments with a negative value are sometimes referred to as "credits." These are just terms of convenience since there is only one `Viauco::Adjustment` model in a storefront which handles this by allowing either positive or negative values.
 
 Adjustments can either be considered included or additional. An "included" adjustment is an adjustment to the price of an item which is included in that price of an item. A good example of this is a GST/VAT tax. An "additional" adjustment is an adjustment to the price of the item on top of the original item price. A good example of that would be how sales tax is handled in countries like the United States.
 
@@ -25,11 +25,11 @@ Along with these attributes, an adjustment links to three polymorphic objects:
 * A source
 * An adjustable
 
-The *source* is the source of the adjustment. Typically a `Spree::TaxRate` object or a `Spree::PromotionAction` object.
+The *source* is the source of the adjustment. Typically a `Viauco::TaxRate` object or a `Viauco::PromotionAction` object.
 
 The *adjustable* is the object being adjusted, which is either an order, line item or shipment.
 
-Adjustments can come from one of two locations within Spree's core:
+Adjustments can come from one of two locations within Viauco's core:
 
 * Tax Rates
 * Promotions
@@ -41,29 +41,29 @@ An adjustment's `label` attribute can be used as a good indicator of where the a
 There are some helper methods to return the different types of adjustments:
 
 ```ruby
-scope :shipping, -> { where(adjustable_type: 'Spree::Shipment') }
+scope :shipping, -> { where(adjustable_type: 'Viauco::Shipment') }
 scope :is_included, -> { where(included: true)  }
 scope :additional, -> { where(included: false) }
 ```
 
 * `open`: All open adjustments.
-* `tax`: All adjustments which have a source that is a `Spree::TaxRate` object
-* `price`: All adjustments which adjust a `Spree::LineItem` object.
-* `shipping`: All adjustments which adjust a `Spree::Shipment` object.
-* `promotion`: All adjustments where the source is a `Spree::PromotionAction` object.
+* `tax`: All adjustments which have a source that is a `Viauco::TaxRate` object
+* `price`: All adjustments which adjust a `Viauco::LineItem` object.
+* `shipping`: All adjustments which adjust a `Viauco::Shipment` object.
+* `promotion`: All adjustments where the source is a `Viauco::PromotionAction` object.
 * `optional`: All adjustments which are not `mandatory`.
-* `return_authorization`: All adjustments where the source is a `Spree::ReturnAuthorization`.
+* `return_authorization`: All adjustments where the source is a `Viauco::ReturnAuthorization`.
 * `eligible`: Adjustments which have been determined to be `eligible` for their adjustable. Useful for determining which adjustments are applying to the adjustable.
 * `charge`: Adjustments which *increase* the price of their adjustable.
 * `credit`: Adjustments which *decrease* the price of their adjustable.
 * `included`: Adjustments which are included in the object's price. Typically tax adjustments.
 * `additional`: Adjustments which modify the object's price. The default for all adjustments.
 
-These scopes can be called on either the `Spree::Adjustment` class itself, or on an `adjustments` association. For example, calling any one of these three is
+These scopes can be called on either the `Viauco::Adjustment` class itself, or on an `adjustments` association. For example, calling any one of these three is
 valid:
 
 ```ruby
-Spree::Adjustment.eligible
+Viauco::Adjustment.eligible
 order.adjustments.eligible
 line_item.adjustments.eligible
 shipment.adjustments.eligible
@@ -71,7 +71,7 @@ shipment.adjustments.eligible
 
 ## Adjustment Associations
 
-As of Spree 2.2, you are able to retrieve the specific adjustments of an Order, a Line Item or a Shipment.
+As of Viauco 2.2, you are able to retrieve the specific adjustments of an Order, a Line Item or a Shipment.
 
 An order itself, much like line items and shipments, can have its own individual modifications. For instance, an order with over $100 of line items may have 10% off. To retrieve these adjustments on the order, call the `adjustments` association:
 
@@ -101,13 +101,13 @@ order.shipment_adjustments
 
 ### Creating a New Adjuster
 
-To create a new adjuster for Spree, create a new ruby object that inherits from `Spree::Adjustable::Adjuster::Base` and implements an `update` method:
+To create a new adjuster for Viauco, create a new ruby object that inherits from `Viauco::Adjustable::Adjuster::Base` and implements an `update` method:
 
 ```ruby
-module Spree
+module Viauco
   module Adjustable
     module Adjuster
-      class MyAdjuster < Spree::Adjustable::Adjuster::Base
+      class MyAdjuster < Viauco::Adjustable::Adjuster::Base
         def update
           ...
           #your ruby magic
@@ -132,14 +132,14 @@ module Spree
 end
 ```
 
-Next you need to add the class to spree `Rails.application.config.spree.adjusters` so it is included whenever adjustments are updated (Promotion and Tax are included by default):
+Next you need to add the class to viauco `Rails.application.config.viauco.adjusters` so it is included whenever adjustments are updated (Promotion and Tax are included by default):
 
 ```ruby
 # NOTE: it is advisable that that Tax be implemented last so Tax is calculated correctly
-app.config.spree.adjusters = [
-          Spree::Adjustable::Adjuster::MyAdjuster,
-          Spree::Adjustable::Adjuster::Promotion,
-          Spree::Adjustable::Adjuster::Tax
+app.config.viauco.adjusters = [
+          Viauco::Adjustable::Adjuster::MyAdjuster,
+          Viauco::Adjustable::Adjuster::Promotion,
+          Viauco::Adjustable::Adjuster::Tax
           ]
 ```
 

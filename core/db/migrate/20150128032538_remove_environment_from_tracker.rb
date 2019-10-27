@@ -1,8 +1,8 @@
 class RemoveEnvironmentFromTracker < ActiveRecord::Migration[4.2]
-  class Spree::Tracker < Spree::Base; end
+  class Viauco::Tracker < Viauco::Base; end
 
   def up
-    Spree::Tracker.where('environment != ?', Rails.env).update_all(active: false)
-    remove_column :spree_trackers, :environment
+    Viauco::Tracker.where('environment != ?', Rails.env).update_all(active: false)
+    remove_column :viauco_trackers, :environment
   end
 end

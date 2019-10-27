@@ -34,8 +34,8 @@ public/attachments
 public/blank_iframe.html
 public/ckeditora
 sandbox/*
-spree_dev
-spree_test
+viauco_dev
+viauco_test
 testapp
 **/spec/dummy
 tmp

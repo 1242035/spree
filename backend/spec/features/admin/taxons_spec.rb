@@ -6,7 +6,7 @@ describe 'Taxonomies and taxons', type: :feature do
   let(:taxonomy) { create(:taxonomy, name: 'Hello') }
 
   it 'admin should be able to edit taxon' do
-    visit spree.edit_admin_taxonomy_taxon_path(taxonomy, taxonomy.root.id)
+    visit viauco.edit_admin_taxonomy_taxon_path(taxonomy, taxonomy.root.id)
 
     fill_in 'taxon_name', with: 'Shirt'
     fill_in 'taxon_description', with: 'Discover our new rails shirts'
@@ -17,7 +17,7 @@ describe 'Taxonomies and taxons', type: :feature do
   end
 
   it 'taxon without name should not be updated' do
-    visit spree.edit_admin_taxonomy_taxon_path(taxonomy, taxonomy.root.id)
+    visit viauco.edit_admin_taxonomy_taxon_path(taxonomy, taxonomy.root.id)
 
     fill_in 'taxon_name', with: ''
     fill_in 'taxon_description', with: 'Discover our new rails shirts'
@@ -32,7 +32,7 @@ describe 'Taxonomies and taxons', type: :feature do
     product = create(:product)
     product.taxons << taxon_1
 
-    visit spree.admin_taxons_path
+    visit viauco.admin_taxons_path
     select_clothing_from_select2
 
     find('.product').hover

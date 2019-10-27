@@ -1,12 +1,12 @@
 ---
-title: Migrating to Spree
+title: Migrating to Viauco
 section: advanced
 ---
 
 ## Overview
 
 This section explains how to convert existing sites or data sets for
-use with Spree. It is a mix of tips and information about the relevant
+use with Viauco. It is a mix of tips and information about the relevant
 APIs, and so is definitely intended for developers. After reading it you
 should know:
 
@@ -55,7 +55,7 @@ and save the time of the code import.
 
 ### Rails Fixtures
 
-Spree uses fixtures to load up the sample data. It's a convenient
+Viauco uses fixtures to load up the sample data. It's a convenient
 format for small collections of data, but can be tricky when working with
 large data sets, especially if there are many interconnections and if you
 need to be careful with validation.
@@ -137,7 +137,7 @@ This is more a technique for getting the data loaded at the right time.
 Technically, the product catalogue is *seed data*, standard data which
 is needed for the app to work properly.
 
-Spree has several options for loading seed data, but perhaps the easiest
+Viauco has several options for loading seed data, but perhaps the easiest
 to use here is to put ruby files in *site/db/default/*. These files are
 processed when *rake db:seed* is called, and will be processed in the order of the
 migration timestamps.
@@ -153,7 +153,7 @@ so that alphabetical order gives the correct load order…
 
 ### Important system-wide settings
 
-A related but important topic is the Spree core settings that your app
+A related but important topic is the Viauco core settings that your app
 will need to function correctly, eg to disable backordering or to
 configure the mail subsystem. You can (mostly) set these from the admin
 interface, but we recommend using initializers for these. See the
@@ -184,7 +184,7 @@ Products must have at least a name and a price in order to pass
 validation, and we set the description too.
 
 ```ruby
-p = Spree::Product.create name: 'some product', price: 10.0,
+p = Viauco::Product.create name: 'some product', price: 10.0,
 description: 'some text here'
 ```
 
@@ -217,7 +217,7 @@ this if the product does not have option variants.
 
 If you don't have option variants, then you may also need to register
 some stock for the master variant. The exact steps depend on how you
-have configured Spree's [inventory system](/developer/core/inventory.html), but most sites
+have configured Viauco's [inventory system](/developer/core/inventory.html), but most sites
 will just need to assign to *p.on_hand*, eg *p.on_hand = 100*.
 
 #### Shipping category
@@ -227,13 +227,13 @@ provides product-specific information for the shipping
 calculators, eg to indicate that a product requires additional insurance
 or can only be surface shipped. If no special conditions are needed, you
 can leave this field as nil.
-The *Spree::ShippingCategory* model is effectively a wrapper for a
+The *Viauco::ShippingCategory* model is effectively a wrapper for a
 string. You can either generate the list of categories in advance, or use
 *where.first_or_create* to reuse previous objects or create new ones
 when required.
 
 ```ruby
-p.shipping_category = Spree::ShippingCategory.where(name: 'Type A').first_or_create
+p.shipping_category = Viauco::ShippingCategory.where(name: 'Type A').first_or_create
 ```
 
 #### Tax category
@@ -294,7 +294,7 @@ possibly using 'A > B > C' style of context to assign the taxons for a product. 
 
 ```ruby
 # create outside of loop
-  main_taxonomy = Spree::Taxonomy.where(name: 'Products').first_or_create
+  main_taxonomy = Viauco::Taxonomy.where(name: 'Products').first_or_create
 
 # inside of main loop
 the_taxons = []
@@ -302,7 +302,7 @@ taxon_col.split(/[\r\n]*/).each do |chain|
   taxon = nil
   names = chain.split
   names.each do |name|
-    taxon = Spree::Taxon.where.first_or_create
+    taxon = Viauco::Taxon.where.first_or_create
   end
   the_taxons << taxon
 end
@@ -323,7 +323,7 @@ should give the internal name and presentation name. For simplicity, the code
 examples have these names as the same string.
 
 ```ruby
-size_prop = Spree::Property.where(name: 'size', presentation: 'Size').first_or_create
+size_prop = Viauco::Property.where(name: 'size', presentation: 'Size').first_or_create
 ```
 
 Then you just set the value for the property-product pair.
@@ -331,7 +331,7 @@ Assuming value*size_info+ which is derived from the relevant
 column, this means:
 
 ```ruby
-Spree::ProductProperty.create property: size_prop, product: p, value: size_info
+Viauco::ProductProperty.create property: size_prop, product: p, value: size_info
 ```
 
 #### Product prototypes
@@ -356,7 +356,7 @@ which (usually) have a single option value for each of the product's option
 types (e.g. 'small' and 'red' etc).
 
 ***
-Spree's core generally assumes that each variant has exactly one
+Viauco's core generally assumes that each variant has exactly one
 option value for each of the product's option types, but the current
 code is tolerant of missing values. Certain extensions may be more
 strict, e.g. ones for providing advanced variant selection.
@@ -370,7 +370,7 @@ explicitly set, the new variant will use the master variant's price (the same ap
 *cost_price* too). You can also set the *weight*, *width*, *height*, and *depth* too.
 
 ```ruby
-v = Spree::Variant.create product: p, sku: "some_sku_code", price: NNNN
+v = Viauco::Variant.create product: p, sku: "some_sku_code", price: NNNN
 ```
 
 ***
@@ -379,7 +379,7 @@ a product's price will need to be copied to all of its variants.
 ***
 
 Next, you may also want to register some stock for this variant.
-The exact steps depend on how you have configured Spree's
+The exact steps depend on how you have configured Viauco's
 [inventory system](/developer/core/inventory.html), but most sites
 will just need to assign to *v.on_hand*, eg *v.on_hand = 100*.
 
@@ -398,7 +398,7 @@ use the *where.first_or_create* technique, with something like this:
 
 ```ruby
 p.option_types = option_names_col.map do |name|
-  Spree::OptionType.where(name: name, presentation: name).first_or_create
+  Viauco::OptionType.where(name: name, presentation: name).first_or_create
 end
 ```
 
@@ -415,9 +415,9 @@ the option values for the new variant (see below for variant creation).
 
 ```ruby
 *, opts, sku, price = opt_info.match(/(.+)\s=\s(\w+)\s@\s\$(.+)/).to_a
-v = Spree::Variant.create product: p, sku: sku, price: price
+v = Viauco::Variant.create product: p, sku: sku, price: price
 v.option_values = opts.split('&').map do |nm|
-  Spree::OptionValue.where.first_or_create nm.strip
+  Viauco::OptionValue.where.first_or_create nm.strip
 end
 ```
 
@@ -433,7 +433,7 @@ also attach resources like color swatches to the more specific values.
 
 #### Ordering of option values
 You might want option values to appear in a certain order, such as by
-increasing size or by alphabetical order. The *Spree::OptionValue* model uses
+increasing size or by alphabetical order. The *Viauco::OptionValue* model uses
 *acts_as_list* for setting the order, and option types will use the *position* field when retrieving
 their associated values. The position is scoped to the relevant option type.
 
@@ -441,9 +441,9 @@ If you create option values in advance, just create them in the required
 order and the plugin will set the *position* automatically.
 
 ```ruby
-color_type = Spree::OptionType.create name: 'Color', presentation: 'Color'
+color_type = Viauco::OptionType.create name: 'Color', presentation: 'Color'
 color_options = %w[Red Blue Green].split.map { |n|
-  Spree::OptionValue.create name: n, presentation: n,
+  Viauco::OptionValue.create name: n, presentation: n,
   option_type: color_type }
 ```
 
@@ -460,13 +460,13 @@ end
 
 [Steph Skardal](https://github.com/stephskardal) has produced a useful
 blog post on [product
-optioning](http://blog.endpoint.com/2010/01/rails-ecommerce-spree-hooks-comments.html).
+optioning](http://blog.endpoint.com/2010/01/rails-ecommerce-viauco-hooks-comments.html).
 This discusses how the variant option representation works and how she
 used it to build an extension for enhanced product option selection.
 
 ### Product and Variant images
 
-Spree uses [paperclip](https://github.com/thoughtbot/paperclip) to
+Viauco uses [paperclip](https://github.com/thoughtbot/paperclip) to
 manage image attachments and their various size formats. (See the [Customization Guide](/developer/customization/logic.html#product-images) for info on altering the image formats.)
 You can attach images to products and to variants - the mechanism is
 polymorphic. Given some local image file, the following will associate the image and
@@ -474,10 +474,10 @@ create all of the size formats.
 
 ```ruby
 #for image for product (all variants) represented by master variant
-img = Spree::Image.create(attachment: File.open(path), viewable: product.master)
+img = Viauco::Image.create(attachment: File.open(path), viewable: product.master)
 
 #for image for single variant
-img = Spree::Image.create(attachment: File.open(path), viewable: variant)
+img = Viauco::Image.create(attachment: File.open(path), viewable: variant)
 ```
 
 Paperclip also supports external [storage of images in S3](https://github.com/thoughtbot/paperclip/blob/master/lib/paperclip/storage.rb)

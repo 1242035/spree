@@ -23,8 +23,8 @@ use rake db:load_file[/absolute/path/to/sample/filename.rb]}
     end
     ruby_files.sort.each do |fixture, ruby_file|
       # If file exists within application it takes precendence.
-      if File.exist?(File.join(Rails.root, 'db/default/spree', "#{fixture}.rb"))
-        ruby_file = File.expand_path(File.join(Rails.root, 'db/default/spree', "#{fixture}.rb"))
+      if File.exist?(File.join(Rails.root, 'db/default/viauco', "#{fixture}.rb"))
+        ruby_file = File.expand_path(File.join(Rails.root, 'db/default/viauco', "#{fixture}.rb"))
       end
       # an invoke will only execute the task once
       Rake::Task['db:load_file'].execute(Rake::TaskArguments.new([:file], [ruby_file]))
@@ -72,11 +72,11 @@ use rake db:load_file[/absolute/path/to/sample/filename.rb]}
 
     ActiveRecord::Base.send(:subclasses).each(&:reset_column_information)
 
-    load_defaults = Spree::Country.count == 0
+    load_defaults = Viauco::Country.count == 0
     load_defaults ||= agree('Countries present, load sample data anyways? [y/n]: ')
     Rake::Task['db:seed'].invoke if load_defaults
 
-    if Rails.env.production? && Spree::Product.count > 0
+    if Rails.env.production? && Viauco::Product.count > 0
       load_sample = agree('WARNING: In Production and products exist in database, load sample data anyways? [y/n]:')
     else
       load_sample = true if ENV['AUTO_ACCEPT']
@@ -86,13 +86,13 @@ use rake db:load_file[/absolute/path/to/sample/filename.rb]}
     if load_sample
       # Reload models' attributes in case they were loaded in old migrations with wrong attributes
       ActiveRecord::Base.descendants.each(&:reset_column_information)
-      Rake::Task['spree_sample:load'].invoke
+      Rake::Task['viauco_sample:load'].invoke
     end
 
     puts "Bootstrap Complete.\n\n"
   end
 
-  desc 'Fix orphan line items after upgrading to Spree 3.1: only needed if you have line items attached to deleted records with Slug (product) and SKU (variant) duplicates of non-deleted records.'
+  desc 'Fix orphan line items after upgrading to Viauco 3.1: only needed if you have line items attached to deleted records with Slug (product) and SKU (variant) duplicates of non-deleted records.'
   task fix_orphan_line_items: :environment do |_t, _args|
     def get_input
       STDOUT.flush
@@ -120,12 +120,12 @@ use rake db:load_file[/absolute/path/to/sample/filename.rb]}
       no_live_variants_found = []
       variants_to_fix = []
 
-      Spree::Variant.deleted.each do |variant|
+      Viauco::Variant.deleted.each do |variant|
         # check if this variant has any line items at all
         next if variant.line_items.none?
 
         variants_to_fix << variant
-        dup_variant = Spree::Variant.find_by(sku: variant.sku)
+        dup_variant = Viauco::Variant.find_by(sku: variant.sku)
         if dup_variant
           # this variant is OK
         else
@@ -147,18 +147,18 @@ use rake db:load_file[/absolute/path/to/sample/filename.rb]}
 
       puts 'Ready to fix...'
       variants_to_fix.each do |variant|
-        dup_variant = Spree::Variant.find_by(sku: variant.sku)
+        dup_variant = Viauco::Variant.find_by(sku: variant.sku)
         puts "Changing all line items for #{variant.sku} variant id #{variant.id} (deleted) to variant id #{dup_variant.id} (not deleted) ..."
-        Spree::LineItem.unscoped.where(variant_id: variant.id).update_all(variant_id: dup_variant.id)
+        Viauco::LineItem.unscoped.where(variant_id: variant.id).update_all(variant_id: dup_variant.id)
       end
 
       puts 'DONE !   Your database should no longer have line items that are associated with deleted variants.'
     end
   end
 
-  desc 'Migrates taxon icons to spree assets after upgrading to Spree 3.4: only needed if you used taxons icons.'
+  desc 'Migrates taxon icons to viauco assets after upgrading to Viauco 3.4: only needed if you used taxons icons.'
   task migrate_taxon_icons: :environment do |_t, _args|
-    Spree::Taxon.where.not(icon_file_name: nil).find_each do |taxon|
+    Viauco::Taxon.where.not(icon_file_name: nil).find_each do |taxon|
       taxon.create_icon(attachment_file_name: taxon.icon_file_name,
                         attachment_content_type: taxon.icon_content_type,
                         attachment_file_size: taxon.icon_file_size,
@@ -166,21 +166,21 @@ use rake db:load_file[/absolute/path/to/sample/filename.rb]}
     end
   end
 
-  desc 'Migrates taxon icons to taxon images after upgrading to Spree 3.7: only needed if you used taxons icons.'
+  desc 'Migrates taxon icons to taxon images after upgrading to Viauco 3.7: only needed if you used taxons icons.'
   task migrate_taxon_icons_to_images: :environment do |_t, _args|
-    Spree::Asset.where(type: 'Spree::TaxonIcon').update_all(type: 'Spree::TaxonImage')
+    Viauco::Asset.where(type: 'Viauco::TaxonIcon').update_all(type: 'Viauco::TaxonImage')
   end
 
-  desc 'Ensure all Order associated with Store after upgrading to Spree 3.7'
+  desc 'Ensure all Order associated with Store after upgrading to Viauco 3.7'
   task associate_orders_with_store: :environment do |_t, _args|
-    Spree::Order.where(store_id: nil).update_all(store_id: Spree::Store.default.id)
+    Viauco::Order.where(store_id: nil).update_all(store_id: Viauco::Store.default.id)
   end
 
-  desc 'Ensure all Order has currency present after upgrading to Spree 3.7'
+  desc 'Ensure all Order has currency present after upgrading to Viauco 3.7'
   task ensure_order_currency_presence: :environment do |_t, _args|
-    Spree::Order.where(currency: nil).find_in_batches do |orders|
+    Viauco::Order.where(currency: nil).find_in_batches do |orders|
       orders.each do |order|
-        order.update!(currency: order.store.default_currency || Spree::Config[:currency])
+        order.update!(currency: order.store.default_currency || Viauco::Config[:currency])
       end
     end
   end

@@ -1,6 +1,6 @@
 ---
 title: Zones
-description: Use the Spree Commerce storefront API to access Zone data.
+description: Use the Viauco Commerce storefront API to access Zone data.
 ---
 
 ## Index
@@ -42,7 +42,7 @@ To search for a particular zone, make a request like this:
 GET /api/v1/zones?q[name_cont]=north
 ```
 
-The searching API is provided through the Ransack gem which Spree depends on. The `name_cont` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
+The searching API is provided through the Ransack gem which Viauco depends on. The `name_cont` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
 
 The search results are paginated.
 
@@ -83,7 +83,7 @@ POST /api/v1/zones
 ```
 
 Assuming in this instance that you want to create a zone containing
-a zone member which is a `Spree::Country` record with the `id` attribute of 1, send through the parameters like this:
+a zone member which is a `Viauco::Country` record with the `id` attribute of 1, send through the parameters like this:
 
 ```json
 {
@@ -91,7 +91,7 @@ a zone member which is a `Spree::Country` record with the `id` attribute of 1, s
     "name": "North Pole",
     "zone_members": [
       {
-        "zoneable_type": "Spree::Country",
+        "zoneable_type": "Viauco::Country",
         "zoneable_id": 1
       }
     ]
@@ -122,7 +122,7 @@ To update zone and zone member information, use parameters like this:
     "name": "North Pole",
     "zone_members": [
       {
-        "zoneable_type": "Spree::Country",
+        "zoneable_type": "Viauco::Country",
         "zoneable_id": 1
       }
     ]

@@ -12,7 +12,7 @@ hidden: true
 
 This tutorial is a continuation of the previous one, [Extensions](/developer/tutorials/extensions_tutorial.html), and begins where we left off in the last one. We have created a simple extension for promoting on-sale products on a "sales homepage".
 
-In this tutorial we are going to learn about [Deface](https://github.com/spree/deface) and how we can use it to improve our extension. As part of improving our extension, we will be updating the existing Spree admin interface so that we are able to set the `sale_price` for products.
+In this tutorial we are going to learn about [Deface](https://github.com/viauco/deface) and how we can use it to improve our extension. As part of improving our extension, we will be updating the existing Viauco admin interface so that we are able to set the `sale_price` for products.
 
 ## What is Deface?
 
@@ -25,13 +25,13 @@ and perform an action against all the matching elements.
 
 ### The Goal
 
-Our goal is to add a field to the product edit admin page that allows the `sale_price` to be added or updated. We could do this by overriding the view Spree provides, but there are potential problems with this technique. If Spree updates the view in a new release we won't get the updated view as we are already overriding it. We would need to update our view with the new content from Spree and then add our customizations back in to stay fully up to date.
+Our goal is to add a field to the product edit admin page that allows the `sale_price` to be added or updated. We could do this by overriding the view Viauco provides, but there are potential problems with this technique. If Viauco updates the view in a new release we won't get the updated view as we are already overriding it. We would need to update our view with the new content from Viauco and then add our customizations back in to stay fully up to date.
 
-Let's do this instead using Deface, which we just learned about. Using Deface will allow us to keep our view customizations in one spot, `app/overrides`, and make sure we are always using the latest implementation of the view provided by Spree.
+Let's do this instead using Deface, which we just learned about. Using Deface will allow us to keep our view customizations in one spot, `app/overrides`, and make sure we are always using the latest implementation of the view provided by Viauco.
 
 ### The Implementation
 
-We want to override the product edit admin page, so the view we want to modify in this case is the product form partial. This file's path will be `spree/admin/products/_form.html.erb`.
+We want to override the product edit admin page, so the view we want to modify in this case is the product form partial. This file's path will be `viauco/admin/products/_form.html.erb`.
 
 First, let's create the overrides directory with the following command:
 
@@ -39,12 +39,12 @@ First, let's create the overrides directory with the following command:
 mkdir app/overrides
 ```
 
-So we want to override `spree/admin/products/_form.html.erb`. Here is the part of the file we are going to add content to (you can also view the [full file](https://github.com/spree/spree/blob/master/backend/app/views/spree/admin/products/_form.html.erb)):
+So we want to override `viauco/admin/products/_form.html.erb`. Here is the part of the file we are going to add content to (you can also view the [full file](https://github.com/viauco/viauco/blob/master/backend/app/views/viauco/admin/products/_form.html.erb)):
 
 ```erb
 <div class="right four columns omega" data-hook="admin_product_form_right">
   <%= f.field_container :price do %>
-    <%= f.label :price, raw(Spree.t(:master_price) + content_tag(:span, ' *', class: 'required')) %>
+    <%= f.label :price, raw(Viauco.t(:master_price) + content_tag(:span, ' *', class: 'required')) %>
     <%= f.text_field :price, value: number_to_currency(@product.price, unit: '')%>
     <%= f.error_message_on :price %>
   <% end %>
@@ -54,12 +54,12 @@ So we want to override `spree/admin/products/_form.html.erb`. Here is the part o
 We want our override to insert another field container after the price field container. We can do this by creating a new file `app/overrides/add_sale_price_to_product_edit.rb` and adding the following content:
 
 ```ruby
-Deface::Override.new(virtual_path: 'spree/admin/products/_form',
+Deface::Override.new(virtual_path: 'viauco/admin/products/_form',
   name: 'add_sale_price_to_product_edit',
   insert_after: "erb[loud]:contains('text_field :price')",
   text: "
     <%%= f.field_container :sale_price do %>
-      <%%= f.label :sale_price, raw(Spree.t(:sale_price) + content_tag(:span, ' *')) %>
+      <%%= f.label :sale_price, raw(Viauco.t(:sale_price) + content_tag(:span, ' *')) %>
       <%%= f.text_field :sale_price, value:
         number_to_currency(@product.sale_price, unit: '') %>
       <%%= f.error_message_on :sale_price %>
@@ -70,17 +70,17 @@ Deface::Override.new(virtual_path: 'spree/admin/products/_form',
 We also need to delegate `sale_price` to the master variant in order to get the
 updated product edit form working.
 
-We can do this by creating a new file `app/models/spree/product_decorator.rb` and adding the following content to it:
+We can do this by creating a new file `app/models/viauco/product_decorator.rb` and adding the following content to it:
 
 ```ruby
-module Spree
+module Viauco
   Product.class_eval do
     delegate :sale_price, :sale_price=, to: :master
   end
 end
 ```
 
-Now, when we head to `http://localhost:3000/admin/products` and edit a product, we should be able to set a sale price for the product and be able to view it on our sale page, `http://localhost:3000/sale`. Note that you will likely need to restart our example Spree application (created in the [Getting Started](/developer/tutorials/getting_started_tutorial.html) tutorial).
+Now, when we head to `http://localhost:3000/admin/products` and edit a product, we should be able to set a sale price for the product and be able to view it on our sale page, `http://localhost:3000/sale`. Note that you will likely need to restart our example Viauco application (created in the [Getting Started](/developer/tutorials/getting_started_tutorial.html) tutorial).
 
 ### Available actions
 
@@ -131,11 +131,11 @@ As Deface operates on the Erb source the content supplied to an override can inc
 
 ### Targeting elements
 
-While Deface allows you to use a large subset of CSS3 style selectors (as provided by Nokogiri), the majority of Spree's views have been updated to include a custom HTML attribute (<tt>data-hook</tt>), which is designed to provide consistent targets for your overrides to use.
+While Deface allows you to use a large subset of CSS3 style selectors (as provided by Nokogiri), the majority of Viauco's views have been updated to include a custom HTML attribute (<tt>data-hook</tt>), which is designed to provide consistent targets for your overrides to use.
 
-As Spree views are changed over coming versions, the original HTML elements maybe edited or be removed. We will endeavour to ensure that data-hook / id combination will remain consistent within any single view file (where possible), thus making your overrides more robust and upgrade proof.
+As Viauco views are changed over coming versions, the original HTML elements maybe edited or be removed. We will endeavour to ensure that data-hook / id combination will remain consistent within any single view file (where possible), thus making your overrides more robust and upgrade proof.
 
-For example, spree/products/show.html.erb looks as follows:
+For example, viauco/products/show.html.erb looks as follows:
 
 ```erb
 <div data-hook="product_show" itemscope itemtype="http://schema.org/Product">
@@ -167,7 +167,7 @@ For example, spree/products/show.html.erb looks as follows:
         <h1 class="product-title" itemprop="name"><%%= accurate_title %></h1>
 
         <div itemprop="description" data-hook="description">
-          <%%= product_description(product) rescue Spree.t(:product_has_no_description) %>
+          <%%= product_description(product) rescue Viauco.t(:product_has_no_description) %>
         </div>
 
         <div id="cart-form" data-hook="cart_form">
@@ -222,7 +222,7 @@ are converted into a pseudo markup as follows.
 
 ---
 
-Version 1.0 of Deface, used in Spree 2.1, changed the code tag syntax.
+Version 1.0 of Deface, used in Viauco 2.1, changed the code tag syntax.
 Formerly code tags were parsed as `<code erb-loud>` and `<code erb-silent>`. They are now parsed as `<erb loud>` and `<erb silent>`.
 Deface overrides which used selectors like `code[erb-loud]` should now
 use `erb[loud]`.
@@ -233,9 +233,9 @@ Given the following Erb file:
 
 ```erb
 <%% if products.empty? %>
- <%%= Spree.t(:no_products_found) %>
+ <%%= Viauco.t(:no_products_found) %>
 <%% elsif params.key?(:keywords) %>
-  <h3><%%= Spree.t(:products) %></h3>
+  <h3><%%= Viauco.t(:products) %></h3>
 <%% end %>
 ```
 
@@ -244,10 +244,10 @@ Would be seen by Deface as:
 ```html
 <!-- <html>
   <erb[silent]> if products.empty? </erb>
-  <erb[loud]> Spree.t(:no_products_found) </erb>
+  <erb[loud]> Viauco.t(:no_products_found) </erb>
   <erb[silent]> elsif params.key?(:keywords) </erb>
 
-  <h3><erb[loud]> Spree.t(:products) </erb></h3>
+  <h3><erb[loud]> Viauco.t(:products) </erb></h3>
 
   <erb[silent]> end </erb>
 </html> -->
@@ -264,7 +264,7 @@ insert_before: "erb[silent]:contains('elsif')"
 
 ### View upgrade protection
 
-To ensure upgrading between versions of Spree is as painless as
+To ensure upgrading between versions of Viauco is as painless as
 possible, Deface supports an `:original` option that can contain a
 string of the original content that's being replaced. When Deface is
 applying the override it will ensure that the current source matches the
@@ -273,7 +273,7 @@ different.
 
 These warnings are a good indicator that you need to review the source
 and ensure your replacement is adequately replacing all the
-functionality provided by Spree. This will help reduce unexpected issues
+functionality provided by Viauco. This will help reduce unexpected issues
 after upgrades.
 
 Once you've reviewed the new source you can update the `:original` value
@@ -303,4 +303,4 @@ future theming developments (editor).
 ### More information on Deface
 
 For more information and sample overrides please refer to its
-[README](https://github.com/spree/deface) file on GitHub.
+[README](https://github.com/viauco/deface) file on GitHub.

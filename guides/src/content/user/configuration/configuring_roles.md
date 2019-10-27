@@ -4,7 +4,7 @@ title: Roles
 
 ## Introduction
 
-Roles are used to define user's permissions on your website. This option gives you ability to control users rights. By default Spree offers two kinds of Roles **Admin** and **User**. If you would like to make more roles with specific features than Admin and User role, our company offers making those by backed-end work. To open **Roles** tab extend **Configuration** dropdown and find **Roles**.
+Roles are used to define user's permissions on your website. This option gives you ability to control users rights. By default Viauco offers two kinds of Roles **Admin** and **User**. If you would like to make more roles with specific features than Admin and User role, our company offers making those by backed-end work. To open **Roles** tab extend **Configuration** dropdown and find **Roles**.
 
 ## Creating new Role
 

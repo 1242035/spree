@@ -113,7 +113,7 @@ export default class Sidebar extends React.PureComponent {
                             <li key={index}>
                               <Link
                                 to={item.node.fields.slug}
-                                activeClassName="spree-green fw6"
+                                activeClassName="viauco-green fw6"
                                 className="link gray db mv2 fw4"
                               >
                                 {item.node.frontmatter.title}

@@ -37,7 +37,7 @@ Every single product has a master variant, which tracks basic information such a
 
 Master variants are automatically created along with a product and exist for the sole purpose of having a consistent API when associating variants and [line items](orders#line-items). If there were no master variant, then line items would need to track a polymorphic association which would either be a product or a variant.
 
-By having a master variant, the code within Spree to track  is simplified.
+By having a master variant, the code within Viauco to track  is simplified.
 
 ### Normal Variants
 
@@ -57,7 +57,7 @@ Variants which are not the master variant are unique based on [option type and o
 
 Images link to a product through its master variant. The sub-variants for the product may also have their own unique images to differentiate them in the frontend.
 
-Spree automatically handles creation and storage of several size versions of each image (via the Paperclip plugin). The default styles are as follows:
+Viauco automatically handles creation and storage of several size versions of each image (via the Paperclip plugin). The default styles are as follows:
 
 ```ruby
 styles: {
@@ -68,13 +68,13 @@ styles: {
 }
 ```
 
-These sizes can be changed by altering the value of `Spree::Image.attachment_definitions[:attachment][:styles]`. Once `Spree::Image.attachment_definitions[:attachment][:styles]` has been changed, you *must* regenerate the paperclip thumbnails by running this command:
+These sizes can be changed by altering the value of `Viauco::Image.attachment_definitions[:attachment][:styles]`. Once `Viauco::Image.attachment_definitions[:attachment][:styles]` has been changed, you *must* regenerate the paperclip thumbnails by running this command:
 
 ```bash
-bundle exec rake paperclip:refresh:thumbnails CLASS=Spree::Image
+bundle exec rake paperclip:refresh:thumbnails CLASS=Viauco::Image
 ```
 
-If you want to change the image that is displayed when a product has no image, simply set `Spree::Image.attachment_definitions[:attachment][:default_url]` with a path to the image that you want to use like this: `/assets/images/missing_:style.png`. These image styles must match the keys within `Spree::Config[:attachment_styles]`. That means that ideally, you'd have four images of different sizes: `missing_mini.png`, `missing_small.png`, `missing_product.png`, and `missing_large.png`.
+If you want to change the image that is displayed when a product has no image, simply set `Viauco::Image.attachment_definitions[:attachment][:default_url]` with a path to the image that you want to use like this: `/assets/images/missing_:style.png`. These image styles must match the keys within `Viauco::Config[:attachment_styles]`. That means that ideally, you'd have four images of different sizes: `missing_mini.png`, `missing_small.png`, `missing_product.png`, and `missing_large.png`.
 
 ## Product Properties
 
@@ -103,7 +103,7 @@ If this property doesn't already exist, a new `Property` instance with this name
 
 This presence or lack of a price for a variant in a particular currency will determine if that variant is visible in the frontend. If no variants of a product have a particular price value for the site's current currency, that product will not be visible in the frontend.
 
-You may see what price a product would be in the current currency (`Spree::Config[:currency]`) by calling the `price` method on that instance:
+You may see what price a product would be in the current currency (`Viauco::Config[:currency]`) by calling the `price` method on that instance:
 
 ```bash
 $ product.price
@@ -114,7 +114,7 @@ To find a list of currencies that this product is available in, call `prices` to
 
 ```bash
 $ product.prices
-=> [#<Spree::Price id: 2 ...]
+=> [#<Viauco::Price id: 2 ...]
 ```
 
 ## Prototypes
@@ -132,9 +132,9 @@ When working with Taxonomies there are two key terms to understand:
 
 By default, both Taxons and Taxonomies are ordered by their `position` attribute.
 
-Taxons use the [Nested set model](http://en.wikipedia.org/wiki/Nested_set_model) for their hierarchy. The `lft` and `rgt` columns in the `spree_taxons` table represent the locations within the hierarchy of the item. This logic is handled by the [awesome_nested_set](https://github.com/collectiveidea/awesome_nested_set) gem.
+Taxons use the [Nested set model](http://en.wikipedia.org/wiki/Nested_set_model) for their hierarchy. The `lft` and `rgt` columns in the `viauco_taxons` table represent the locations within the hierarchy of the item. This logic is handled by the [awesome_nested_set](https://github.com/collectiveidea/awesome_nested_set) gem.
 
 Taxons link to products through an intermediary model called `Classification`. This model exists so that when a product is deleted, all of the links from that product to its taxons are deleted automatically. A similar action takes place when a taxon is deleted; all of the links to products are deleted automatically.
 
-Linking to a taxon in a controller or a template should be done using the `spree.nested_taxons_path` helper, which will use the taxon's permalink to
+Linking to a taxon in a controller or a template should be done using the `viauco.nested_taxons_path` helper, which will use the taxon's permalink to
 generate a URL such as `/t/categories/brand`.

@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  <%= link_to Viauco.t(:stock_locations), viauco.admin_stock_locations_url %> /
+  <%= @stock_location.name %>
+<% end %>
+
+<%= render partial: 'viauco/admin/shared/error_messages', locals: { target: @stock_location } %>
+
+<%= form_for [:admin, @stock_location] do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'viauco/admin/shared/edit_resource_links' %>
+  </fieldset>
+<% end %>

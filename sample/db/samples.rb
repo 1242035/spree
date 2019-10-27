@@ -1,2 +1,2 @@
-Spree::Sample.load_sample('payment_methods')
-Spree::Sample.load_sample('shipping_categories')
+Viauco::Sample.load_sample('payment_methods')
+Viauco::Sample.load_sample('shipping_categories')

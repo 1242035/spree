@@ -1,6 +1,6 @@
 ---
 title: Variants
-description: Use the Spree Commerce storefront API to access Variant data.
+description: Use the Viauco Commerce storefront API to access Variant data.
 ---
 
 ## Index
@@ -64,7 +64,7 @@ GET /api/v1/variants?product_id=ruby-on-rails-tote&q[sku_cont]=foo
 ```
 
 
-The searching API is provided through the Ransack gem which Spree depends on. The `sku_cont` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
+The searching API is provided through the Ransack gem which Viauco depends on. The `sku_cont` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
 
 The search results are paginated.
 

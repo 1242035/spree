@@ -6,7 +6,7 @@ describe 'Roles', type: :feature do
   before do
     create(:role, name: 'admin')
     create(:role, name: 'user')
-    visit spree.admin_path
+    visit viauco.admin_path
     click_link 'Configuration'
     # Crap workaround for animation to finish expanding so click doesn't hit ReimbursementTypes.
     sleep 1

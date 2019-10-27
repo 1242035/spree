@@ -1,11 +1,11 @@
 ---
 title: States
-description: Use the Spree Commerce storefront API to access State data.
+description: Use the Viauco Commerce storefront API to access State data.
 ---
 
 ## Index
 
-To get a list of states within Spree, make a request like this:
+To get a list of states within Viauco, make a request like this:
 
 ```text
 GET /api/v1/states

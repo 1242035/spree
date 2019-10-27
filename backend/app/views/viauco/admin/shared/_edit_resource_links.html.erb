@@ -1,0 +1,5 @@
+<div class="form-actions" data-hook="buttons">
+  <%= button Viauco.t('actions.update'), 'refresh', 'submit', {class: 'btn-success', data: { disable_with: "#{ Viauco.t(:saving) }..." }} %>
+  <span class="or"><%= Viauco.t(:or) %></span>
+  <%= button_link_to Viauco.t('actions.cancel'), collection_url, icon: 'delete' %>
+</div>

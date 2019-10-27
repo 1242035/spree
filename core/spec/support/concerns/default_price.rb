@@ -14,13 +14,13 @@ shared_examples_for 'default_price' do
       expect(default_price_association.options[:dependent]).to eq :destroy
     end
 
-    it 'has the class name of Spree::Price' do
-      expect(default_price_association.options[:class_name]).to eq 'Spree::Price'
+    it 'has the class name of Viauco::Price' do
+      expect(default_price_association.options[:class_name]).to eq 'Viauco::Price'
     end
   end
 
   describe '#default_price' do
-    it { expect(instance.default_price.class).to eql Spree::Price }
+    it { expect(instance.default_price.class).to eql Viauco::Price }
 
     it 'delegates price' do
       expect(instance.default_price).to receive(:price)

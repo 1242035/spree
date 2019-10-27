@@ -1,10 +1,10 @@
-spree_path = Rails.application.routes.url_helpers.try(:spree_path, trailing_slash: true) || '/'
+viauco_path = Rails.application.routes.url_helpers.try(:viauco_path, trailing_slash: true) || '/'
 
 Rails.application.routes.draw do
-  use_doorkeeper scope: "#{spree_path}/spree_oauth"
+  use_doorkeeper scope: "#{viauco_path}/viauco_oauth"
 end
 
-Spree::Core::Engine.add_routes do
+Viauco::Core::Engine.add_routes do
   namespace :api, defaults: { format: 'json' } do
     namespace :v1 do
       resources :promotions, only: [:show]
@@ -170,10 +170,10 @@ Spree::Core::Engine.add_routes do
       format = ".#{params[:format]}" unless params[:format].blank?
       query  = "?#{request.query_string}" unless request.query_string.blank?
 
-      if request.path == "#{spree_path}api/v1/#{params[:path]}#{format}#{query}"
-        "#{spree_path}api/404"
+      if request.path == "#{viauco_path}api/v1/#{params[:path]}#{format}#{query}"
+        "#{viauco_path}api/404"
       else
-        "#{spree_path}api/v1/#{params[:path]}#{format}#{query}"
+        "#{viauco_path}api/v1/#{params[:path]}#{format}#{query}"
       end
     }, via: [:get, :post, :put, :patch, :delete]
 
@@ -181,10 +181,10 @@ Spree::Core::Engine.add_routes do
       format = ".#{params[:format]}" unless params[:format].blank?
       query  = "?#{request.query_string}" unless request.query_string.blank?
 
-      if request.path == "#{spree_path}api/v1/#{params[:path]}#{format}#{query}"
-        "#{spree_path}api/404"
+      if request.path == "#{viauco_path}api/v1/#{params[:path]}#{format}#{query}"
+        "#{viauco_path}api/404"
       else
-        "#{spree_path}api/v1/#{params[:path]}#{format}#{query}"
+        "#{viauco_path}api/v1/#{params[:path]}#{format}#{query}"
       end
     }, via: [:get, :post, :put, :patch, :delete]
   end

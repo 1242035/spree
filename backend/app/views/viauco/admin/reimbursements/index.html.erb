@@ -1,0 +1,28 @@
+<%= render partial: 'viauco/admin/shared/order_tabs', locals: { current: :reimbursements } %>
+
+<% content_for :page_title do %>
+  / <%= Viauco.t(:edit_reimbursement) %>
+<% end %>
+
+<%= render partial: 'viauco/admin/shared/error_messages', locals: { target: @customer_return } %>
+
+<table class="table">
+  <thead data-hook="customer_return_header">
+    <tr>
+      <th><%= Viauco.t(:id) %></th>
+      <th><%= Viauco.t(:total) %></th>
+      <th><%= Viauco.t(:status) %></th>
+      <th><%= "#{Viauco.t('date')}/#{Viauco.t('time')}" %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @reimbursements.each do |reimbursement| %>
+      <tr id="<%= viauco_dom_id(reimbursement) %>" data-hook="reimbursement_row">
+        <td><%= reimbursement.id %></td>
+        <td><%= reimbursement.total %></td>
+        <td><%= reimbursement.reimbursement_status %></td>
+        <td><%= pretty_time(reimbursement.created_at) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

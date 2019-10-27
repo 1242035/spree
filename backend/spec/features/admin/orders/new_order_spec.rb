@@ -11,19 +11,19 @@ describe 'New Order', type: :feature do
     create(:check_payment_method)
     create(:shipping_method)
     # create default store
-    allow(Spree.user_class).to receive(:find_by).and_return(user)
+    allow(Viauco.user_class).to receive(:find_by).and_return(user)
     create(:store)
-    visit spree.new_admin_order_path
+    visit viauco.new_admin_order_path
   end
 
   it 'does check if you have a billing address before letting you add shipments' do
     click_on 'Shipments'
     expect(page).to have_content 'Please fill in customer info'
-    expect(page).to have_current_path(spree.edit_admin_order_customer_path(Spree::Order.last))
+    expect(page).to have_current_path(viauco.edit_admin_order_customer_path(Viauco::Order.last))
   end
 
   it 'completes new order successfully without using the cart', js: true do
-    select2_search product.name, from: Spree.t(:name_or_sku)
+    select2_search product.name, from: Viauco.t(:name_or_sku)
 
     click_icon :add
     expect(page).to have_css('.card', text: 'Order Line Items')
@@ -38,7 +38,7 @@ describe 'New Order', type: :feature do
     click_on 'Payments'
     click_on 'Update'
 
-    expect(page).to have_current_path(spree.admin_order_payments_path(Spree::Order.last))
+    expect(page).to have_current_path(viauco.admin_order_payments_path(Viauco::Order.last))
     click_icon 'capture'
 
     click_on 'Shipments'
@@ -49,7 +49,7 @@ describe 'New Order', type: :feature do
 
   context 'adding new item to the order', js: true do
     it 'inventory items show up just fine and are also registered as shipments' do
-      select2_search product.name, from: Spree.t(:name_or_sku)
+      select2_search product.name, from: Viauco.t(:name_or_sku)
 
       within('table.stock-levels') do
         fill_in 'variant_quantity', with: 2
@@ -78,7 +78,7 @@ describe 'New Order', type: :feature do
   context "adding new item to the order which isn't available", js: true do
     before do
       product.update(available_on: nil)
-      select2_search product.name, from: Spree.t(:name_or_sku)
+      select2_search product.name, from: Viauco.t(:name_or_sku)
     end
 
     it 'inventory items is displayed' do
@@ -103,11 +103,11 @@ describe 'New Order', type: :feature do
   # Regression test for #3958
   context 'without a delivery step', js: true do
     before do
-      allow(Spree::Order).to receive_messages checkout_step_names: [:address, :payment, :confirm, :complete]
+      allow(Viauco::Order).to receive_messages checkout_step_names: [:address, :payment, :confirm, :complete]
     end
 
     it 'can still see line items' do
-      select2_search product.name, from: Spree.t(:name_or_sku)
+      select2_search product.name, from: Viauco.t(:name_or_sku)
       click_icon :add
       within('.line-items') do
         within('.line-item-name') do
@@ -134,7 +134,7 @@ describe 'New Order', type: :feature do
       click_on 'Update'
 
       click_on 'Shipments'
-      select2_search product.name, from: Spree.t(:name_or_sku)
+      select2_search product.name, from: Viauco.t(:name_or_sku)
       click_icon :add
       expect(page).not_to have_content('Your order is empty')
 
@@ -148,12 +148,12 @@ describe 'New Order', type: :feature do
   # Regression test for #5327
   context 'customer with default credit card', js: true do
     before do
-      allow(Spree.user_class).to receive(:find_by).and_return(user)
+      allow(Viauco.user_class).to receive(:find_by).and_return(user)
       create(:credit_card, default: true, user: user)
     end
 
     it 'transitions to delivery not to complete' do
-      select2_search product.name, from: Spree.t(:name_or_sku)
+      select2_search product.name, from: Viauco.t(:name_or_sku)
 
       within('table.stock-levels') do
         fill_in 'variant_quantity', with: 1
@@ -165,7 +165,7 @@ describe 'New Order', type: :feature do
       select_customer
       wait_for { !page.has_button?('Update') }
       click_button 'Update'
-      expect(Spree::Order.last.state).to eq 'delivery'
+      expect(Viauco::Order.last.state).to eq 'delivery'
     end
   end
 

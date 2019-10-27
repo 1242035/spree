@@ -14,7 +14,7 @@ Next to each user there are 2 buttons and additionaly you can sort them by name 
 
 ## Filtering Users
 
-You may not always want to see all of the users - the Spree default. You may want to view only those users that you want to make additional changes. Default way of sorting the users that are present is by the name.
+You may not always want to see all of the users - the Viauco default. You may want to view only those users that you want to make additional changes. Default way of sorting the users that are present is by the name.
 
 You can choose one or more of the following options to narrow your user search, then click the **Filter** button to extend filter options in dropdown.
 

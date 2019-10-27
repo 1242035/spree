@@ -1,0 +1,11 @@
+<% content_for :page_title do %>
+  <%= link_to Viauco.t(:promotions), admin_promotions_url %> /
+  <%= Viauco.t(:new_promotion) %>
+<% end %>
+
+<%= form_for :promotion, url: collection_url do |f| %>
+  <%= render partial: 'form', locals: { f: f } %>
+  <div class="text-center">
+    <%= render partial: 'viauco/admin/shared/new_resource_links' %>
+  </div>
+<% end %>

@@ -1,0 +1,18 @@
+<div class="card" id="order_details" data-hook>
+  <div class="card-header">
+    <h3 class="card-title mb-0 h5"><%= Viauco.t(:confirm) %></h3>
+  </div>
+  <div class="card-body">
+    <%= render partial: 'viauco/shared/order_details', locals: { order: @order } %>
+  </div>
+</div>
+
+<div class="card text-right form-buttons mt-4" data-hook="buttons">
+  <div class="card-body">
+    <% if @order.using_store_credit? %>
+      <%= button_tag Viauco.t('store_credit.remove'), name: 'remove_store_credit', class: 'continue btn' %>
+    <% end %>
+    <%= submit_tag Viauco.t(:place_order), class: 'btn btn-lg btn-success' %>
+    <script>Viauco.disableSaveOnClick();</script>
+  </div>
+</div>

@@ -8,7 +8,7 @@ describe 'Order - State Changes', type: :feature do
   context 'for completed order' do
     before do
       order.next!
-      visit spree.admin_order_state_changes_path(order)
+      visit viauco.admin_order_state_changes_path(order)
     end
 
     it 'are viewable' do

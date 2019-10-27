@@ -1,9 +1,9 @@
 require 'spec_helper'
 
 describe 'Users', type: :feature do
-  include Spree::BaseHelper
+  include Viauco::BaseHelper
   stub_authorization!
-  include Spree::Admin::BaseHelper
+  include Viauco::Admin::BaseHelper
 
   let!(:user_a) { create(:user_with_addresses, email: 'a@example.com') }
   let!(:user_b) { create(:user_with_addresses, email: 'b@example.com') }
@@ -25,7 +25,7 @@ describe 'Users', type: :feature do
       refresh # need to refresh after creating the orders for specs that did not require orders
       within('#user-lifetime-stats') do
         [:total_sales, :num_orders, :average_order_value, :member_since].each do |stat_name|
-          expect(page).to have_content Spree.t(stat_name)
+          expect(page).to have_content Viauco.t(stat_name)
         end
         expect(page).to have_content (order.total + order_2.total)
         expect(page).to have_content orders.count
@@ -35,19 +35,19 @@ describe 'Users', type: :feature do
     end
 
     it 'can go back to the users list' do
-      expect(page).to have_link Spree.t(:users), href: spree.admin_users_path
+      expect(page).to have_link Viauco.t(:users), href: viauco.admin_users_path
     end
 
     it 'can navigate to the account page' do
-      expect(page).to have_link Spree.t(:"admin.user.account"), href: spree.edit_admin_user_path(user_a)
+      expect(page).to have_link Viauco.t(:"admin.user.account"), href: viauco.edit_admin_user_path(user_a)
     end
 
     it 'can navigate to the order history' do
-      expect(page).to have_link Spree.t(:"admin.user.orders"), href: spree.orders_admin_user_path(user_a)
+      expect(page).to have_link Viauco.t(:"admin.user.orders"), href: viauco.orders_admin_user_path(user_a)
     end
 
     it 'can navigate to the items purchased' do
-      expect(page).to have_link Spree.t(:"admin.user.items"), href: spree.items_admin_user_path(user_a)
+      expect(page).to have_link Viauco.t(:"admin.user.items"), href: viauco.items_admin_user_path(user_a)
     end
   end
 
@@ -75,8 +75,8 @@ describe 'Users', type: :feature do
 
   before do
     create(:country)
-    stub_const('Spree::User', create(:user, email: 'example@example.com').class)
-    visit spree.admin_path
+    stub_const('Viauco::User', create(:user, email: 'example@example.com').class)
+    visit viauco.admin_path
     click_link 'Users'
   end
 
@@ -145,14 +145,14 @@ describe 'Users', type: :feature do
     end
 
     it 'can edit user roles' do
-      Spree::Role.create name: 'admin'
+      Viauco::Role.create name: 'admin'
       click_link 'Users', match: :first
       click_link user_a.email
 
-      check 'user_spree_role_admin'
+      check 'user_viauco_role_admin'
       click_button 'Update'
       expect(page).to have_text 'Account updated'
-      expect(page).to have_checked_field('user_spree_role_admin')
+      expect(page).to have_checked_field('user_viauco_role_admin')
     end
 
     it 'can edit user shipping address' do
@@ -193,46 +193,46 @@ describe 'Users', type: :feature do
     context 'no api key exists' do
       it 'can generate a new api key' do
         within('#admin_user_edit_api_key') do
-          expect(user_a.spree_api_key).to be_blank
-          click_button Spree.t('generate_key', scope: 'api')
+          expect(user_a.viauco_api_key).to be_blank
+          click_button Viauco.t('generate_key', scope: 'api')
         end
 
-        expect(user_a.reload.spree_api_key).to be_present
+        expect(user_a.reload.viauco_api_key).to be_present
 
         within('#admin_user_edit_api_key') do
-          expect(page).to have_css('#current-api-key', text: /Key: #{user_a.spree_api_key}/)
+          expect(page).to have_css('#current-api-key', text: /Key: #{user_a.viauco_api_key}/)
         end
       end
     end
 
     context 'an api key exists' do
       before do
-        user_a.generate_spree_api_key!
-        expect(user_a.reload.spree_api_key).to be_present
+        user_a.generate_viauco_api_key!
+        expect(user_a.reload.viauco_api_key).to be_present
         refresh
       end
 
       it 'can clear an api key' do
         within('#admin_user_edit_api_key') do
-          click_button Spree.t('clear_key', scope: 'api')
+          click_button Viauco.t('clear_key', scope: 'api')
         end
 
-        expect(user_a.reload.spree_api_key).to be_blank
+        expect(user_a.reload.viauco_api_key).to be_blank
         expect(page).not_to have_css('#current-api-key')
       end
 
       it 'can regenerate an api key' do
-        old_key = user_a.spree_api_key
+        old_key = user_a.viauco_api_key
 
         within('#admin_user_edit_api_key') do
-          click_button Spree.t('regenerate_key', scope: 'api')
+          click_button Viauco.t('regenerate_key', scope: 'api')
         end
 
-        expect(user_a.reload.spree_api_key).to be_present
-        expect(user_a.reload.spree_api_key).not_to eq old_key
+        expect(user_a.reload.viauco_api_key).to be_present
+        expect(user_a.reload.viauco_api_key).not_to eq old_key
 
         within('#admin_user_edit_api_key') do
-          expect(page).to have_css('#current-api-key', text: /Key: #{user_a.spree_api_key}/)
+          expect(page).to have_css('#current-api-key', text: /Key: #{user_a.viauco_api_key}/)
         end
       end
     end
@@ -242,7 +242,7 @@ describe 'Users', type: :feature do
     before do
       orders
       click_link user_a.email
-      within('#sidebar') { click_link Spree.t(:"admin.user.orders") }
+      within('#sidebar') { click_link Viauco.t(:"admin.user.orders") }
     end
 
     it_behaves_like 'a user page'
@@ -272,7 +272,7 @@ describe 'Users', type: :feature do
     before do
       orders
       click_link user_a.email
-      within('#sidebar') { click_link Spree.t(:"admin.user.items") }
+      within('#sidebar') { click_link Viauco.t(:"admin.user.items") }
     end
 
     it_behaves_like 'a user page'

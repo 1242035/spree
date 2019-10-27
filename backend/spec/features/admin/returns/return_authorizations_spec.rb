@@ -8,7 +8,7 @@ describe 'Return Authorizations', type: :feature do
     let!(:return_authorization_2) { create(:return_authorization, created_at: Time.current - 1.day) }
 
     before do
-      visit spree.admin_return_authorizations_path
+      visit viauco.admin_return_authorizations_path
     end
 
     it 'lists return authorizations sorted by created_at' do
@@ -25,7 +25,7 @@ describe 'Return Authorizations', type: :feature do
     end
 
     it 'displays state' do
-      return_authorization_state = Spree.t("return_authorization_states.#{return_authorization.state}")
+      return_authorization_state = Viauco.t("return_authorization_states.#{return_authorization.state}")
       within_row(1) { expect(page).to have_content(return_authorization_state) }
     end
 
@@ -39,7 +39,7 @@ describe 'Return Authorizations', type: :feature do
     let!(:return_authorization_2) { create(:return_authorization, state: 'canceled') }
 
     before do
-      visit spree.admin_return_authorizations_path
+      visit viauco.admin_return_authorizations_path
     end
 
     it 'searches on number' do
@@ -60,14 +60,14 @@ describe 'Return Authorizations', type: :feature do
 
     it 'searches on status' do
       click_on 'Filter'
-      select Spree.t("return_authorization_states.#{return_authorization.state}"), from: 'Status'
+      select Viauco.t("return_authorization_states.#{return_authorization.state}"), from: 'Status'
       click_on 'Search'
 
       expect(page).to have_content(return_authorization.number)
       expect(page).not_to have_content(return_authorization_2.number)
 
       click_on 'Filter'
-      select Spree.t("return_authorization_states.#{return_authorization_2.state}"), from: 'Status'
+      select Viauco.t("return_authorization_states.#{return_authorization_2.state}"), from: 'Status'
       click_on 'Search'
 
       expect(page).to have_content(return_authorization_2.number)
@@ -96,7 +96,7 @@ describe 'Return Authorizations', type: :feature do
 
     describe 'order number' do
       it 'opens orders edit page' do
-        visit spree.admin_return_authorizations_path
+        visit viauco.admin_return_authorizations_path
         click_link return_authorization.order.number
         expect(page).to have_content("Orders / #{return_authorization.order.number}")
       end
@@ -104,7 +104,7 @@ describe 'Return Authorizations', type: :feature do
 
     describe 'return authorization number' do
       it 'opens return authorization edit page' do
-        visit spree.admin_return_authorizations_path
+        visit viauco.admin_return_authorizations_path
         click_link return_authorization.number
         expect(page).to have_content(return_authorization.number)
       end
@@ -115,7 +115,7 @@ describe 'Return Authorizations', type: :feature do
       let!(:return_authorization_2) { create(:return_authorization, state: 'canceled') }
 
       it 'only shows authorized return authorizations' do
-        visit spree.admin_return_authorizations_path
+        visit viauco.admin_return_authorizations_path
         within('.nav-tabs') do
           click_link 'Authorized'
         end
@@ -125,13 +125,13 @@ describe 'Return Authorizations', type: :feature do
       end
 
       it 'preselects authorized status in filter' do
-        visit spree.admin_return_authorizations_path
+        visit viauco.admin_return_authorizations_path
         within('.nav-tabs') do
           click_link 'Authorized'
         end
 
         within('#table-filter') do
-          return_authorization_state = Spree.t("return_authorization_states.#{return_authorization.state}")
+          return_authorization_state = Viauco.t("return_authorization_states.#{return_authorization.state}")
           expect(page).to have_select('Status', selected: return_authorization_state)
         end
       end
@@ -142,7 +142,7 @@ describe 'Return Authorizations', type: :feature do
       let!(:return_authorization_2) { create(:return_authorization, state: 'authorized') }
 
       it 'only shows canceled return authorizations' do
-        visit spree.admin_return_authorizations_path
+        visit viauco.admin_return_authorizations_path
         within('.nav-tabs') do
           click_link 'Canceled'
         end
@@ -152,13 +152,13 @@ describe 'Return Authorizations', type: :feature do
       end
 
       it 'preselects canceled status in filter' do
-        visit spree.admin_return_authorizations_path
+        visit viauco.admin_return_authorizations_path
         within('.nav-tabs') do
           click_link 'Canceled'
         end
 
         within('#table-filter') do
-          return_authorization_state = Spree.t("return_authorization_states.#{return_authorization.state}")
+          return_authorization_state = Viauco.t("return_authorization_states.#{return_authorization.state}")
           expect(page).to have_select('Status', selected: return_authorization_state)
         end
       end

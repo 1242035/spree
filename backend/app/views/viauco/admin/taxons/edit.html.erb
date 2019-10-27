@@ -1,0 +1,20 @@
+<% content_for :page_title do %>
+  <%= link_to Viauco.t(:taxonomies), viauco.admin_taxonomies_url %> /
+  <%= link_to @taxonomy.name, viauco.edit_admin_taxonomy_url(@taxonomy) %> /
+  <%= @taxon.name %>
+<% end %>
+
+<%# Because otherwise the form would attempt to use to_param of @taxon %>
+<% form_url = admin_taxonomy_taxon_path(@taxonomy.id, @taxon.id) %>
+
+<%= render partial: 'viauco/admin/shared/error_messages', locals: { target: @taxon } %>
+
+<%= form_for [:admin, @taxonomy, @taxon], method: :put, url: form_url, html: { multipart: true } do |f| %>
+  <%= render 'form', f: f %>
+
+  <div class="form-actions" data-hook="buttons">
+    <%= button Viauco.t('actions.update'), 'save' %>
+    <span class="or"><%= Viauco.t(:or) %></span>
+    <%= button_link_to Viauco.t('actions.cancel'), edit_admin_taxonomy_url(@taxonomy), icon: "remove" %>
+  </div>
+<% end %>

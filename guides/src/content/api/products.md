@@ -1,6 +1,6 @@
 ---
 title: Products
-description: Use the Spree Commerce storefront API to access Product data.
+description: Use the Viauco Commerce storefront API to access Product data.
 ---
 
 ## Index
@@ -48,10 +48,10 @@ GET /api/v1/products?page=2
 To search for a particular product, make a request like this:
 
 ```text
-GET /api/v1/products?q[name_cont]=Spree
+GET /api/v1/products?q[name_cont]=Viauco
 ```
 
-The searching API is provided through the Ransack gem which Spree depends on. The `name_cont` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
+The searching API is provided through the Ransack gem which Viauco depends on. The `name_cont` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
 
 The search results are paginated.
 

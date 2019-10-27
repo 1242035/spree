@@ -48,7 +48,7 @@ const SiteMetadata = ({
         <meta property="og:site_name" content={title} />
         <meta
           property="og:image"
-          content="https://spreecommerce.org/img/wawe-with-img.png"
+          content="https://viaucocommerce.org/img/wawe-with-img.png"
         />
         <meta property="og:image:width" content="512" />
         <meta property="og:image:height" content="512" />

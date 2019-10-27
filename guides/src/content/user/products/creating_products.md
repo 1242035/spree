@@ -17,7 +17,7 @@ The three mandatory fields ("Name", "Master Price", and "Shipping Categories") a
 
 ## Product Details
 
-After you click the "Create" button, the Spree application brings you to a more detailed product entry page, where you can input more information about your new product.
+After you click the "Create" button, the Viauco application brings you to a more detailed product entry page, where you can input more information about your new product.
 
 ![Product Edit Form](../../../images/user/products/product_edit_form.jpg)
 
@@ -26,7 +26,7 @@ After you click the "Create" button, the Spree application brings you to a more 
 * **Description** - This is where you will provide a detailed description of the product and its features. The application gives you plenty of room to be thorough.
 * **Master Price** - For now, just think about the Master Price as the price you charge someone to buy the item. Later in this guide, you will learn more about variants and how they impact a product's actual price.
 * **Cost Price** - What the item costs you, the seller, to purchase or produce.
-* **Cost Currency** - It may be that the currency used when you purchased the product is not the same as that you use in your store. Spree makes these conversions for you - just enter the code for the currency used in acquiring your inventory.
+* **Cost Currency** - It may be that the currency used when you purchased the product is not the same as that you use in your store. Viauco makes these conversions for you - just enter the code for the currency used in acquiring your inventory.
 * **Available On** - This field will either be blank, or the same as what you entered on the initial page. You can change this field whenever you like.
 * **SKU** - This field will either be blank, or the same as what you entered on the initial page. You can change this field whenever you like.
 * **Weight** - The product's weight in ounces. May be used to calculate shipping cost.
@@ -42,7 +42,7 @@ After you click the "Create" button, the Spree application brings you to a more 
 
 ## Images
 
-A store whose products had no images to look at would be pretty boring, and probably not garner a lot of sales. It would be very time-consuming to have to upload, crop, resize, and associate several photos to each product, if you had to do so manually. Luckily, Spree makes maintaining images of your products quick and painless.
+A store whose products had no images to look at would be pretty boring, and probably not garner a lot of sales. It would be very time-consuming to have to upload, crop, resize, and associate several photos to each product, if you had to do so manually. Luckily, Viauco makes maintaining images of your products quick and painless.
 
 Just click the "Images" link under "Product Details" on the right-hand side of the screen. Any images that you may have already uploaded will be previewed for you. To add a new image for your product, click the "New Image" button.
 
@@ -111,7 +111,7 @@ You can read much more in-depth information about this feature in the [Product P
 
 ## Stock Management
 
-As of version 2.0 of Spree, you now have much more granular control over how inventory is tracked through your store. You will learn more about stock locations in the [Stock Locations Guide](/user/configuration/configuring_inventory.html), but for now it's enough to understand that you enter the number of each product variant that you have at each of your individual stock locations.
+As of version 2.0 of Viauco, you now have much more granular control over how inventory is tracked through your store. You will learn more about stock locations in the [Stock Locations Guide](/user/configuration/configuring_inventory.html), but for now it's enough to understand that you enter the number of each product variant that you have at each of your individual stock locations.
 
 Let's assume that you have two stock locations - your main New York warehouse and your satellite Detroit warehouse. Refer to the instructions on creating stock locations in the [Stock Locations Guide](/user/configuration/configuring_inventory.html#create-a-new-stock-location) to add your warehouses.
 

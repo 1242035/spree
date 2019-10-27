@@ -23,7 +23,7 @@ Next to each product there are 3 buttons.
 
 ## Filtering products
 
-You may not always want to see all of the products in the shop - the Spree default. You may want to view only those products that you want to make additional changes. Default way of sorting products that are present is by the name, but there is also possibility to sort them by Master price.
+You may not always want to see all of the products in the shop - the Viauco default. You may want to view only those products that you want to make additional changes. Default way of sorting products that are present is by the name, but there is also possibility to sort them by Master price.
 
 You can choose one or more of the following options to narrow your product search, then click the **Filter** button to extend filter options in dropdown.
 

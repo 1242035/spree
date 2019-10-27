@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  <%= link_to Viauco.t(:countries), viauco.admin_countries_url %> /
+  <%= Viauco.t(:new_country) %>
+<% end %>
+
+<%= render partial: 'viauco/admin/shared/error_messages', locals: { target: @country } %>
+
+<%= form_for [:admin, @country] do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'viauco/admin/shared/new_resource_links' %>
+  </fieldset>
+<% end %>

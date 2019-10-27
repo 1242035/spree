@@ -1,0 +1,29 @@
+<fieldset data-hook="store_credit">
+  <legend><%= Viauco.t(:store_credit_name) %></legend>
+  <table class="table table-condensed table-bordered">
+    <tr>
+      <th width="20%"><%= Viauco.t(:used) %>:</th>
+      <td><%= payment.source.display_amount_used %></td>
+    </tr>
+    <tr>
+      <th><%= Viauco.t(:amount) %>:</th>
+      <td><%= payment.source.display_amount %></td>
+    </tr>
+    <tr>
+      <th><%= Viauco.t(:memo) %>:</th>
+      <td><%= payment.source.memo %></td>
+    </tr>
+    <tr>
+      <th><%= Viauco.t(:type) %>:</th>
+      <td><%= payment.source.category_name %></td>
+    </tr>
+    <tr>
+      <th><%= Viauco.t(:created_by) %>:</th>
+      <td><%= payment.source.created_by_email %></td>
+    </tr>
+    <tr>
+      <th><%= Viauco.t(:issued_on) %>:</th>
+      <td><%= pretty_time(payment.source.created_at) %></td>
+    </tr>
+  </table>
+</fieldset>

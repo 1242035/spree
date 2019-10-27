@@ -1,0 +1,31 @@
+<%= render 'order_actions', order: @order, events: @order_events %>
+
+<%= render 'viauco/admin/shared/order_tabs', current: :shipments %>
+
+<% content_for :page_title do %>
+  / <%= plural_resource_name(Viauco::Shipment) %>
+<% end %>
+
+<div data-hook="admin_order_edit_header">
+  <%= render 'viauco/admin/shared/error_messages', target: @order %>
+</div>
+
+<% if @order.payments.valid.any? && @order.considered_risky? %>
+  <%= render 'viauco/admin/orders/risk_analysis', latest_payment: @order.payments.valid.last %>
+<% end %>
+
+<%= render 'add_product' if @order.shipment_state != 'shipped' && can?(:update, @order) %>
+
+<% if @order.line_items.empty? %>
+  <div class="alert alert-warning">
+    <%= Viauco.t(:your_order_is_empty_add_product)%>
+  </div>
+<% end %>
+
+<div data-hook="admin_order_edit_form">
+  <div id="order-form-wrapper">
+    <%= render partial: 'form', locals: { order: @order } %>
+  </div>
+</div>
+
+<%= render 'viauco/admin/shared/order_summary' %>

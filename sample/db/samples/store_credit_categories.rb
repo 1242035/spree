@@ -1,1 +1,1 @@
-Spree::StoreCreditCategory.find_or_create_by!(name: 'Default')
+Viauco::StoreCreditCategory.find_or_create_by!(name: 'Default')

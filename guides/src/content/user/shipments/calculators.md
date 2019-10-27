@@ -4,9 +4,9 @@ title: Calculators
 
 ## Calculators
 
-A Calculator is the component of the Spree shipping system responsible for calculating the shipping price for each available [Shipping Method](/user/shipments/shipping_methods.html).
+A Calculator is the component of the Viauco shipping system responsible for calculating the shipping price for each available [Shipping Method](/user/shipments/shipping_methods.html).
 
-Spree ships with 5 default calculators:
+Viauco ships with 5 default calculators:
 
 * [Flat rate (per order)](#flat-rate-per-order)
 * [Flat rate (per item)](#flat-rate-per-item)

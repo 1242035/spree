@@ -2,7 +2,7 @@ en:
   activemodel:
     errors:
       models:
-        spree/fulfilment_changer:
+        viauco/fulfilment_changer:
           attributes:
             desired_shipment:
               can_not_transfer_within_same_shipment: can not be same as current shipment
@@ -12,7 +12,7 @@ en:
               can_not_have_backordered_inventory_units: has backordered inventory units
   activerecord:
     attributes:
-      spree/address:
+      viauco/address:
         address1: Address
         address2: Address (contd.)
         city: City
@@ -22,19 +22,19 @@ en:
         phone: Phone
         state: State
         zipcode: Zip Code
-      spree/calculator/tiered_flat_rate:
+      viauco/calculator/tiered_flat_rate:
         preferred_base_amount: Base Amount
         preferred_tiers: Tiers
-      spree/calculator/tiered_percent:
+      viauco/calculator/tiered_percent:
         preferred_base_percent: Base Percent
         preferred_tiers: Tiers
-      spree/country:
+      viauco/country:
         iso: ISO
         iso3: ISO3
         iso_name: ISO Name
         name: Name
         numcode: ISO Code
-      spree/credit_card:
+      viauco/credit_card:
         base: ''
         cc_type: Type
         month: Month
@@ -42,15 +42,15 @@ en:
         verification_value: Verification Value
         year: Year
         name: Name
-      spree/inventory_unit:
+      viauco/inventory_unit:
         state: State
-      spree/line_item:
+      viauco/line_item:
         price: Price
         quantity: Quantity
-      spree/option_type:
+      viauco/option_type:
         name: Name
         presentation: Presentation
-      spree/order:
+      viauco/order:
         checkout_complete: Checkout Complete
         completed_at: Completed At
         coupon_code: Coupon Code
@@ -65,7 +65,7 @@ en:
         state: State
         total: Total
         considered_risky: Risky
-      spree/order/bill_address:
+      viauco/order/bill_address:
         address1: Billing address street
         city: Billing address city
         firstname: Billing address first name
@@ -73,7 +73,7 @@ en:
         phone: Billing address phone
         state: Billing address state
         zipcode: Billing address zipcode
-      spree/order/ship_address:
+      viauco/order/ship_address:
         address1: Shipping address street
         city: Shipping address city
         firstname: Shipping address first name
@@ -81,12 +81,12 @@ en:
         phone: Shipping address phone
         state: Shipping address state
         zipcode: Shipping address zipcode
-      spree/payment:
+      viauco/payment:
         amount: Amount
         number: Number
-      spree/payment_method:
+      viauco/payment_method:
         name: Name
-      spree/product:
+      viauco/product:
         available_on: Available On
         discontinue_on: Discontinue On
         cost_currency: Cost Currency
@@ -97,7 +97,7 @@ en:
         on_hand: On Hand
         shipping_category: Shipping Category
         tax_category: Tax Category
-      spree/promotion:
+      viauco/promotion:
         advertise: Advertise
         code: Code
         description: Description
@@ -109,24 +109,24 @@ en:
         starts_at: Starts At
         usage_limit: Usage Limit
         promotion_category: Promotion Category
-      spree/promotion_category:
+      viauco/promotion_category:
         name: Name
         code: Code
-      spree/property:
+      viauco/property:
         name: Name
         presentation: Presentation
-      spree/prototype:
+      viauco/prototype:
         name: Name
-      spree/return_authorization:
+      viauco/return_authorization:
         amount: Amount
-      spree/role:
+      viauco/role:
         name: Name
-      spree/shipment:
+      viauco/shipment:
         number: Number
-      spree/state:
+      viauco/state:
         abbr: Abbreviation
         name: Name
-      spree/state_change:
+      viauco/state_change:
         state_changes: State changes
         type: Type
         state_from: State from
@@ -134,35 +134,35 @@ en:
         user: User
         timestamp: Timestamp
         updated: Updated
-      spree/store:
+      viauco/store:
         url: Site URL
         meta_description: Meta Description
         meta_keywords: Meta Keywords
         seo_title: Seo Title
         name: Site Name
         mail_from_address: Mail From Address
-      spree/store_credit:
+      viauco/store_credit:
         amount_used: "Amount used"
-      spree/store_credit_category:
+      viauco/store_credit_category:
         name: Name
-      spree/tax_category:
+      viauco/tax_category:
         description: Description
         name: Name
-      spree/tax_rate:
+      viauco/tax_rate:
         amount: Rate
         included_in_price: Included in Price
         show_rate_in_label: Show rate in label
-      spree/taxon:
+      viauco/taxon:
         name: Name
         permalink: Permalink
         position: Position
-      spree/taxonomy:
+      viauco/taxonomy:
         name: Name
-      spree/user:
+      viauco/user:
         email: Email
         password: Password
         password_confirmation: Password Confirmation
-      spree/variant:
+      viauco/variant:
         cost_currency: Cost Currency
         cost_price: Cost Price
         depth: Depth
@@ -171,213 +171,213 @@ en:
         sku: SKU
         weight: Weight
         width: Width
-      spree/zone:
+      viauco/zone:
         description: Description
         name: Name
     models:
-      spree/address:
+      viauco/address:
         one: Address
         other: Addresses
-      spree/country:
+      viauco/country:
         one: Country
         other: Countries
-      spree/credit_card:
+      viauco/credit_card:
         one: Credit Card
         other: Credit Cards
-      spree/customer_return:
+      viauco/customer_return:
         one: Customer Return
         other: Customer Returns
-      spree/inventory_unit:
+      viauco/inventory_unit:
         one: Inventory Unit
         other: Inventory Units
-      spree/line_item:
+      viauco/line_item:
         one: Line Item
         other: Line Items
-      spree/option_type:
+      viauco/option_type:
         one: Option Type
         other: Option Types
-      spree/option_value:
+      viauco/option_value:
         one: Option Value
         other: Option Values
-      spree/order:
+      viauco/order:
         one: Order
         other: Orders
-      spree/payment:
+      viauco/payment:
         one: Payment
         other: Payments
-      spree/payment_method:
+      viauco/payment_method:
         one: Payment Method
         other: Payment Methods
-      spree/product:
+      viauco/product:
         one: Product
         other: Products
-      spree/promotion:
+      viauco/promotion:
         one: Promotion
         other: Promotions
-      spree/promotion_category:
+      viauco/promotion_category:
         one: Promotion Category
         other: Promotion Categories
-      spree/property:
+      viauco/property:
         one: Property
         other: Properties
-      spree/prototype:
+      viauco/prototype:
         one: Prototype
         other: Prototypes
-      spree/refund_reason:
+      viauco/refund_reason:
         one: Refund Reason
         other: Refund Reasons
-      spree/reimbursement:
+      viauco/reimbursement:
         one: Reimbursement
         other: Reimbursements
-      spree/reimbursement_type:
+      viauco/reimbursement_type:
         one: Reimbursement Type
         other: Reimbursement Types
-      spree/return_authorization:
+      viauco/return_authorization:
         one: Return Authorization
         other: Return Authorizations
-      spree/return_authorization_reason:
+      viauco/return_authorization_reason:
         one: Return Authorization Reason
         other: Return Authorization Reasons
-      spree/role:
+      viauco/role:
         one: Roles
         other: Roles
-      spree/shipment:
+      viauco/shipment:
         one: Shipment
         other: Shipments
-      spree/shipping_category:
+      viauco/shipping_category:
         one: Shipping Category
         other: Shipping Categories
-      spree/shipping_method:
+      viauco/shipping_method:
         one: Shipping Method
         other: Shipping Methods
-      spree/state:
+      viauco/state:
         one: State
         other: States
-      spree/state_change:
+      viauco/state_change:
         one: State Change
         other: State Changes
-      spree/stock_movement:
+      viauco/stock_movement:
         one: Stock Movement
         other: Stock Movements
-      spree/stock_location:
+      viauco/stock_location:
         one: Stock Location
         other: Stock Locations
-      spree/stock_transfer:
+      viauco/stock_transfer:
         one: Stock Transfer
         other: Stock Transfers
-      spree/store_credit:
+      viauco/store_credit:
         one: Store Credit
         other: Store Credits
-      spree/store_credit_category:
+      viauco/store_credit_category:
         one: Store Credit Category
         other: Store Credit Categories
-      spree/tax_category:
+      viauco/tax_category:
         one: Tax Category
         other: Tax Categories
-      spree/tax_rate:
+      viauco/tax_rate:
         one: Tax Rate
         other: Tax Rates
-      spree/taxon:
+      viauco/taxon:
         one: Taxon
         other: Taxons
-      spree/taxonomy:
+      viauco/taxonomy:
         one: Taxonomy
         other: Taxonomies
-      spree/tracker:
+      viauco/tracker:
         one: Tracker
         other: Trackers
-      spree/user:
+      viauco/user:
         one: User
         other: Users
-      spree/variant:
+      viauco/variant:
         one: Variant
         other: Variants
-      spree/zone:
+      viauco/zone:
         one: Zone
         other: Zones
     errors:
       models:
-        spree/calculator/tiered_flat_rate:
+        viauco/calculator/tiered_flat_rate:
           attributes:
             base:
               keys_should_be_positive_number: "Tier keys should all be numbers larger than 0"
             preferred_tiers:
               should_be_hash: "should be a hash"
-        spree/calculator/tiered_percent:
+        viauco/calculator/tiered_percent:
           attributes:
             base:
               keys_should_be_positive_number: "Tier keys should all be numbers larger than 0"
               values_should_be_percent: "Tier values should all be percentages between 0% and 100%"
             preferred_tiers:
               should_be_hash: "should be a hash"
-        spree/classification:
+        viauco/classification:
           attributes:
             taxon_id:
               already_linked: "is already linked to this product"
-        spree/credit_card:
+        viauco/credit_card:
           attributes:
             base:
               card_expired: "Card has expired"
               expiry_invalid: "Card expiration is invalid"
-        spree/line_item:
+        viauco/line_item:
           attributes:
             currency:
               must_match_order_currency: "Must match order currency"
-        spree/promotion:
+        viauco/promotion:
           attributes:
             expires_at:
               invalid_date_range: must be later than start date
-        spree/product:
+        viauco/product:
           attributes:
             discontinue_on:
               invalid_date_range: must be later than available date
             base:
               cannot_destroy_if_attached_to_line_items: Cannot delete products once they are attached to line items.
-        spree/refund:
+        viauco/refund:
           attributes:
             amount:
               greater_than_allowed: is greater than the allowed amount.
-        spree/reimbursement:
+        viauco/reimbursement:
           attributes:
             base:
               return_items_order_id_does_not_match: One or more of the return items specified do not belong to the same order as the reimbursement.
-        spree/return_item:
+        viauco/return_item:
           attributes:
             reimbursement:
               cannot_be_associated_unless_accepted: cannot be associated to a return item that is not accepted.
             inventory_unit:
               other_completed_return_item_exists: "%{inventory_unit_id} has already been taken by return item %{return_item_id}"
-        spree/shipping_method:
+        viauco/shipping_method:
           attributes:
             base:
               required_shipping_category: "You must select at least one shipping category"
-        spree/store:
+        viauco/store:
           attributes:
             base:
               cannot_destroy_default_store: Cannot destroy the default Store.
-        spree/store_credit:
+        viauco/store_credit:
           attributes:
             amount_used:
               cannot_be_greater_than_amount: Cannot be greater than amount.
               greater_than_zero_restrict_delete: is greater than zero. Can not delete store credit.
             amount_authorized:
               exceeds_total_credits: Exceeds total credits.
-        spree/store_credit_category:
+        viauco/store_credit_category:
           attributes:
             base:
               cannot_destroy_if_used_in_store_credit: Cannot delete store credit categories once they are used in store credit.
-        spree/variant:
+        viauco/variant:
           attributes:
             base:
               cannot_destroy_if_attached_to_line_items: Cannot delete variants once they are attached to line items.
               no_master_variant_found_to_infer_price: No master variant found to infer price
               must_supply_price_for_variant_or_master: Must supply price for variant or master price for product.
-        spree/image:
+        viauco/image:
           attributes:
             attachment:
               not_allowed_content_type: has not allowed content type
               attachment_must_be_present: must be present
-        spree/taxon_image:
+        viauco/taxon_image:
           attributes:
             attachment:
               not_allowed_content_type: has not allowed content type
@@ -434,7 +434,7 @@ en:
       format:
         precision: 1
 
-  spree:
+  viauco:
     abbreviation: Abbreviation
     accept: Accept
     acceptance_status: Acceptance status
@@ -757,7 +757,7 @@ en:
     error_user_destroy_with_orders: User associated with orders cannot be destroyed
     event: Event
     events:
-      spree:
+      viauco:
         cart:
           add: Add to cart
         checkout:
@@ -1348,7 +1348,7 @@ en:
     source: Source
     special_instructions: Special Instructions
     split: Split
-    spree_gateway_error_flash_for_checkout: There was a problem with your payment information. Please check your information and try again.
+    viauco_gateway_error_flash_for_checkout: There was a problem with your payment information. Please check your information and try again.
     ssl:
       change_protocol: "Please switch to using HTTP (rather than HTTPS) and retry this request."
     start: Start

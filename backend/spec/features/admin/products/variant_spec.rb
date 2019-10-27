@@ -11,7 +11,7 @@ describe 'Variants', type: :feature do
         create(:option_value, option_type: option.option_type)
       end
 
-      visit spree.admin_products_path
+      visit viauco.admin_products_path
       within_row(1) { click_icon :edit }
       click_link 'Variants'
       click_on 'Add One'
@@ -29,14 +29,14 @@ describe 'Variants', type: :feature do
     context 'currency displaying' do
       context 'using Russian Rubles' do
         before do
-          Spree::Config[:currency] = 'RUB'
+          Viauco::Config[:currency] = 'RUB'
           create(:variant, product: product, price: 19.99)
         end
 
         # Regression test for #2737
         context 'uses руб as the currency symbol' do
           it 'on the products listing page' do
-            visit spree.admin_product_variants_path(product)
+            visit viauco.admin_product_variants_path(product)
             within_row(1) { expect(page).to have_content('19.99 ₽') }
           end
         end

@@ -1,0 +1,12 @@
+<% if viauco_current_user %>
+  <li>
+    <%= link_to Viauco.t(:my_account), viauco.account_path %>
+  </li>
+  <li>
+    <%= link_to Viauco.t(:logout), viauco.logout_path %>
+  </li>
+<% else %>
+  <li id="link-to-login">
+    <%= link_to Viauco.t(:login), viauco.login_path %>
+  </li>
+<% end %>

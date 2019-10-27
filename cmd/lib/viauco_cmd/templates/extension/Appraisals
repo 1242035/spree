@@ -1,0 +1,27 @@
+appraise 'viauco-3-2' do
+  gem 'viauco_core', '~> 3.2.0'
+  gem 'viauco_backend', '~> 3.2.0'
+  gem 'viauco_auth_devise', '~> 3.4.0'
+  gem 'rails-controller-testing'
+end
+
+appraise 'viauco-3-5' do
+  gem 'viauco_core', '~> 3.5.0'
+  gem 'viauco_backend', '~> 3.5.0'
+  gem 'viauco_auth_devise', '~> 3.4.0'
+  gem 'rails-controller-testing'
+end
+
+appraise 'viauco-3-7' do
+  gem 'viauco_core', '~> 3.7.0'
+  gem 'viauco_backend', '~> 3.7.0'
+  gem 'viauco_auth_devise', '~> 3.5.0'
+  gem 'rails-controller-testing'
+end
+
+appraise 'viauco-master' do
+  gem 'viauco_core', github: 'viauco/viauco', branch: 'master'
+  gem 'viauco_backend', github: 'viauco/viauco', branch: 'master'
+  gem 'viauco_auth_devise', github: 'viauco/viauco_auth_devise', branch: 'master'
+  gem 'rails-controller-testing'
+end

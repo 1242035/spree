@@ -1,0 +1,13 @@
+<% content_for :page_title do %>
+  <%= link_to Viauco.t(:roles), viauco.admin_roles_url %> /
+  <%= Viauco.t(:new_role) %>
+<% end %>
+
+<%= render partial: 'viauco/admin/shared/error_messages', locals: { target: @role } %>
+
+<%= form_for [:admin, @role] do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'viauco/admin/shared/new_resource_links' %>
+  </fieldset>
+<% end %>

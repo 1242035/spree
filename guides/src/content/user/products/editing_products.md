@@ -4,7 +4,7 @@ title: Editing Products
 
 ## Introduction
 
-You will often need to modify the products in your store - prices may fluctuate, descriptions may change, you may take new photographs of your inventory. Spree makes it quick and easy to make such changes.
+You will often need to modify the products in your store - prices may fluctuate, descriptions may change, you may take new photographs of your inventory. Viauco makes it quick and easy to make such changes.
 
 ## Editing Products
 

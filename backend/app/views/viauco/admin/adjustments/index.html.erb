@@ -1,0 +1,36 @@
+<%= render partial: 'viauco/admin/shared/order_tabs', locals: { current: :adjustments} %>
+
+<% content_for :page_title do %>
+   / <%= plural_resource_name(Viauco::Adjustment) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to(Viauco.t(:new_adjustment), new_admin_order_adjustment_url(@order), class: "btn-success", icon: 'add') if can? :create, Viauco::Adjustment %>
+<% end %>
+
+<% if @adjustments.present? %>
+  <div class="card mb-3">
+    <%= render partial: 'adjustments_table' %>
+  </div>
+<% else %>
+  <div class="alert alert-warning">
+    <%= Viauco.t(:no_resource_found, resource: plural_resource_name(Viauco::Adjustment)) %>
+  </div>
+<% end %>
+
+<% if @order.can_add_coupon? %>
+  <div class="card bg-light mb-3" data-hook="adjustments_new_coupon_code">
+    <div class="card-body">
+      <div class="form-group">
+        <%= text_field_tag "coupon_code", "", placeholder: Viauco.t(:coupon_code), class: "form-control" %>
+      </div>
+      <%= button Viauco.t(:add_coupon_code), 'plus', 'submit', id: "add_coupon_code" %>
+    </div>
+  </div>
+<% end %>
+
+<%= javascript_tag do %>
+  var order_number = '<%= @order.number %>';
+<% end %>
+
+<%= render partial: 'viauco/admin/shared/order_summary' %>

@@ -1,0 +1,18 @@
+<% content_for :page_title do %>
+  <%= plural_resource_name(Viauco::Taxonomy) %>
+<% end %>
+
+<% content_for :page_actions do %>
+  <%= button_link_to Viauco.t(:new_taxonomy), new_object_url, class: "btn-success", icon: 'add', id: 'admin_new_taxonomy_link' %>
+<% end if can?(:create, Viauco::Taxonomy) %>
+
+<% if @taxonomies.any? %>
+  <div id="list-taxonomies" data-hook>
+    <%= render 'list' %>
+  </div>
+<% else %>
+  <div class="alert alert-info no-objects-found">
+    <%= Viauco.t(:no_resource_found, resource: plural_resource_name(Viauco::Taxonomy)) %>,
+    <%= link_to Viauco.t(:add_one), new_object_url if can?(:create, Viauco::Taxonomy) %>!
+  </div>
+<% end %>

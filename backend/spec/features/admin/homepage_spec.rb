@@ -6,7 +6,7 @@ describe 'Homepage', type: :feature do
 
     context 'visiting the homepage' do
       before do
-        visit spree.admin_path
+        visit viauco.admin_path
       end
 
       it "has header text 'Orders'" do
@@ -43,15 +43,15 @@ describe 'Homepage', type: :feature do
 
       context 'version number' do
         it 'is displayed' do
-          within('.sidebar') { expect(page).to have_content(Spree.version) }
+          within('.sidebar') { expect(page).to have_content(Viauco.version) }
         end
 
         context 'if turned off' do
-          before { Spree::Config[:admin_show_version] = false }
+          before { Viauco::Config[:admin_show_version] = false }
 
           it 'is not displayed' do
-            visit spree.admin_path
-            within('.sidebar') { expect(page).not_to have_content(Spree.version) }
+            visit viauco.admin_path
+            within('.sidebar') { expect(page).not_to have_content(Viauco.version) }
           end
         end
       end
@@ -59,7 +59,7 @@ describe 'Homepage', type: :feature do
 
     context 'visiting the products tab' do
       before do
-        visit spree.admin_products_path
+        visit viauco.admin_products_path
       end
 
       it 'has a link to products' do
@@ -82,15 +82,15 @@ describe 'Homepage', type: :feature do
 
   context 'as fakedispatch user' do
     before do
-      allow_any_instance_of(Spree::Admin::BaseController).to receive(:spree_current_user).and_return(nil)
+      allow_any_instance_of(Viauco::Admin::BaseController).to receive(:viauco_current_user).and_return(nil)
     end
 
     custom_authorization! do |_user|
-      can [:admin, :edit, :index, :read], Spree::Order
+      can [:admin, :edit, :index, :read], Viauco::Order
     end
 
     it 'only displays tabs fakedispatch has access to' do
-      visit spree.admin_path
+      visit viauco.admin_path
       expect(page).to have_link('Orders')
       expect(page).not_to have_link('Products')
       expect(page).not_to have_link('Promotions')

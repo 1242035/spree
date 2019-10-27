@@ -24,7 +24,7 @@ export default class DocSearch extends React.Component {
     if (window.docsearch) {
       window.docsearch({
         apiKey: 'fb697cd2d04591b036ea172259c05ba8',
-        indexName: 'spreecommerce',
+        indexName: 'viaucocommerce',
         inputSelector: '#algolia-doc-search'
       })
     } else {

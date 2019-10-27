@@ -1,7 +1,7 @@
-Spree::Sample.load_sample('option_types')
+Viauco::Sample.load_sample('option_types')
 
-size = Spree::OptionType.find_by!(presentation: 'Size')
-color = Spree::OptionType.find_by!(presentation: 'Color')
+size = Viauco::OptionType.find_by!(presentation: 'Size')
+color = Viauco::OptionType.find_by!(presentation: 'Color')
 
 option_values_attributes = [
   {
@@ -49,5 +49,5 @@ option_values_attributes = [
 ]
 
 option_values_attributes.each do |attrs|
-  Spree::OptionValue.where(attrs).first_or_create!
+  Viauco::OptionValue.where(attrs).first_or_create!
 end

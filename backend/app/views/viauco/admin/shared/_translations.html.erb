@@ -1,0 +1,49 @@
+<script>
+  Viauco.translations = <%==
+  { abbr_day_names:           I18n.t(:abbr_day_names, scope: :date),
+    add:                      Viauco.t(:add),
+    are_you_sure:             Viauco.t(:are_you_sure),
+    are_you_sure_delete:      Viauco.t(:are_you_sure_delete),
+    bill_address:             Viauco.t(:bill_address),
+    cancel:                   Viauco.t(:cancel,  scope: :actions),
+    choose_a_customer:        Viauco.t(:choose_a_customer),
+    confirm_delete:           Viauco.t(:confirm_delete),
+    currency_separator:       I18n.t('number.currency.format.separator'),
+    cut:                      Viauco.t(:cut),
+    date_picker:              Viauco.t(:js_format, scope: 'date_picker', default: 'yy/mm/dd'),
+    destroy:                  Viauco.t(:destroy, scope: :actions),
+    edit:                     Viauco.t(:edit,    scope: :actions),
+    first_day:                Viauco.t(:first_day, scope: 'date_picker', default: 0).to_i,
+    find_a_taxon:             Viauco.t(:find_a_taxon),
+    item_stock_placeholder:   Viauco.t(:choose_location),
+    loading:                  Viauco.t(:loading),
+    month_names:              I18n.t(:month_names, scope: :date).instance_eval {|o|
+                                     o.try(:reject, &:blank?) || o},
+    more:                     Viauco.t(:more),
+    name:                     Viauco.t(:name),
+    new_taxon:                Viauco.t(:new_taxon),
+    next:                     Viauco.t(:next),
+    no_results:               Viauco.t(:no_results),
+    option_type_placeholder:  Viauco.t(:option_type_placeholder),
+    paste:                    Viauco.t(:paste),
+    previous:                 Viauco.t(:previous),
+    remove:                   Viauco.t(:remove),
+    rename:                   Viauco.t(:rename),
+    save:                     Viauco.t(:save,    scope: :actions),
+    searching:                Viauco.t(:searching),
+    server_error:             Viauco.t(:server_error),
+    sku:                      Viauco.t(:sku),
+    type_to_search:           Viauco.t(:type_to_search),
+    taxon_placeholder:        Viauco.t(:taxon_placeholder),
+    taxonomy_tree_error:      Viauco.t(:taxonomy_tree_error),
+    tags_placeholder:         Viauco.t(:tags_placeholder),
+    tracking:                 Viauco.t(:tracking),
+    variant_placeholder:      Viauco.t(:variant_placeholder),
+    value:                    Viauco.t(:value)
+  }.to_json
+%>
+</script>
+
+<% if I18n.locale != :en %>
+  <%= javascript_include_tag "select2_locale_#{I18n.locale}" %>
+<% end %>

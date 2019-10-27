@@ -1,5 +1,5 @@
-Spree::Core::Engine.add_routes do
+Viauco::Core::Engine.add_routes do
   get '/forbidden', to: 'home#forbidden', as: :forbidden
 end
 
-Spree::Core::Engine.draw_routes
+Viauco::Core::Engine.draw_routes

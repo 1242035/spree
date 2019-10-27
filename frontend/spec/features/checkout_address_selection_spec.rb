@@ -2,7 +2,7 @@ require 'spec_helper'
 
 describe 'Address selection during checkout', type: :feature, js: true do
   let!(:store) { create(:store, default: true) }
-  let(:state) { Spree::State.all.first || create(:state) }
+  let(:state) { Viauco::State.all.first || create(:state) }
 
   describe 'guest user' do
     include_context 'checkout address book'
@@ -36,8 +36,8 @@ describe 'Address selection during checkout', type: :feature, js: true do
       @user.addresses << create(:address, address1: FFaker::Address.street_address, state: state, alternative_phone: nil)
       @user.save
 
-      allow_any_instance_of(Spree::CheckoutController).to receive_messages(try_spree_current_user: @user)
-      allow_any_instance_of(Spree::CheckoutController).to receive_messages(skip_state_validation?: true)
+      allow_any_instance_of(Viauco::CheckoutController).to receive_messages(try_viauco_current_user: @user)
+      allow_any_instance_of(Viauco::CheckoutController).to receive_messages(skip_state_validation?: true)
 
       click_button 'Checkout'
     end
@@ -69,12 +69,12 @@ describe 'Address selection during checkout', type: :feature, js: true do
     it 'saves 2 addresses for user if they are different', js: true do
       expect do
         within('#billing') do
-          choose Spree.t('address_book.other_address')
+          choose Viauco.t('address_book.other_address')
           fill_in_address(billing)
         end
         within('#shipping') do
           uncheck 'order_use_billing'
-          choose Spree.t('address_book.other_address')
+          choose Viauco.t('address_book.other_address')
           fill_in_address(shipping, :ship)
         end
         complete_checkout
@@ -84,12 +84,12 @@ describe 'Address selection during checkout', type: :feature, js: true do
     it 'saves 1 address for user if they are the same' do
       expect do
         within('#billing') do
-          choose Spree.t('address_book.other_address')
+          choose Viauco.t('address_book.other_address')
           fill_in_address(billing)
         end
         within('#shipping') do
           uncheck 'order_use_billing'
-          choose Spree.t('address_book.other_address')
+          choose Viauco.t('address_book.other_address')
           fill_in_address(billing, :ship)
         end
         complete_checkout
@@ -105,12 +105,12 @@ describe 'Address selection during checkout', type: :feature, js: true do
       # this is what this piece of code ('field is required') tests
       it 'shows address form with error' do
         within('#billing') do
-          choose Spree.t('address_book.other_address')
+          choose Viauco.t('address_book.other_address')
           fill_in_address(address)
         end
         within('#shipping') do
           uncheck 'order_use_billing'
-          choose Spree.t('address_book.other_address')
+          choose Viauco.t('address_book.other_address')
           fill_in_address(address, :ship)
         end
         click_button 'Save and Continue'
@@ -126,12 +126,12 @@ describe 'Address selection during checkout', type: :feature, js: true do
     describe 'entering 2 new addresses', js: true do
       it 'assigns 2 new addresses to order' do
         within('#billing') do
-          choose Spree.t('address_book.other_address')
+          choose Viauco.t('address_book.other_address')
           fill_in_address(billing)
         end
         within('#shipping') do
           uncheck 'order_use_billing'
-          choose Spree.t('address_book.other_address')
+          choose Viauco.t('address_book.other_address')
           fill_in_address(shipping, :ship)
         end
         complete_checkout
@@ -159,7 +159,7 @@ describe 'Address selection during checkout', type: :feature, js: true do
           choose "order_bill_address_id_#{address.id}"
           within('#shipping') do
             uncheck 'order_use_billing'
-            choose Spree.t('address_book.other_address')
+            choose Viauco.t('address_book.other_address')
             fill_in_address(shipping, :ship)
           end
           complete_checkout
@@ -171,7 +171,7 @@ describe 'Address selection during checkout', type: :feature, js: true do
         choose "order_bill_address_id_#{address.id}"
         within('#shipping') do
           uncheck 'order_use_billing'
-          choose Spree.t('address_book.other_address')
+          choose Viauco.t('address_book.other_address')
           fill_in_address(shipping, :ship)
         end
         complete_checkout
@@ -192,7 +192,7 @@ describe 'Address selection during checkout', type: :feature, js: true do
         choose "order_bill_address_id_#{address.id}"
         within('#shipping') do
           uncheck 'order_use_billing'
-          choose Spree.t('address_book.other_address')
+          choose Viauco.t('address_book.other_address')
           fill_in_address(shipping, :ship)
         end
         click_button 'Save and Continue'
@@ -243,7 +243,7 @@ describe 'Address selection during checkout', type: :feature, js: true do
           uncheck 'order_use_billing'
           choose "order_ship_address_id_#{address.id}"
           within('#billing') do
-            choose Spree.t('address_book.other_address')
+            choose Viauco.t('address_book.other_address')
             fill_in_address(billing)
           end
           complete_checkout
@@ -255,7 +255,7 @@ describe 'Address selection during checkout', type: :feature, js: true do
         uncheck 'order_use_billing'
         choose "order_ship_address_id_#{address.id}"
         within('#billing') do
-          choose Spree.t('address_book.other_address')
+          choose Viauco.t('address_book.other_address')
           fill_in_address(billing)
         end
         complete_checkout
@@ -277,7 +277,7 @@ describe 'Address selection during checkout', type: :feature, js: true do
         uncheck 'order_use_billing'
         choose "order_ship_address_id_#{address.id}"
         within('#billing') do
-          choose Spree.t('address_book.other_address')
+          choose Viauco.t('address_book.other_address')
           fill_in_address(billing)
         end
         click_button 'Save and Continue'
@@ -298,7 +298,7 @@ describe 'Address selection during checkout', type: :feature, js: true do
           uncheck 'order_use_billing'
           choose "order_ship_address_id_#{address.id}"
           within('#billing') do
-            choose Spree.t('address_book.other_address')
+            choose Viauco.t('address_book.other_address')
             fill_in_address(address)
           end
           complete_checkout

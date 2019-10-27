@@ -4,7 +4,7 @@ describe 'Taxonomies', type: :feature, js: true do
   stub_authorization!
 
   before do
-    visit spree.admin_path
+    visit viauco.admin_path
     click_link 'Products'
   end
 
@@ -12,7 +12,7 @@ describe 'Taxonomies', type: :feature, js: true do
     it 'displays existing taxonomies' do
       create(:taxonomy, name: 'Brand')
       create(:taxonomy, name: 'Categories')
-      visit spree.admin_taxonomies_path
+      visit viauco.admin_taxonomies_path
       within_row(1) { expect(page).to have_content('Brand') }
       within_row(2) { expect(page).to have_content('Categories') }
     end

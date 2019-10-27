@@ -1,0 +1,18 @@
+<% content_for :page_title do %>
+  <%= link_to Viauco.t(:users), viauco.admin_users_url %> /
+  <%= Viauco.t(:new_user) %>
+<% end %>
+
+<div data-hook="admin_user_new_form_header">
+  <%= render partial: 'viauco/admin/shared/error_messages', locals: { target: @user } %>
+</div>
+
+<div data-hook="admin_user_new_form">
+  <%= form_for [:admin, @user], url: viauco.admin_users_url, method: :post do |f| %>
+    <%= render partial: 'form', locals: { f: f } %>
+
+    <div data-hook="admin_user_new_form_buttons">
+      <%= render partial: 'viauco/admin/shared/new_resource_links' %>
+    </div>
+  <% end %>
+</div>

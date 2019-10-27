@@ -1,0 +1,11 @@
+<% content_for :page_title do %>
+  <%= link_to Viauco.t(:stores), viauco.admin_stores_path(@store) %> /
+  <%= Viauco.t(:add_store) %>
+<% end %>
+
+<%= form_for @store, url: viauco.admin_stores_path(@store) do |f| %>
+  <fieldset>
+    <%= render partial: 'form', locals: { f: f } %>
+    <%= render partial: 'viauco/admin/shared/new_resource_links', locals: { collection_url: viauco.admin_stores_path(@store) } %>
+  </fieldset>
+<% end %>

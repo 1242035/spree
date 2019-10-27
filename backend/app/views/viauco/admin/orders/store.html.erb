@@ -1,0 +1,7 @@
+<%= render 'viauco/admin/shared/order_tabs', current: :store %>
+
+<div data-hook="admin_order_edit_header">
+  <%= render 'viauco/admin/shared/error_messages', target: @order %>
+</div>
+
+<%= render 'store_form', order: @order if can?(:update, @order) %>

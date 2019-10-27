@@ -7,7 +7,7 @@ describe 'Address', type: :feature, inaccessible: true do
     create(:product, name: 'RoR Mug')
     create(:order_with_totals, state: 'cart')
 
-    visit spree.root_path
+    visit viauco.root_path
 
     add_to_cart('RoR Mug')
 
@@ -21,7 +21,7 @@ describe 'Address', type: :feature, inaccessible: true do
     let!(:canada) { create(:country, name: 'Canada', states_required: true, iso: 'CA') }
     let!(:uk) { create(:country, name: 'United Kingdom', states_required: true, iso: 'UK') }
 
-    before { Spree::Config[:default_country_id] = uk.id }
+    before { Viauco::Config[:default_country_id] = uk.id }
 
     context 'but has no state' do
       it 'shows the state input field' do

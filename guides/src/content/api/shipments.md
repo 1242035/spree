@@ -1,6 +1,6 @@
 ---
 title: Shipments
-description: Use the Spree Commerce storefront API to access Shipment data.
+description: Use the Viauco Commerce storefront API to access Shipment data.
 ---
 
 ## Mine

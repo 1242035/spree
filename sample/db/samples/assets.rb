@@ -1,23 +1,23 @@
 unless ENV['SKIP_SAMPLE_IMAGES']
-  Spree::Sample.load_sample('products')
-  Spree::Sample.load_sample('variants')
+  Viauco::Sample.load_sample('products')
+  Viauco::Sample.load_sample('variants')
   products = {}
-  products[:ror_baseball_jersey] = Spree::Product.find_by!(name: 'Ruby on Rails Baseball Jersey')
-  products[:ror_tote] = Spree::Product.find_by!(name: 'Ruby on Rails Tote')
-  products[:ror_bag] = Spree::Product.find_by!(name: 'Ruby on Rails Bag')
-  products[:ror_jr_spaghetti] = Spree::Product.find_by!(name: 'Ruby on Rails Jr. Spaghetti')
-  products[:ror_mug] = Spree::Product.find_by!(name: 'Ruby on Rails Mug')
-  products[:ror_ringer] = Spree::Product.find_by!(name: 'Ruby on Rails Ringer T-Shirt')
-  products[:ror_stein] = Spree::Product.find_by!(name: 'Ruby on Rails Stein')
-  products[:spree_baseball_jersey] = Spree::Product.find_by!(name: 'Spree Baseball Jersey')
-  products[:spree_stein] = Spree::Product.find_by!(name: 'Spree Stein')
-  products[:spree_jr_spaghetti] = Spree::Product.find_by!(name: 'Spree Jr. Spaghetti')
-  products[:spree_mug] = Spree::Product.find_by!(name: 'Spree Mug')
-  products[:spree_ringer] = Spree::Product.find_by!(name: 'Spree Ringer T-Shirt')
-  products[:spree_tote] = Spree::Product.find_by!(name: 'Spree Tote')
-  products[:spree_bag] = Spree::Product.find_by!(name: 'Spree Bag')
-  products[:ruby_baseball_jersey] = Spree::Product.find_by!(name: 'Ruby Baseball Jersey')
-  products[:apache_baseball_jersey] = Spree::Product.find_by!(name: 'Apache Baseball Jersey')
+  products[:ror_baseball_jersey] = Viauco::Product.find_by!(name: 'Ruby on Rails Baseball Jersey')
+  products[:ror_tote] = Viauco::Product.find_by!(name: 'Ruby on Rails Tote')
+  products[:ror_bag] = Viauco::Product.find_by!(name: 'Ruby on Rails Bag')
+  products[:ror_jr_spaghetti] = Viauco::Product.find_by!(name: 'Ruby on Rails Jr. Spaghetti')
+  products[:ror_mug] = Viauco::Product.find_by!(name: 'Ruby on Rails Mug')
+  products[:ror_ringer] = Viauco::Product.find_by!(name: 'Ruby on Rails Ringer T-Shirt')
+  products[:ror_stein] = Viauco::Product.find_by!(name: 'Ruby on Rails Stein')
+  products[:viauco_baseball_jersey] = Viauco::Product.find_by!(name: 'Viauco Baseball Jersey')
+  products[:viauco_stein] = Viauco::Product.find_by!(name: 'Viauco Stein')
+  products[:viauco_jr_spaghetti] = Viauco::Product.find_by!(name: 'Viauco Jr. Spaghetti')
+  products[:viauco_mug] = Viauco::Product.find_by!(name: 'Viauco Mug')
+  products[:viauco_ringer] = Viauco::Product.find_by!(name: 'Viauco Ringer T-Shirt')
+  products[:viauco_tote] = Viauco::Product.find_by!(name: 'Viauco Tote')
+  products[:viauco_bag] = Viauco::Product.find_by!(name: 'Viauco Bag')
+  products[:ruby_baseball_jersey] = Viauco::Product.find_by!(name: 'Ruby Baseball Jersey')
+  products[:apache_baseball_jersey] = Viauco::Product.find_by!(name: 'Apache Baseball Jersey')
 
   def image(name, type = 'jpeg')
     images_path = Pathname.new(File.dirname(__FILE__)) + 'images'
@@ -120,66 +120,66 @@ unless ENV['SKIP_SAMPLE_IMAGES']
         attachment: image('ruby_baseball', 'png')
       }
     ],
-    products[:spree_bag].master => [
+    products[:viauco_bag].master => [
       {
-        name: file_name('spree_bag'),
-        attachment: image('spree_bag')
+        name: file_name('viauco_bag'),
+        attachment: image('viauco_bag')
       }
     ],
-    products[:spree_tote].master => [
+    products[:viauco_tote].master => [
       {
-        name: file_name('spree_tote_front'),
-        attachment: image('spree_tote_front')
+        name: file_name('viauco_tote_front'),
+        attachment: image('viauco_tote_front')
       },
       {
-        name: file_name('spree_tote_back'),
-        attachment: image('spree_tote_back')
+        name: file_name('viauco_tote_back'),
+        attachment: image('viauco_tote_back')
       }
     ],
-    products[:spree_ringer].master => [
+    products[:viauco_ringer].master => [
       {
-        name: file_name('spree_ringer_t'),
-        attachment: image('spree_ringer_t')
+        name: file_name('viauco_ringer_t'),
+        attachment: image('viauco_ringer_t')
       },
       {
-        name: file_name('spree_ringer_t_back'),
-        attachment: image('spree_ringer_t_back')
+        name: file_name('viauco_ringer_t_back'),
+        attachment: image('viauco_ringer_t_back')
       }
     ],
-    products[:spree_jr_spaghetti].master => [
+    products[:viauco_jr_spaghetti].master => [
       {
-        name: file_name('spree_spaghetti'),
-        attachment: image('spree_spaghetti')
+        name: file_name('viauco_spaghetti'),
+        attachment: image('viauco_spaghetti')
       }
     ],
-    products[:spree_baseball_jersey].master => [
+    products[:viauco_baseball_jersey].master => [
       {
-        name: file_name('spree_jersey'),
-        attachment: image('spree_jersey')
+        name: file_name('viauco_jersey'),
+        attachment: image('viauco_jersey')
       },
       {
-        name: file_name('spree_jersey_back'),
-        attachment: image('spree_jersey_back')
+        name: file_name('viauco_jersey_back'),
+        attachment: image('viauco_jersey_back')
       }
     ],
-    products[:spree_stein].master => [
+    products[:viauco_stein].master => [
       {
-        name: file_name('spree_stein'),
-        attachment: image('spree_stein')
+        name: file_name('viauco_stein'),
+        attachment: image('viauco_stein')
       },
       {
-        name: file_name('spree_stein_back'),
-        attachment: image('spree_stein_back')
+        name: file_name('viauco_stein_back'),
+        attachment: image('viauco_stein_back')
       }
     ],
-    products[:spree_mug].master => [
+    products[:viauco_mug].master => [
       {
-        name: file_name('spree_mug'),
-        attachment: image('spree_mug')
+        name: file_name('viauco_mug'),
+        attachment: image('viauco_mug')
       },
       {
-        name: file_name('spree_mug_back'),
-        attachment: image('spree_mug_back')
+        name: file_name('viauco_mug_back'),
+        attachment: image('viauco_mug_back')
       }
     ]
   }

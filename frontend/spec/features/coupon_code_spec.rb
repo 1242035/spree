@@ -14,15 +14,15 @@ describe 'Coupon code promotions', type: :feature, js: true do
 
   context 'visitor makes checkout as guest without registration' do
     def create_basic_coupon_promotion(code)
-      promotion = Spree::Promotion.create!(name: code.titleize,
+      promotion = Viauco::Promotion.create!(name: code.titleize,
                                            code: code,
                                            starts_at: 1.day.ago,
                                            expires_at: 1.day.from_now)
 
-      calculator = Spree::Calculator::FlatRate.new
+      calculator = Viauco::Calculator::FlatRate.new
       calculator.preferred_amount = 10
 
-      action = Spree::Promotion::Actions::CreateItemAdjustments.new
+      action = Viauco::Promotion::Actions::CreateItemAdjustments.new
       action.calculator = calculator
       action.promotion = promotion
       action.save
@@ -39,7 +39,7 @@ describe 'Coupon code promotions', type: :feature, js: true do
       it 'informs about an invalid coupon code' do
         fill_in 'order_coupon_code', with: 'coupon_codes_rule_man'
         click_button 'Save and Continue'
-        expect(page).to have_content(Spree.t(:coupon_code_not_found))
+        expect(page).to have_content(Viauco.t(:coupon_code_not_found))
       end
 
       it 'informs the user about a coupon code which has exceeded its usage' do
@@ -48,13 +48,13 @@ describe 'Coupon code promotions', type: :feature, js: true do
 
         fill_in 'order_coupon_code', with: 'onetwo'
         click_button 'Save and Continue'
-        expect(page).to have_content(Spree.t(:coupon_code_max_usage))
+        expect(page).to have_content(Viauco.t(:coupon_code_max_usage))
       end
 
       it 'can enter an invalid coupon code, then a real one' do
         fill_in 'order_coupon_code', with: 'coupon_codes_rule_man'
         click_button 'Save and Continue'
-        expect(page).to have_content(Spree.t(:coupon_code_not_found))
+        expect(page).to have_content(Viauco.t(:coupon_code_not_found))
         fill_in 'order_coupon_code', with: 'onetwo'
         click_button 'Save and Continue'
         expect(page).to have_content('Promotion (Onetwo) -$10.00')

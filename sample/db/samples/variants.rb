@@ -1,31 +1,31 @@
-Spree::Sample.load_sample('option_values')
-Spree::Sample.load_sample('products')
+Viauco::Sample.load_sample('option_values')
+Viauco::Sample.load_sample('products')
 
-ror_baseball_jersey = Spree::Product.find_by!(name: 'Ruby on Rails Baseball Jersey')
-ror_tote = Spree::Product.find_by!(name: 'Ruby on Rails Tote')
-ror_bag = Spree::Product.find_by!(name: 'Ruby on Rails Bag')
-ror_jr_spaghetti = Spree::Product.find_by!(name: 'Ruby on Rails Jr. Spaghetti')
-ror_mug = Spree::Product.find_by!(name: 'Ruby on Rails Mug')
-ror_ringer = Spree::Product.find_by!(name: 'Ruby on Rails Ringer T-Shirt')
-ror_stein = Spree::Product.find_by!(name: 'Ruby on Rails Stein')
-spree_baseball_jersey = Spree::Product.find_by!(name: 'Spree Baseball Jersey')
-spree_stein = Spree::Product.find_by!(name: 'Spree Stein')
-spree_jr_spaghetti = Spree::Product.find_by!(name: 'Spree Jr. Spaghetti')
-spree_mug = Spree::Product.find_by!(name: 'Spree Mug')
-spree_ringer = Spree::Product.find_by!(name: 'Spree Ringer T-Shirt')
-spree_tote = Spree::Product.find_by!(name: 'Spree Tote')
-spree_bag = Spree::Product.find_by!(name: 'Spree Bag')
-ruby_baseball_jersey = Spree::Product.find_by!(name: 'Ruby Baseball Jersey')
-apache_baseball_jersey = Spree::Product.find_by!(name: 'Apache Baseball Jersey')
+ror_baseball_jersey = Viauco::Product.find_by!(name: 'Ruby on Rails Baseball Jersey')
+ror_tote = Viauco::Product.find_by!(name: 'Ruby on Rails Tote')
+ror_bag = Viauco::Product.find_by!(name: 'Ruby on Rails Bag')
+ror_jr_spaghetti = Viauco::Product.find_by!(name: 'Ruby on Rails Jr. Spaghetti')
+ror_mug = Viauco::Product.find_by!(name: 'Ruby on Rails Mug')
+ror_ringer = Viauco::Product.find_by!(name: 'Ruby on Rails Ringer T-Shirt')
+ror_stein = Viauco::Product.find_by!(name: 'Ruby on Rails Stein')
+viauco_baseball_jersey = Viauco::Product.find_by!(name: 'Viauco Baseball Jersey')
+viauco_stein = Viauco::Product.find_by!(name: 'Viauco Stein')
+viauco_jr_spaghetti = Viauco::Product.find_by!(name: 'Viauco Jr. Spaghetti')
+viauco_mug = Viauco::Product.find_by!(name: 'Viauco Mug')
+viauco_ringer = Viauco::Product.find_by!(name: 'Viauco Ringer T-Shirt')
+viauco_tote = Viauco::Product.find_by!(name: 'Viauco Tote')
+viauco_bag = Viauco::Product.find_by!(name: 'Viauco Bag')
+ruby_baseball_jersey = Viauco::Product.find_by!(name: 'Ruby Baseball Jersey')
+apache_baseball_jersey = Viauco::Product.find_by!(name: 'Apache Baseball Jersey')
 
-small = Spree::OptionValue.where(name: 'Small').first
-medium = Spree::OptionValue.where(name: 'Medium').first
-large = Spree::OptionValue.where(name: 'Large').first
-extra_large = Spree::OptionValue.where(name: 'Extra Large').first
+small = Viauco::OptionValue.where(name: 'Small').first
+medium = Viauco::OptionValue.where(name: 'Medium').first
+large = Viauco::OptionValue.where(name: 'Large').first
+extra_large = Viauco::OptionValue.where(name: 'Extra Large').first
 
-red = Spree::OptionValue.where(name: 'Red').first
-blue = Spree::OptionValue.where(name: 'Blue').first
-green = Spree::OptionValue.where(name: 'Green').first
+red = Viauco::OptionValue.where(name: 'Red').first
+blue = Viauco::OptionValue.where(name: 'Blue').first
+green = Viauco::OptionValue.where(name: 'Green').first
 
 variants = [
   {
@@ -127,38 +127,38 @@ masters = {
     sku: 'RUB-00001',
     cost_price: 17
   },
-  spree_baseball_jersey => {
+  viauco_baseball_jersey => {
     sku: 'SPR-00001',
     cost_price: 17
   },
-  spree_stein => {
+  viauco_stein => {
     sku: 'SPR-00016',
     cost_price: 15
   },
-  spree_jr_spaghetti => {
+  viauco_jr_spaghetti => {
     sku: 'SPR-00013',
     cost_price: 17
   },
-  spree_mug => {
+  viauco_mug => {
     sku: 'SPR-00014',
     cost_price: 11
   },
-  spree_ringer => {
+  viauco_ringer => {
     sku: 'SPR-00015',
     cost_price: 17
   },
-  spree_tote => {
+  viauco_tote => {
     sku: 'SPR-00011',
     cost_price: 13
   },
-  spree_bag => {
+  viauco_bag => {
     sku: 'SPR-00012',
     cost_price: 21
   }
 }
 
 variants.each do |attrs|
-  Spree::Variant.create!(attrs) if Spree::Variant.where(product_id: attrs[:product].id, sku: attrs[:sku]).none?
+  Viauco::Variant.create!(attrs) if Viauco::Variant.where(product_id: attrs[:product].id, sku: attrs[:sku]).none?
 end
 
 masters.each do |product, variant_attrs|

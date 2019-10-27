@@ -26,13 +26,13 @@ describe 'Customer Details', type: :feature, js: true do
 
   context 'brand new order' do
     before do
-      allow(Spree.user_class).to receive(:find_by).and_return(user)
-      visit spree.new_admin_order_path
+      allow(Viauco.user_class).to receive(:find_by).and_return(user)
+      visit viauco.new_admin_order_path
     end
     # Regression test for #3335 & #5317
 
     it 'associates a user when not using guest checkout' do
-      select2_search product.name, from: Spree.t(:name_or_sku)
+      select2_search product.name, from: Viauco.t(:name_or_sku)
 
       within('table.stock-levels') do
         fill_in 'variant_quantity', with: 1
@@ -54,19 +54,19 @@ describe 'Customer Details', type: :feature, js: true do
       expect_form_value('#order_bill_address_attributes_phone', user.bill_address.phone)
       wait_for { !page.has_button?('Update') }
       click_button 'Update'
-      expect(Spree::Order.last.user).to eq(user)
+      expect(Viauco::Order.last.user).to eq(user)
     end
   end
 
   context 'editing an order' do
     before do
-      configure_spree_preferences do |config|
+      configure_viauco_preferences do |config|
         config.default_country_id = country.id
         config.company = true
       end
 
-      allow(Spree.user_class).to receive(:find_by).and_return(user)
-      visit spree.admin_orders_path
+      allow(Viauco.user_class).to receive(:find_by).and_return(user)
+      visit viauco.admin_orders_path
       within('table#listing_orders') { click_icon(:edit) }
     end
 
@@ -123,7 +123,7 @@ describe 'Customer Details', type: :feature, js: true do
     # Regression test for #942
     context 'errors when no shipping methods are available' do
       before do
-        Spree::ShippingMethod.delete_all
+        Viauco::ShippingMethod.delete_all
       end
 
       specify do

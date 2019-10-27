@@ -6,8 +6,8 @@ defaults: &defaults
     CIRCLE_ARTIFACTS: /tmp/test-artifacts
     BUNDLE_JOBS: 4
     BUNDLE_RETRY: 3
-    BUNDLE_PATH: ~/spree/vendor/bundle
-  working_directory: ~/spree
+    BUNDLE_PATH: ~/viauco/vendor/bundle
+  working_directory: ~/viauco
   docker:
     - image: &image circleci/ruby:2.5-node-browsers
 
@@ -18,12 +18,12 @@ run_tests: &run_tests
     - checkout
     - restore_cache:
         keys:
-          - spree-bundle-v4-{{ checksum ".ruby-version" }}-{{ .Branch }}
-          - spree-bundle-v4-{{ checksum ".ruby-version" }}
+          - viauco-bundle-v4-{{ checksum ".ruby-version" }}-{{ .Branch }}
+          - viauco-bundle-v4-{{ checksum ".ruby-version" }}
     - run:
         name: Ensure Bundle Install
         command: |
-          bundle install --path=~/spree/vendor/bundle
+          bundle install --path=~/viauco/vendor/bundle
           ./build-ci.rb install
     - run:
         name: Run rspec in parallel
@@ -44,17 +44,17 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - spree-bundle-v4-{{ checksum ".ruby-version" }}-{{ .Branch }}
-            - spree-bundle-v4-{{ checksum ".ruby-version" }}
+            - viauco-bundle-v4-{{ checksum ".ruby-version" }}-{{ .Branch }}
+            - viauco-bundle-v4-{{ checksum ".ruby-version" }}
       - run:
           name: Bundle Install
           command: |
-            bundle install --path=~/spree/vendor/bundle
+            bundle install --path=~/viauco/vendor/bundle
             ./build-ci.rb install
       - save_cache:
-          key: spree-bundle-v4-{{ checksum ".ruby-version" }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          key: viauco-bundle-v4-{{ checksum ".ruby-version" }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
           paths:
-            - ~/spree/vendor/bundle
+            - ~/viauco/vendor/bundle
 
   run_tests_postgres: &run_tests_postgres
     <<: *run_tests
@@ -86,12 +86,12 @@ jobs:
       - checkout
       - restore_cache:
           keys:
-            - spree-bundle-v4-{{ checksum ".ruby-version" }}-{{ .Branch }}
-            - spree-bundle-v4-{{ checksum ".ruby-version" }}
+            - viauco-bundle-v4-{{ checksum ".ruby-version" }}-{{ .Branch }}
+            - viauco-bundle-v4-{{ checksum ".ruby-version" }}
       - run:
           name: Ensure Bundle Install
           command: |
-            bundle install --path=~/spree/vendor/bundle
+            bundle install --path=~/viauco/vendor/bundle
             ./build-ci.rb install
       - run:
           name: Run rspec in parallel

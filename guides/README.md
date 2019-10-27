@@ -1,6 +1,6 @@
-# Spree Guides
+# Viauco Guides
 
-This is a Spree Guides application built with [gatsby](https://www.gatsbyjs.org).
+This is a Viauco Guides application built with [gatsby](https://www.gatsbyjs.org).
 
 All submissions are welcome!
 

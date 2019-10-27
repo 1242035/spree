@@ -18,7 +18,7 @@ In this page you can make additional changes to the user like email, roles and p
 
 ![API Key](../../../images/user/users/user_edit_inside_api.jpg)
 
-Moreover there are **Lifetime Stats** collected by the Spree. You can see the following:
+Moreover there are **Lifetime Stats** collected by the Viauco. You can see the following:
 
 * **Total Sales** - It defines how much the user has spent money in your shop.
 * **Orders** - Shows the number how many orders the user has bought.
@@ -95,7 +95,7 @@ Editing Store Credits will present you the same options like adding them.
 
 ![Store Credit Edit Inside options](../../../images/user/users/store_credit_user_added_edit_inside.jpg)
 
-Those Store Credits are visible to the User in few places during checkout. It's worth to mention that the User is not forced to use Store Credits during Payment step - the Spree default. Spree gives a user choice to pay full price with Credit Card or use Store Credits.
+Those Store Credits are visible to the User in few places during checkout. It's worth to mention that the User is not forced to use Store Credits during Payment step - the Viauco default. Viauco gives a user choice to pay full price with Credit Card or use Store Credits.
 
 ![User's choice](../../../images/user/users/store_credit_front_apply.jpg)
 

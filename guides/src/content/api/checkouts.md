@@ -1,6 +1,6 @@
 ---
 title: Checkouts
-description: Use the Spree Commerce storefront API to access Checkout data.
+description: Use the Viauco Commerce storefront API to access Checkout data.
 ---
 
 ## Introduction
@@ -261,7 +261,7 @@ for each shipment for the order. These were returned when transitioning to the
 GET /api/v1/orders/:number.json
 ```
 
-Spree will select a shipping rate by default so you can advance to the `payment`
+Viauco will select a shipping rate by default so you can advance to the `payment`
 state by making this request:
 
 ```
@@ -374,7 +374,7 @@ For more information on payments, view the [payments documentation](payments).
   "payments": [
     {
       "id": 3,
-      "source_type": "Spree::CreditCard",
+      "source_type": "Viauco::CreditCard",
       "source_id": 2,
       "amount": "65.37",
       "display_amount": "$65.37",

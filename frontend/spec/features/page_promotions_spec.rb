@@ -4,15 +4,15 @@ describe 'page promotions', type: :feature, js: true do
   before do
     create(:product, name: 'RoR Mug', price: 20)
 
-    promotion = Spree::Promotion.create!(name: '$10 off',
+    promotion = Viauco::Promotion.create!(name: '$10 off',
                                          path: 'test',
                                          starts_at: 1.day.ago,
                                          expires_at: 1.day.from_now)
 
-    calculator = Spree::Calculator::FlatRate.new
+    calculator = Viauco::Calculator::FlatRate.new
     calculator.preferred_amount = 10
 
-    action = Spree::Promotion::Actions::CreateItemAdjustments.create(calculator: calculator)
+    action = Viauco::Promotion::Actions::CreateItemAdjustments.create(calculator: calculator)
     promotion.actions << action
 
     add_to_cart('RoR Mug')

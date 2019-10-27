@@ -5,7 +5,7 @@ describe 'viewing products', type: :feature, inaccessible: true do
   let!(:super_clothing) { taxonomy.root.children.create(name: 'Super Clothing') }
   let!(:t_shirts) { super_clothing.children.create(name: 'T-Shirts') }
   let(:metas) { { meta_description: 'Brand new Ruby on Rails TShirts', meta_title: 'Ruby On Rails TShirt', meta_keywords: 'ror, tshirt, ruby' } }
-  let(:store_name) { ((first_store = Spree::Store.first) && first_store.name).to_s }
+  let(:store_name) { ((first_store = Viauco::Store.first) && first_store.name).to_s }
 
   before do
     t_shirts.children.create(name: 'XXL') # xxl
@@ -77,7 +77,7 @@ describe 'viewing products', type: :feature, inaccessible: true do
   context 'taxon pages' do
     include_context 'custom products'
     before do
-      visit spree.root_path
+      visit viauco.root_path
     end
 
     it 'is able to visit brand Ruby on Rails' do

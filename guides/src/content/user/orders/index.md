@@ -2,7 +2,7 @@
 title: Orders
 ---
 
-Much of your time administering your Spree store will be spent manipulating customer orders - processing payments, issuing refunds, confirming shipments, etc.
+Much of your time administering your Viauco store will be spent manipulating customer orders - processing payments, issuing refunds, confirming shipments, etc.
 
 In these guides, you will learn how to:
 

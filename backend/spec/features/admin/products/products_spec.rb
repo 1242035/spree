@@ -20,7 +20,7 @@ describe 'Products', type: :feature do
         end
 
         it 'lists existing products with correct sorting by name' do
-          visit spree.admin_products_path
+          visit viauco.admin_products_path
           # Name ASC
           within_row(1) { expect(page).to have_content('apache baseball cap') }
           within_row(2) { expect(page).to have_content('zomg shirt') }
@@ -32,7 +32,7 @@ describe 'Products', type: :feature do
         end
 
         it 'lists existing products with correct sorting by price' do
-          visit spree.admin_products_path
+          visit viauco.admin_products_path
           # Name ASC (default)
           within_row(1) { expect(page).to have_content('apache baseball cap') }
           within_row(2) { expect(page).to have_content('zomg shirt') }
@@ -47,14 +47,14 @@ describe 'Products', type: :feature do
       context 'currency displaying' do
         context 'using Russian Rubles' do
           before do
-            Spree::Config[:currency] = 'RUB'
+            Viauco::Config[:currency] = 'RUB'
             create(:product, name: 'Just a product', price: 19.99)
           end
 
           # Regression test for #2737
           context 'uses руб as the currency symbol' do
             it 'on the products listing page' do
-              visit spree.admin_products_path
+              visit viauco.admin_products_path
               within_row(1) { expect(page).to have_content('19.99 ₽') }
             end
           end
@@ -67,7 +67,7 @@ describe 'Products', type: :feature do
         create(:product, name: 'apache baseball cap', deleted_at: '2011-01-06 18:21:13')
         create(:product, name: 'zomg shirt')
 
-        visit spree.admin_products_path
+        visit viauco.admin_products_path
         expect(page).to have_content('zomg shirt')
         expect(page).not_to have_content('apache baseball cap')
 
@@ -89,7 +89,7 @@ describe 'Products', type: :feature do
         create(:product, name: 'apache baseball cap2', sku: 'B100')
         create(:product, name: 'zomg shirt')
 
-        visit spree.admin_products_path
+        visit viauco.admin_products_path
         fill_in 'q_name_cont', with: 'ap'
         click_on 'Search'
 
@@ -138,7 +138,7 @@ describe 'Products', type: :feature do
         @option_type_prototype = prototype
         @property_prototype = create(:prototype, name: 'Random')
         @shipping_category = create(:shipping_category)
-        visit spree.admin_products_path
+        visit viauco.admin_products_path
         click_link 'admin_new_product'
         within('#new_product') do
           expect(page).to have_content('SKU')
@@ -156,7 +156,7 @@ describe 'Products', type: :feature do
         select @shipping_category.name, from: 'product_shipping_category_id'
         click_button 'Create'
         expect(page).to have_content('successfully created!')
-        expect(Spree::Product.last.variants.length).to eq(1)
+        expect(Viauco::Product.last.variants.length).to eq(1)
       end
 
       it 'does not display variants when prototype does not contain option types' do
@@ -205,7 +205,7 @@ describe 'Products', type: :feature do
     context 'creating a new product' do
       before do
         @shipping_category = create(:shipping_category)
-        visit spree.admin_products_path
+        visit viauco.admin_products_path
         click_link 'admin_new_product'
         within('#new_product') do
           expect(page).to have_content('SKU')
@@ -282,7 +282,7 @@ describe 'Products', type: :feature do
       it 'allows an admin to clone a product' do
         create(:product)
 
-        visit spree.admin_products_path
+        visit viauco.admin_products_path
         within_row(1) do
           click_icon :clone
         end
@@ -294,7 +294,7 @@ describe 'Products', type: :feature do
         it 'allows an admin to clone a deleted product' do
           create(:product, name: 'apache baseball cap')
 
-          visit spree.admin_products_path
+          visit viauco.admin_products_path
           click_on 'Filter'
           check 'Show Deleted'
           click_on 'Search'
@@ -324,15 +324,15 @@ describe 'Products', type: :feature do
       end
 
       it 'parses correctly available_on' do
-        visit spree.admin_product_path(product)
+        visit viauco.admin_product_path(product)
         fill_in 'product_available_on', with: '2012/12/25'
         click_button 'Update'
         expect(page).to have_content('successfully updated!')
-        expect(Spree::Product.last.available_on.to_s).to eq('2012-12-25 00:00:00 UTC')
+        expect(Viauco::Product.last.available_on.to_s).to eq('2012-12-25 00:00:00 UTC')
       end
 
       it 'adds option_types when selecting a prototype', js: true do
-        visit spree.admin_product_path(product)
+        visit viauco.admin_product_path(product)
         within('#sidebar') do
           click_link 'Properties'
         end
@@ -387,7 +387,7 @@ describe 'Products', type: :feature do
         end
 
         it 'parses correctly decimal values like weight' do
-          visit spree.admin_product_path(product)
+          visit viauco.admin_product_path(product)
           fill_in 'product_weight', with: '1'
           click_button 'Update'
           weight_prev = find('#product_weight').value
@@ -401,7 +401,7 @@ describe 'Products', type: :feature do
       let!(:product) { create(:product) }
 
       it 'is still viewable' do
-        visit spree.admin_products_path
+        visit viauco.admin_products_path
         accept_confirm do
           click_icon :delete
         end
@@ -420,7 +420,7 @@ describe 'Products', type: :feature do
 
     context 'filtering products', js: true do
       it 'renders selected filters' do
-        visit spree.admin_products_path
+        visit viauco.admin_products_path
 
         click_on 'Filter'
 
@@ -441,16 +441,16 @@ describe 'Products', type: :feature do
 
   context 'with only product permissions' do
     before do
-      allow_any_instance_of(Spree::Admin::BaseController).to receive(:spree_current_user).and_return(nil)
+      allow_any_instance_of(Viauco::Admin::BaseController).to receive(:viauco_current_user).and_return(nil)
     end
 
     custom_authorization! do |_user|
-      can [:admin, :update, :read], Spree::Product
+      can [:admin, :update, :read], Viauco::Product
     end
     let!(:product) { create(:product) }
 
     it 'only displays accessible links on index' do
-      visit spree.admin_products_path
+      visit viauco.admin_products_path
 
       expect(page).to have_link('Products')
       expect(page).not_to have_link('Option Types')
@@ -463,7 +463,7 @@ describe 'Products', type: :feature do
     end
 
     it 'only displays accessible links on edit' do
-      visit spree.admin_product_path(product)
+      visit viauco.admin_product_path(product)
 
       # product tabs should be hidden
       expect(page).to have_link('Details')

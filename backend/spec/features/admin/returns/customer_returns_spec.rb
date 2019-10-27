@@ -8,7 +8,7 @@ describe 'Customer Returns', type: :feature do
     let!(:customer_return_2) { create(:customer_return, created_at: Time.current - 1.day) }
 
     before do
-      visit spree.admin_customer_returns_path
+      visit viauco.admin_customer_returns_path
     end
 
     it 'lists sorted by created_at' do
@@ -29,7 +29,7 @@ describe 'Customer Returns', type: :feature do
     end
 
     it 'displays status' do
-      within_row(1) { expect(page).to have_content(Spree.t(:incomplete)) }
+      within_row(1) { expect(page).to have_content(Viauco.t(:incomplete)) }
     end
 
     it 'has edit link' do
@@ -41,7 +41,7 @@ describe 'Customer Returns', type: :feature do
     let!(:customer_return_2) { create(:customer_return) }
 
     before do
-      visit spree.admin_customer_returns_path
+      visit viauco.admin_customer_returns_path
     end
 
     it 'searches on number' do
@@ -78,7 +78,7 @@ describe 'Customer Returns', type: :feature do
   describe 'link' do
     describe 'order number' do
       it 'opens orders edit page' do
-        visit spree.admin_customer_returns_path
+        visit viauco.admin_customer_returns_path
         click_link customer_return.order.number
         expect(page).to have_content("Orders / #{customer_return.order.number}")
       end
@@ -86,7 +86,7 @@ describe 'Customer Returns', type: :feature do
 
     describe 'customer return number' do
       it 'opens customer return edit page' do
-        visit spree.admin_customer_returns_path
+        visit viauco.admin_customer_returns_path
         click_link customer_return.number
         expect(page).to have_content("Customer Return ##{customer_return.number}")
       end

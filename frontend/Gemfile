@@ -1,6 +1,6 @@
-eval_gemfile('../common_spree_dependencies.rb')
+eval_gemfile('../common_viauco_dependencies.rb')
 
-gem 'spree_core', path: '../core'
-gem 'spree_api', path: '../api'
+gem 'viauco_core', path: '../core'
+gem 'viauco_api', path: '../api'
 
 gemspec

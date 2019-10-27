@@ -1,13 +1,13 @@
 ---
-title: Upgrading Spree from 0.60.x to 0.70.x
+title: Upgrading Viauco from 0.60.x to 0.70.x
 section: upgrades
 order: 16
 ---
 
 ## Overview
 
-This guide covers upgrading a 0.60.x Spree store, to a 0.70.x store. This
-guide has been written from the perspective of a blank Spree 0.60.x store with
+This guide covers upgrading a 0.60.x Viauco store, to a 0.70.x store. This
+guide has been written from the perspective of a blank Viauco 0.60.x store with
 no extensions.
 
 If you have extensions that your store depends on, you will need to manually
@@ -16,8 +16,8 @@ upgrade is complete.
 
 ## Upgrade Rails
 
-Spree 0.60.x depends on Rails 3.0.12, whereas Spree 0.70.x depends on any Rails
-version from 3.1.1 up to 3.1.4. The first step in upgrading Spree is to
+Viauco 0.60.x depends on Rails 3.0.12, whereas Viauco 0.70.x depends on any Rails
+version from 3.1.1 up to 3.1.4. The first step in upgrading Viauco is to
 upgrade the Rails version in the `Gemfile`:
 
 ````ruby
@@ -25,14 +25,14 @@ gem 'rails', '3.1.12'```
 
 For more information, please read the [Upgrading Ruby on Rails Guide](http://guides.rubyonrails.org/upgrading_ruby_on_rails.html#upgrading-from-rails-3-0-to-rails-3-1).
 
-## Upgrade Spree
+## Upgrade Viauco
 
 For best results, use the 0-70-stable branch from GitHub:
 
 ```ruby
-gem 'spree', github: 'spree/spree', branch: '0-70-stable'```
+gem 'viauco', github: 'viauco/viauco', branch: '0-70-stable'```
 
-Run `bundle update rails` and `bundle update spree` and verify that was successful.
+Run `bundle update rails` and `bundle update viauco` and verify that was successful.
 
 ## Remove debug_rjs configuration
 
@@ -41,21 +41,21 @@ In `config/environments/development.rb`, remove this line:
 ```ruby
 config.action_view.debug_rjs = true```
 
-## Remove lib/spree_site.rb
+## Remove lib/viauco_site.rb
 
-This file is no longer used in 0.70.x versions of Spree.
+This file is no longer used in 0.70.x versions of Viauco.
 
 ## Set up new data
 
 To migrate the data across, use these commands:
 
 ```bash
-rails g spree:site
+rails g viauco:site
 rake db:migrate```
 
 ## The Asset Pipline
 
-With the upgrade to Rails 3.1 comes the [asset pipeline](http://guides.rubyonrails.org/asset_pipeline.html). You need to add these gems to your Gemfile in order to support Spree's assets being served:
+With the upgrade to Rails 3.1 comes the [asset pipeline](http://guides.rubyonrails.org/asset_pipeline.html). You need to add these gems to your Gemfile in order to support Viauco's assets being served:
 
 ```ruby
 group :assets do

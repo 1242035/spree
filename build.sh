@@ -17,37 +17,37 @@ prepare_app(){
 # Target postgres. Override with: `DB=sqlite bash build.sh`
 export DB=${DB:-postgres}
 
-# Spree defaults
-echo "Setup Spree defaults..."
+# Viauco defaults
+echo "Setup Viauco defaults..."
 bundle check || bundle update --quiet
 
-# Spree API
+# Viauco API
 echo "**************************************"
-echo "* Setup Spree API and running RSpec..."
+echo "* Setup Viauco API and running RSpec..."
 echo "**************************************"
 cd api; prepare_app; bundle exec rspec spec
 
-# Spree Backend
+# Viauco Backend
 echo "******************************************"
-echo "* Setup Spree Backend and running RSpec..."
+echo "* Setup Viauco Backend and running RSpec..."
 echo "******************************************"
 cd ../backend; prepare_app; bundle exec rspec spec
 
-# Spree Core
+# Viauco Core
 echo "***************************************"
-echo "* Setup Spree Core and running RSpec..."
+echo "* Setup Viauco Core and running RSpec..."
 echo "***************************************"
 cd ../core; prepare_app; bundle exec rspec spec
 
-# Spree Frontend
+# Viauco Frontend
 echo "*******************************************"
-echo "* Setup Spree Frontend and running RSpec..."
+echo "* Setup Viauco Frontend and running RSpec..."
 echo "*******************************************"
 cd ../frontend; prepare_app; bundle exec rspec spec
 
-# Spree Sample
+# Viauco Sample
 echo "*****************************************"
-echo "* Setup Spree Sample and running RSpec..."
+echo "* Setup Viauco Sample and running RSpec..."
 echo "*****************************************"
 cd ../sample; prepare_app; bundle exec rspec spec
 

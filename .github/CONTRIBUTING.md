@@ -8,7 +8,7 @@ Here's a quick guide:
 
 2. Clone the fork to your local machine
 
-3. Run `bundle install` inside `spree` directory
+3. Run `bundle install` inside `viauco` directory
 
 4. Create a sandbox environment
 
@@ -27,7 +27,7 @@ Here's a quick guide:
 refactoring and documentation changes require no new tests. If you are adding
 functionality or fixing a bug, we need tests!
 
-7. Run the tests. [See instructions](https://github.com/spree/spree#running-tests)
+7. Run the tests. [See instructions](https://github.com/viauco/viauco#running-tests)
 
 8. Push to your fork and submit a pull request. If the changes will apply cleanly
 to the master branch, you will only need to submit one pull request.

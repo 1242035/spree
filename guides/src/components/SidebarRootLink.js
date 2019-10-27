@@ -39,12 +39,12 @@ const SidebarRootLink = ({
     {itemsLength > 0 ? (
       <Link
         to={href}
-        className={cx({ 'spree-green': isOpen }, 'link spree-blue db fw5 ml3')}
+        className={cx({ 'viauco-green': isOpen }, 'link viauco-blue db fw5 ml3')}
       >
         {title}
       </Link>
     ) : (
-      <span className="pointer spree-blue ml3" onClick={() => toggleSection()}>
+      <span className="pointer viauco-blue ml3" onClick={() => toggleSection()}>
         {title}
       </span>
     )}

@@ -1,6 +1,6 @@
 ---
 title: Product Images
-description: Use the Spree Commerce storefront API to access Product Images data.
+description: Use the Viauco Commerce storefront API to access Product Images data.
 ---
 
 ## Index
@@ -70,7 +70,7 @@ For instance, a request using cURL will look like this:
 
 ```bash
 curl -i -X POST \
-  -H "X-Spree-Token: USER_TOKEN" \
+  -H "X-Viauco-Token: USER_TOKEN" \
   -H "Content-Type: multipart/form-data" \
   -F "image[attachment]=@/absolute/path/to/image.jpg" \
   -F "type=image/jpeg" \
@@ -95,7 +95,7 @@ A cURL request to update a product image would look like this:
 
 ```bash
 curl -i -X PUT \
-  -H "X-Spree-Token: USER_TOKEN" \
+  -H "X-Viauco-Token: USER_TOKEN" \
   -H "Content-Type: multipart/form-data" \
   -F "image[attachment]=@/new/path/to/image.jpg" \
   -F "type=image/jpeg" \

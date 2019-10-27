@@ -1,0 +1,19 @@
+<%= render partial: 'viauco/admin/shared/product_tabs', locals: { current: :images } %>
+
+<%= render partial: 'viauco/admin/shared/error_messages', locals: { target: @object } %>
+
+<% content_for :page_title do %>
+  <%= Viauco.t(:new_image) %>
+<% end %>
+
+<%= form_for [:admin, @product, @image], html: { multipart: true } do |f| %>
+  <fieldset data-hook="new_image">
+    <%= render partial: 'form', locals: { f: f } %>
+
+    <div class="form-actions" data-hook="buttons">
+      <%= button Viauco.t('actions.create'), 'save' %>
+      <span class="or"><%= Viauco.t(:or) %></span>
+      <%= button_link_to Viauco.t('actions.cancel'), viauco.admin_product_images_url(@product), icon: 'delete', id: 'cancel_link' %>
+    </div>
+  </fieldset>
+<% end %>

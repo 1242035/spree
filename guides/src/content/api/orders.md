@@ -1,6 +1,6 @@
 ---
 title: Orders
-description: Use the Spree Commerce storefront API to access Order data.
+description: Use the Viauco Commerce storefront API to access Order data.
 ---
 
 ## Index
@@ -46,7 +46,7 @@ To search for a particular order, make a request like this:
 GET /api/v1/orders?q[email_cont]=bob
 ```
 
-The searching API is provided through the Ransack gem which Spree depends on. The `email_cont` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
+The searching API is provided through the Ransack gem which Viauco depends on. The `email_cont` here is called a predicate, and you can learn more about them by reading about [Predicates on the Ransack wiki](https://github.com/ernie/ransack/wiki/Basic-Searching).
 
 The search results are paginated.
 
@@ -87,7 +87,7 @@ Users may pass in the order's token in order to be authorized to view an order:
 GET /api/v1/orders/R123456789?order_token=abcdef123456
 ```
 
-The `order_token` parameter will work for authorizing any action for an order within Spree's API.
+The `order_token` parameter will work for authorizing any action for an order within Viauco's API.
 
 ### Successful Response
 

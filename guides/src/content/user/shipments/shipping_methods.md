@@ -45,7 +45,7 @@ You can optionally input a tracking URL for your new shipping method. This allow
 You may need to check with the shipping carrier to see if they have a Shipping Confirmation URL that customers can use for this service. Some [commonly-used tracking URLs](http://verysimple.com/2011/07/06/ups-tracking-url/) are available online.
 
 !!!
-Please note that Spree Commerce, Inc. makes no claims of warranty or accuracy for the information presented on third-party websites. We strongly urge you to verify the information independently before you put it into production on your store.
+Please note that Viauco Commerce, Inc. makes no claims of warranty or accuracy for the information presented on third-party websites. We strongly urge you to verify the information independently before you put it into production on your store.
 !!!
 
 ### Categories
@@ -66,7 +66,7 @@ Check the boxes next to any zones you want served by this shipping method.
 
 ### Calculator
 
-Each shipping method is associated with one [Calculator](/user/shipments/calculators.html). You can choose one of the built-in Spree calculators, or one you made yourself.
+Each shipping method is associated with one [Calculator](/user/shipments/calculators.html). You can choose one of the built-in Viauco calculators, or one you made yourself.
 
 ![Shipping Method Calculator](../../../images/user/shipments/shipping_method_calculator.jpg)
 

@@ -5,7 +5,7 @@ section: core
 
 ## Overview
 
-Spree makes extensive use of the `Spree::Calculator` model and there are several subclasses provided to deal with various types of calculations (flat rate, percentage discount, sales tax, VAT, etc.) All calculators extend the `Spree::Calculator` class and must provide the following methods:
+Viauco makes extensive use of the `Viauco::Calculator` model and there are several subclasses provided to deal with various types of calculations (flat rate, percentage discount, sales tax, VAT, etc.) All calculators extend the `Viauco::Calculator` class and must provide the following methods:
 
 ```ruby
 def self.description
@@ -17,11 +17,11 @@ def compute(object=nil)
 end
 ```
 
-Calculators link to a `calculable` object, which are typically one of `Spree::ShippingMethod`, `Spree::TaxRate`, or `Spree::Promotion::Actions::CreateAdjustment`. These three classes use the `Spree::Core::CalculatedAdjustment` module described below to provide an easy way to calculate adjustments for their objects.
+Calculators link to a `calculable` object, which are typically one of `Viauco::ShippingMethod`, `Viauco::TaxRate`, or `Viauco::Promotion::Actions::CreateAdjustment`. These three classes use the `Viauco::Core::CalculatedAdjustment` module described below to provide an easy way to calculate adjustments for their objects.
 
 ## Available Calculators
 
-The following are descriptions of the currently available calculators in Spree. If you would like to add your own, please see the [Creating a New Calculator](#creating-a-new-calculator) section.
+The following are descriptions of the currently available calculators in Viauco. If you would like to add your own, please see the [Creating a New Calculator](#creating-a-new-calculator) section.
 
 ### Default Tax
 
@@ -97,7 +97,7 @@ This calculator takes two preferences:
 - `amount`: The amount per item to calculate.
 - `currency`: The currency for this calculator.
 
-This calculator depends on its `calculable` responding to a `promotion` method, which should return a `Spree::Promotion` (or similar) object. This object should then return a list of rules, which should respond to a `products` method. This is used to return a result of matching products.
+This calculator depends on its `calculable` responding to a `promotion` method, which should return a `Viauco::Promotion` (or similar) object. This object should then return a list of rules, which should respond to a `products` method. This is used to return a result of matching products.
 
 The list of matching products is compared against the line items for the order being calculated. If any of the matching products are included in the order, they are eligible for this calculator. The calculation is this:
 
@@ -141,16 +141,16 @@ The Price Sack calculator is useful for when you want to provide a discount for 
 - `minimal_amount`: The minimum amount for the line items total to trigger the calculator.
 - `discount_amount`: The amount to discount from the order if the line items total is equal to or greater than the `minimal_amount`.
 - `normal_amount`: The amount to discount from the order if the line items total is less than the `minimal_amount`.
-- `currency`: The currency for this calculator. Defaults to the currency you have set for your store with `Spree::Config[:currency]`
+- `currency`: The currency for this calculator. Defaults to the currency you have set for your store with `Viauco::Config[:currency]`
 
 Suppose you have a Price Sack calculator with a `minimal_amount` preference of \$50, a `normal_amount` preference of $2, and a `discount_amount` of$5. An order with a line items total of $60 would result in a discount of$5 for the whole order. An order of $20 would result in a discount of$2.
 
 ## Creating a New Calculator
 
-To create a new calculator for Spree, you need to do two things. The first is to inherit from the `Spree::Calculator` class and define `description` and `compute` methods on that class:
+To create a new calculator for Viauco, you need to do two things. The first is to inherit from the `Viauco::Calculator` class and define `description` and `compute` methods on that class:
 
 ```ruby
-class CustomCalculator < Spree::Calculator
+class CustomCalculator < Viauco::Calculator
   def self.description
     # Human readable description of the calculator
   end
@@ -161,10 +161,10 @@ class CustomCalculator < Spree::Calculator
 end
 ```
 
-If you are creating a new calculator for shipping methods, please be aware that you need to inherit from `Spree::ShippingCalculator` instead, and define a `compute_package` method:
+If you are creating a new calculator for shipping methods, please be aware that you need to inherit from `Viauco::ShippingCalculator` instead, and define a `compute_package` method:
 
 ```ruby
-class CustomCalculator < Spree::ShippingCalculator
+class CustomCalculator < Viauco::ShippingCalculator
   def self.description
     # Human readable description of the calculator
   end
@@ -175,20 +175,20 @@ class CustomCalculator < Spree::ShippingCalculator
 end
 ```
 
-The second thing is to register this calculator as a tax, shipping, or promotion adjustment calculator by calling code like this at the end of `config/initializers/spree.rb` inside your application (`config` variable defined for brevity):
+The second thing is to register this calculator as a tax, shipping, or promotion adjustment calculator by calling code like this at the end of `config/initializers/viauco.rb` inside your application (`config` variable defined for brevity):
 
 ```ruby
 config = Rails.application.config
-config.spree.calculators.tax_rates << CustomCalculator
-config.spree.calculators.shipping_methods << CustomCalculator
-config.spree.calculators.promotion_actions_create_adjustments << CustomCalculator
+config.viauco.calculators.tax_rates << CustomCalculator
+config.viauco.calculators.shipping_methods << CustomCalculator
+config.viauco.calculators.promotion_actions_create_adjustments << CustomCalculator
 ```
 
-For example if your calculator is placed in `app/models/spree/calculator/shipping/my_own_calculator.rb` you should call:
+For example if your calculator is placed in `app/models/viauco/calculator/shipping/my_own_calculator.rb` you should call:
 
 ```ruby
 config = Rails.application.config
-config.spree.calculators.shipping_methods << Spree::Calculator::Shipping::MyOwnCalculator
+config.viauco.calculators.shipping_methods << Viauco::Calculator::Shipping::MyOwnCalculator
 ```
 
 ### Determining Availability
@@ -196,7 +196,7 @@ config.spree.calculators.shipping_methods << Spree::Calculator::Shipping::MyOwnC
 By default, all shipping method calculators are available at all times. If you wish to make this dependent on something from the order, you can re-define the `available?` method inside your calculator:
 
 ```ruby
-class CustomCalculator < Spree::Calculator
+class CustomCalculator < Viauco::Calculator
   def available?(object)
     object.currency == "USD"
   end
@@ -205,18 +205,18 @@ end
 
 ## Calculated Adjustments
 
-If you wish to use Spree's calculator functionality for your own application, you can include the `Spree::Core::CalculatedAdjustments` module into a model of your choosing.
+If you wish to use Viauco's calculator functionality for your own application, you can include the `Viauco::Core::CalculatedAdjustments` module into a model of your choosing.
 
 ```ruby
 class Plan < ActiveRecord::Base
-  include Spree::Core::CalculatedAdjustments
+  include Viauco::Core::CalculatedAdjustments
 end
 ```
 
 To have calculators available for this class, you will need to register them:
 
 ```ruby
-config.spree.calculators.plans << CustomCalculator
+config.viauco.calculators.plans << CustomCalculator
 ```
 
 Then you can access these calculators by calling this method:

@@ -19,11 +19,11 @@ describe 'Orders Listing', type: :feature do
   end
 
   before do
-    allow_any_instance_of(Spree::OrderInventory).to receive(:add_to_shipment)
+    allow_any_instance_of(Viauco::OrderInventory).to receive(:add_to_shipment)
     # create the order instances after stubbing the `add_to_shipment` method
     order1
     order2
-    visit spree.admin_orders_path
+    visit viauco.admin_orders_path
   end
 
   describe 'listing orders' do
@@ -72,7 +72,7 @@ describe 'Orders Listing', type: :feature do
     end
 
     it 'returns both complete and incomplete orders when only complete orders is not checked' do
-      Spree::Order.create! email: 'incomplete@example.com', completed_at: nil, state: 'cart'
+      Viauco::Order.create! email: 'incomplete@example.com', completed_at: nil, state: 'cart'
       click_on 'Filter'
       uncheck 'q_completed_at_not_null'
       click_on 'Filter Results'
@@ -110,18 +110,18 @@ describe 'Orders Listing', type: :feature do
 
     context 'when pagination is really short' do
       before do
-        @old_per_page = Spree::Config[:admin_orders_per_page]
-        Spree::Config[:admin_orders_per_page] = 1
+        @old_per_page = Viauco::Config[:admin_orders_per_page]
+        Viauco::Config[:admin_orders_per_page] = 1
       end
 
       after do
-        Spree::Config[:admin_orders_per_page] = @old_per_page
+        Viauco::Config[:admin_orders_per_page] = @old_per_page
       end
 
       # Regression test for #4004
       it 'is able to go from page to page for incomplete orders' do
-        Spree::Order.destroy_all
-        2.times { Spree::Order.create! email: 'incomplete@example.com', completed_at: nil, state: 'cart' }
+        Viauco::Order.destroy_all
+        2.times { Viauco::Order.create! email: 'incomplete@example.com', completed_at: nil, state: 'cart' }
         click_on 'Filter'
         uncheck 'q_completed_at_not_null'
         click_on 'Filter Results'
@@ -149,7 +149,7 @@ describe 'Orders Listing', type: :feature do
       before do
         order1.promotions << promotion
         order1.save
-        visit spree.admin_orders_path
+        visit viauco.admin_orders_path
       end
 
       it 'only shows the orders with the selected promotion' do
@@ -175,7 +175,7 @@ describe 'Orders Listing', type: :feature do
 
     context 'filter on shipment state' do
       it 'only shows the orders with the selected shipment state' do
-        select Spree.t("payment_states.#{order1.shipment_state}"), from: 'Shipment State'
+        select Viauco.t("payment_states.#{order1.shipment_state}"), from: 'Shipment State'
         click_on 'Filter Results'
         within_row(1) { expect(page).to have_content('R100') }
         within('table#listing_orders') { expect(page).not_to have_content('R200') }
@@ -184,14 +184,14 @@ describe 'Orders Listing', type: :feature do
 
     context 'filter on payment state' do
       it 'only shows the orders with the selected payment state' do
-        select Spree.t("payment_states.#{order1.payment_state}"), from: 'Payment State'
+        select Viauco.t("payment_states.#{order1.payment_state}"), from: 'Payment State'
         click_on 'Filter Results'
         within_row(1) { expect(page).to have_content('R100') }
         within('table#listing_orders') { expect(page).not_to have_content('R200') }
       end
     end
 
-    # regression tests for https://github.com/spree/spree/issues/6888
+    # regression tests for https://github.com/viauco/viauco/issues/6888
     context 'per page dropdown', js: true do
       before do
         within('div.index-pagination-row', match: :first) do
@@ -230,7 +230,7 @@ describe 'Orders Listing', type: :feature do
       before do
         order1.promotions << promotion
         order1.save
-        visit spree.admin_orders_path
+        visit viauco.admin_orders_path
       end
 
       it 'renders selected filters' do
@@ -248,8 +248,8 @@ describe 'Orders Listing', type: :feature do
           fill_in 'q_email_cont', with: 'john_smith@example.com'
           fill_in 'q_line_items_variant_sku_eq', with: 'BAG-00001'
           select 'Promo', from: 'q_promotions_id_in'
-          select 'Spree Test Store', match: :first, from: 'q_store_id_in'
-          select 'spree', from: 'q_channel_eq'
+          select 'Viauco Test Store', match: :first, from: 'q_store_id_in'
+          select 'viauco', from: 'q_channel_eq'
         end
 
         click_on 'Filter Results'
@@ -266,8 +266,8 @@ describe 'Orders Listing', type: :feature do
           expect(page).to have_content('Email: john_smith@example.com')
           expect(page).to have_content('SKU: BAG-00001')
           expect(page).to have_content('Promotion: Promo')
-          expect(page).to have_content('Store: Spree Test Store')
-          expect(page).to have_content('Channel: spree')
+          expect(page).to have_content('Store: Viauco Test Store')
+          expect(page).to have_content('Channel: viauco')
         end
       end
     end

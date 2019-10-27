@@ -5,21 +5,21 @@ section: "core"
 
 ## Overview
 
-This guide explains how Spree represents shipping options and how it calculates expected costs, and shows how you can configure the system with your own shipping methods. After reading it you should know:
+This guide explains how Viauco represents shipping options and how it calculates expected costs, and shows how you can configure the system with your own shipping methods. After reading it you should know:
 
-* how shipments and shipping are implemented in Spree
+* how shipments and shipping are implemented in Viauco
 * how to specify your shipping structure
 * how split shipments work
 * how to configure products for special shipping treatment
 * how to capture shipping instructions
 
-Spree uses a very flexible and effective system to calculate shipping, accommodating the full range of shipment pricing: from simple flat rate to complex product-type- and weight-dependent calculations.
+Viauco uses a very flexible and effective system to calculate shipping, accommodating the full range of shipment pricing: from simple flat rate to complex product-type- and weight-dependent calculations.
 
 The Shipment model is used to track how items are delivered to the buyer.
 
 Shipments have the following attributes:
 
-* `number`: The unique identifier for this shipment. It begins with the letter H and ends in an 11-digit number. This number is shown to the users, and can be used to find the order by calling `Spree::Shipment.find_by(number: number)`.
+* `number`: The unique identifier for this shipment. It begins with the letter H and ends in an 11-digit number. This number is shown to the users, and can be used to find the order by calling `Viauco::Shipment.find_by(number: number)`.
 * `tracking`: The identifier given for the shipping provider (i.e. FedEx, UPS, etc).
 * `shipped_at`: The time when the shipment was shipped.
 * `state`: The current state of the shipment.
@@ -36,7 +36,7 @@ An explanation of the different states:
 * `shipped`: The shipment is on its way to the buyer.
 * `canceled`: When an order is cancelled, all of its shipments will also be cancelled. When this happens, all items in the shipment will be restocked. If an order is "resumed", then the shipment will also be resumed.
 
-Explaining each piece of the shipment world inside of Spree separately and how each piece fits together can be a cumbersome task. Fortunately, using a few simple examples makes it much easier to grasp. In that spirit, the examples are shown first in this guide.
+Explaining each piece of the shipment world inside of Viauco separately and how each piece fits together can be a cumbersome task. Fortunately, using a few simple examples makes it much easier to grasp. In that spirit, the examples are shown first in this guide.
 
 ## Examples
 
@@ -114,7 +114,7 @@ To achieve this setup you need the following configuration:
 
 ## Design & Functionality
 
-To properly leverage Spree's shipping system's flexibility you must understand a few key concepts:
+To properly leverage Viauco's shipping system's flexibility you must understand a few key concepts:
 
 * Shipping Methods
 * Zones
@@ -171,7 +171,7 @@ During checkout, the shipping categories of the products in your order will dete
 
 A Calculator is the component responsible for calculating the shipping price for each available Shipping Method.
 
-Spree ships with 5 default Calculators:
+Viauco ships with 5 default Calculators:
 
 * Flat rate (per order)
 * Flat rate (per item/product)
@@ -194,7 +194,7 @@ After entering a shipping address, the system displays the available shipping op
 The customer must choose a shipping method for each shipment before proceeding to the next stage. At the confirmation step, the shipping cost will be shown and included in the order's total.
 
 ***
-You can enable collection of extra _shipping instructions_ by setting the option `Spree::Config.shipping_instructions` to `true`. This is set to `false` by default. See [Shipping Instructions](#shipping-instructions) below.
+You can enable collection of extra _shipping instructions_ by setting the option `Viauco::Config.shipping_instructions` to `true`. This is set to `false` by default. See [Shipping Instructions](#shipping-instructions) below.
 ***
 
 ### What the Order's Administrator Sees
@@ -203,11 +203,11 @@ You can enable collection of extra _shipping instructions_ by setting the option
 
 ## Advanced Shipping Methods
 
-Spree comes with a set of calculators that should fit most of the shipping situations that may arise. If the calculators that come with Spree are not enough for your needs, you might want to use an extension - if one exists to meet your needs - or create a custom one.
+Viauco comes with a set of calculators that should fit most of the shipping situations that may arise. If the calculators that come with Viauco are not enough for your needs, you might want to use an extension - if one exists to meet your needs - or create a custom one.
 
 ### Extensions
 
-There are a few Spree extensions which provide additional shipping methods, including special support for fees imposed by common carriers, or support for bulk orders. See the [Spree Extension Registry](https://github.com/spree-contrib) for the latest information.
+There are a few Viauco extensions which provide additional shipping methods, including special support for fees imposed by common carriers, or support for bulk orders. See the [Viauco Extension Registry](https://github.com/viauco-contrib) for the latest information.
 
 ### Writing Your Own
 
@@ -233,28 +233,28 @@ Variants can be specified with weight and dimension information. Some shipping m
 
 ## Shipping Instructions
 
-The option `Spree::Config[:shipping_instructions]` controls collection of additional shipping instructions. This is turned off (set to `false`) by default. If an order has any shipping instructions attached, they will be shown in an order's shipment admin page and can also be edited at that stage. Observe that instructions are currently attached to the _order_ and not to actual _shipments_.
+The option `Viauco::Config[:shipping_instructions]` controls collection of additional shipping instructions. This is turned off (set to `false`) by default. If an order has any shipping instructions attached, they will be shown in an order's shipment admin page and can also be edited at that stage. Observe that instructions are currently attached to the _order_ and not to actual _shipments_.
 
 ## The Active Shipping Extension
 
-The popular `spree_active_shipping` extension harnesses the `active_shipping` gem to interface with carrier APIs such as USPS, Fedex and UPS, ultimately providing Spree-compatible calculators for the different delivery services of those carriers.
+The popular `viauco_active_shipping` extension harnesses the `active_shipping` gem to interface with carrier APIs such as USPS, Fedex and UPS, ultimately providing Viauco-compatible calculators for the different delivery services of those carriers.
 
-To install the `spree-active-shipping` extension add the following to your `Gemfile`:
+To install the `viauco-active-shipping` extension add the following to your `Gemfile`:
 
 ```ruby
-gem 'spree_active_shipping'
+gem 'viauco_active_shipping'
 gem 'active_shipping', git: 'git://github.com/Shopify/active_shipping.git'
 ```
 
 and run `bundle install` from the command line.
 
-As an example of how to use the [spree_active_shipping extension](https://github.com/spree/spree_active_shipping) we'll demonstrate how to configure it to work with the USPS API. The other carriers follow a very similar pattern.
+As an example of how to use the [viauco_active_shipping extension](https://github.com/viauco/viauco_active_shipping) we'll demonstrate how to configure it to work with the USPS API. The other carriers follow a very similar pattern.
 
 For each USPS delivery service you want to offer (e.g. "USPS Media Mail"), you will need to create a `ShippingMethod` with a descriptive name ("Configuration" -> "Shipping Methods") and a `Calculator` (registered in the `active_shipping` extension) that ties the delivery service and the shipping method together.
 
 ### Default Calculators
 
-The `spree_active_shipping` extension comes with several pre-configured calculators out of the box. For example, here are the ones provided for the USPS carrier:
+The `viauco_active_shipping` extension comes with several pre-configured calculators out of the box. For example, here are the ones provided for the USPS carrier:
 
 ```ruby
 def activate
@@ -274,20 +274,20 @@ Each USPS delivery service you want to make available at checkout has to be asso
 
 With zones in place, we can now start adding some shipping methods through the admin panel. The only other essential requirement to calculate the shipping total at checkout is that each product and variant be assigned a weight.
 
-The `spree_active_shipping` gem needs some configuration variables set in order to consume the carrier web services.
+The `viauco_active_shipping` gem needs some configuration variables set in order to consume the carrier web services.
 
 ```ruby
   # these can be set in an initializer in your site extension
-  Spree::ActiveShipping::Config.set(usps_login: "YOUR_USPS_LOGIN")
-  Spree::ActiveShipping::Config.set(fedex_login: "YOUR_FEDEX_LOGIN")
-  Spree::ActiveShipping::Config.set(fedex_password: "YOUR_FEDEX_PASSWORD")
-  Spree::ActiveShipping::Config.set(fedex_account: "YOUR_FEDEX_ACCOUNT")
-  Spree::ActiveShipping::Config.set(fedex_key: "YOUR_FEDEX_KEY")
+  Viauco::ActiveShipping::Config.set(usps_login: "YOUR_USPS_LOGIN")
+  Viauco::ActiveShipping::Config.set(fedex_login: "YOUR_FEDEX_LOGIN")
+  Viauco::ActiveShipping::Config.set(fedex_password: "YOUR_FEDEX_PASSWORD")
+  Viauco::ActiveShipping::Config.set(fedex_account: "YOUR_FEDEX_ACCOUNT")
+  Viauco::ActiveShipping::Config.set(fedex_key: "YOUR_FEDEX_KEY")
 ```
 
 ### Adding Additional Calculators
 
-Additional delivery services that are not pre-configured as a calculator in the `spree_active_shipping` extension can be easily added. Say, for example, you need First Class International Parcels via the US Postal Service.
+Additional delivery services that are not pre-configured as a calculator in the `viauco_active_shipping` extension can be easily added. Say, for example, you need First Class International Parcels via the US Postal Service.
 
 First, create a calculator class that inherits from `Calculator::Usps::Base` and implements a description class method:
 
@@ -314,7 +314,7 @@ class Calculator::ActiveShipping < Calculator
     # raise rates.inspect
 
     return nil unless rates
-    rate = rates[self.description].to_f + (Spree::ActiveShipping::Config[:handling_fee].to_f || 0.0)
+    rate = rates[self.description].to_f + (Viauco::ActiveShipping::Config[:handling_fee].to_f || 0.0)
     return nil unless rate
     # divide by 100 since active_shipping rates are expressed as cents
 
@@ -332,7 +332,7 @@ class Calculator::ActiveShipping < Calculator
 end
 ```
 
-As you can see in the code above, the `spree_active_shipping` gem returns an array of services with their corresponding prices, which the `retrieve_rates` method converts into a hash. Below is what would get returned for an order with an international destination:
+As you can see in the code above, the `viauco_active_shipping` gem returns an array of services with their corresponding prices, which the `retrieve_rates` method converts into a hash. Below is what would get returned for an order with an international destination:
 
 ```ruby
 {
@@ -355,7 +355,7 @@ As you can see in the code above, the `spree_active_shipping` gem returns an arr
 From all of the viable shipping services in this hash, the `compute` method selects the one that matches the description of the calculator. At this point, an optional flat handling fee (set via preferences) can be added:
 
 ```ruby
-rate = rates[self.description].to_f + (Spree::ActiveShipping::Config[:handling_fee].to_f || 0.0)
+rate = rates[self.description].to_f + (Viauco::ActiveShipping::Config[:handling_fee].to_f || 0.0)
 ```
 
 Finally, don't forget to register the calculator you added. In extensions, this is accomplished with the `activate` method:
@@ -371,7 +371,7 @@ end
 Ordinarily, it is the zone of the shipping address that determines which shipping methods are displayed to a customer at checkout. Here is how the availability of a shipping method is determined:
 
 ```ruby
-class Spree::Stock::Estimator
+class Viauco::Stock::Estimator
   def shipping_methods(package)
     shipping_methods = package.shipping_methods
     shipping_methods.delete_if { |ship_method| !ship_method.calculator.available?(package.contents) }
@@ -409,7 +409,7 @@ end
 
 ### Introduction
 
-Split shipments are a new feature as of Spree 2.0 that addresses the needs of complex Spree stores that require sophisticated shipping and warehouse logic. This includes detailed inventory management and allows for shipping from multiple locations.
+Split shipments are a new feature as of Viauco 2.0 that addresses the needs of complex Viauco stores that require sophisticated shipping and warehouse logic. This includes detailed inventory management and allows for shipping from multiple locations.
 
 ![image](../images/developer/core/split_shipments_checkout.png)
 
@@ -419,7 +419,7 @@ This section steps through the basics of what is involved in determining shipmen
 
 The process of determining shipments for an order is triggered by calling `create_proposed_shipments` on an `Order` object while transitioning to the `delivery` state during checkout. This process will first delete any existing shipments for an order and then determine the possible shipments available for that order.
 
-`create_proposed_shipments` will initially call `Spree::Stock::Coordinator.new(@order).packages`. This will return an array of packages. In order to determine which items belong in which package when they are being built, Spree uses an object called a `Splitter`, described in more detail [below](#the-packer).
+`create_proposed_shipments` will initially call `Viauco::Stock::Coordinator.new(@order).packages`. This will return an array of packages. In order to determine which items belong in which package when they are being built, Viauco uses an object called a `Splitter`, described in more detail [below](#the-packer).
 
 After obtaining the array of available packages, they are converted to shipments on the order object. Shipping rates are determined and inventory units are created during this process as well.
 
@@ -431,78 +431,78 @@ This section describes the four main components that power split shipments: [The
 
 ### The Coordinator
 
-The `Spree::Stock::Coordinator` is the starting point for determining shipments when calling `create_proposed_shipments` on an order. Its job is to go through each `StockLocation` available and determine what can be shipped from that location.
+The `Viauco::Stock::Coordinator` is the starting point for determining shipments when calling `create_proposed_shipments` on an order. Its job is to go through each `StockLocation` available and determine what can be shipped from that location.
 
-The `Spree::Stock::Coordinator` will ultimately return an array of packages which can then be easily converted into shipments for an order by calling `to_shipment` on them.
+The `Viauco::Stock::Coordinator` will ultimately return an array of packages which can then be easily converted into shipments for an order by calling `to_shipment` on them.
 
 ### The Packer
 
-A `Spree::Stock::Packer` object is an important part of the `create_proposed_shipments` process. Its job is to determine possible packages for a given StockLocation and order. It uses rules defined in classes known as `Splitters` to determine what packages can be shipped from a `StockLocation`.
+A `Viauco::Stock::Packer` object is an important part of the `create_proposed_shipments` process. Its job is to determine possible packages for a given StockLocation and order. It uses rules defined in classes known as `Splitters` to determine what packages can be shipped from a `StockLocation`.
 
 For example, we may have two splitters for a stock location. One splitter has a rule that any order weighing more than 50lbs should be shipped in a separate package from items weighing less. Our other splitter is a catch-all for any item weighing less than 50lbs. So, given one item in an order weighing 60lbs and two items weighing less, the Packer would use the rules defined in our splitters to come up with two separate packages: one containing the single 60lb item, the other containing our other two items.
 
 #### Default Splitters
 
-Spree comes with two default splitters which are run in sequence. This means that the first splitter takes the packages array from the order, and each subsequent splitter takes the output of the splitter that came before it.
+Viauco comes with two default splitters which are run in sequence. This means that the first splitter takes the packages array from the order, and each subsequent splitter takes the output of the splitter that came before it.
 
 Let's take a look at what the default splitters do:
 
 * **Shipping Category Splitter**: Splits an order into packages based on items' shipping categories. This means that each package will only have items that all belong to the same shipping category.
-* **Weight Splitter**: Splits an order into packages based on a weight threshold. This means that each package has a mass weight. If a new item is added to the order and it causes a package to go over the weight threshold, a new package will be created so that all packages weigh less than the threshold. You can set the weight threshold by changing `Spree::Stock::Splitter::Weight.threshold` (defaults to `150`) in an initializer.
+* **Weight Splitter**: Splits an order into packages based on a weight threshold. This means that each package has a mass weight. If a new item is added to the order and it causes a package to go over the weight threshold, a new package will be created so that all packages weigh less than the threshold. You can set the weight threshold by changing `Viauco::Stock::Splitter::Weight.threshold` (defaults to `150`) in an initializer.
 
 #### Custom Splitters
 
-Note that splitters can be customized, and creating your own can be done with relative ease. By inheriting from `Spree::Stock::Splitter::Base`, you can create your own splitter.
+Note that splitters can be customized, and creating your own can be done with relative ease. By inheriting from `Viauco::Stock::Splitter::Base`, you can create your own splitter.
 
-For an example of a simple splitter, take a look at Spree's [weight based splitter](https://github.com/spree/spree/blob/235e470b242225d7c75c7c4c4c033ee3d739bb36/core/app/models/spree/stock/splitter/weight.rb). This splitter pulls items with a weight greater than 150 into their own shipment.
+For an example of a simple splitter, take a look at Viauco's [weight based splitter](https://github.com/viauco/viauco/blob/235e470b242225d7c75c7c4c4c033ee3d739bb36/core/app/models/viauco/stock/splitter/weight.rb). This splitter pulls items with a weight greater than 150 into their own shipment.
 
-After creating your splitter, you need to add it to the array of splitters Spree
-uses. To do this, add the following to your application's spree initializer
-`spree.rb` file:
+After creating your splitter, you need to add it to the array of splitters Viauco
+uses. To do this, add the following to your application's viauco initializer
+`viauco.rb` file:
 
 ```ruby
-Rails.application.config.spree.stock_splitters << Spree::Stock::Splitter::CustomSplitter
+Rails.application.config.viauco.stock_splitters << Viauco::Stock::Splitter::CustomSplitter
 ```
 
-You can also completely override the splitters used in Spree, rearrange them, etc.
-To do this, add the following to your `spree.rb` file:
+You can also completely override the splitters used in Viauco, rearrange them, etc.
+To do this, add the following to your `viauco.rb` file:
 
 ```ruby
-Rails.application.config.spree.stock_splitters = [
-  Spree::Stock::Splitter::CustomSplitter,
-  Spree::Stock::Splitter::ShippingCategory
+Rails.application.config.viauco.stock_splitters = [
+  Viauco::Stock::Splitter::CustomSplitter,
+  Viauco::Stock::Splitter::ShippingCategory
 ]
 ```
 
 Or if you don't want to split packages just set the option above to an empty
-array. e.g. a store with the following configuration in spree.rb won't have any
+array. e.g. a store with the following configuration in viauco.rb won't have any
 package splitted.
 
 ```ruby
-Rails.application.config.spree.stock_splitters = []
+Rails.application.config.viauco.stock_splitters = []
 ```
 
-If you want to add different splitters for each `StockLocation`, you need to decorate the `Spree::Stock::Coordinator` class and override the `splitters` method.
+If you want to add different splitters for each `StockLocation`, you need to decorate the `Viauco::Stock::Coordinator` class and override the `splitters` method.
 
 ### The Prioritizer
 
-A `Spree::Stock::Prioritizer` object will decide which `StockLocation` should ship which package from an order. The prioritizer will attempt to come up with the best shipping situation available to the user.
+A `Viauco::Stock::Prioritizer` object will decide which `StockLocation` should ship which package from an order. The prioritizer will attempt to come up with the best shipping situation available to the user.
 
-By default, the prioritizer will first select packages where the items are on hand. Then it will try to find packages where items are backordered. During this process, the `Spree::Stock::Adjuster` is also used to ensure each package has the correct number of items.
+By default, the prioritizer will first select packages where the items are on hand. Then it will try to find packages where items are backordered. During this process, the `Viauco::Stock::Adjuster` is also used to ensure each package has the correct number of items.
 
-The prioritizer is also a customization point. If you want to customize which packages should take priority for the order during this process, you can override the `sort_packages` method in `Spree::Stock::Prioritizer`.
+The prioritizer is also a customization point. If you want to customize which packages should take priority for the order during this process, you can override the `sort_packages` method in `Viauco::Stock::Prioritizer`.
 
 #### Customizing the Adjuster
 
 The `Adjuster` visits each package in an order and ensures the correct number of items are in each package. To customize this functionality, you need to do two things:
 
-* Subclass the [Spree::Stock::Adjuster](https://github.com/spree/spree/blob/a55db75bbebc40f5705fc3010d1e5a2190bde79b/core/app/models/spree/stock/adjuster.rb) class and override the the `adjust` method to get the desired functionality.
-* Decorate the `Spree::Stock::Coordinator` and override the `prioritize_packages` method, passing in your custom adjuster class to the `Prioritizer` initializer. For example, if our adjuster was called `Spree::Stock::CustomAdjuster`, we would do the following:
+* Subclass the [Viauco::Stock::Adjuster](https://github.com/viauco/viauco/blob/a55db75bbebc40f5705fc3010d1e5a2190bde79b/core/app/models/viauco/stock/adjuster.rb) class and override the the `adjust` method to get the desired functionality.
+* Decorate the `Viauco::Stock::Coordinator` and override the `prioritize_packages` method, passing in your custom adjuster class to the `Prioritizer` initializer. For example, if our adjuster was called `Viauco::Stock::CustomAdjuster`, we would do the following:
 
 ```ruby
-Spree::Stock::Coordinator.class_eval do
+Viauco::Stock::Coordinator.class_eval do
   def prioritize_packages(packages)
-    prioritizer = Prioritizer.new(order, packages, Spree::Stock::CustomAdjuster)
+    prioritizer = Prioritizer.new(order, packages, Viauco::Stock::CustomAdjuster)
     prioritizer.prioritized_packages
   end
 end
@@ -510,4 +510,4 @@ end
 
 ### The Estimator
 
-The `Spree::Stock::Estimator` loops through the packages created by the packer in order to calculate and attach shipping rates to them. This information is then returned to the user so they can select shipments for their order and complete the checkout process.
+The `Viauco::Stock::Estimator` loops through the packages created by the packer in order to calculate and attach shipping rates to them. This information is then returned to the user so they can select shipments for their order and complete the checkout process.
